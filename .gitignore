@@ -3,4 +3,4 @@
 /.push-*
 /.container-*
 /.dockerfile-*
-.idea
+.idea/
