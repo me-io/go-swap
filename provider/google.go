@@ -32,12 +32,14 @@ func (c *GoogleApi) RequestLatest(from string, to string) *GoogleApi {
 
 	if err != nil {
 		// todo handle error
+		panic("Body in Null")
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		// todo handle error
+		panic("Body in Null")
 	}
 
 	c.responseBody = string(body)
