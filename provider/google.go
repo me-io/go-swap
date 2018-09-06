@@ -16,7 +16,7 @@ type GoogleApi struct {
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
-var GoogleApiUrl = "https://www.google.com/search?q=1+%s+to+%s&ncr=1"
+var GoogleApiUrl = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
 var GoogleApiHeaders = map[string][]string{
 	"Accept":     {"text/html"},
 	"User-Agent": {"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"},
