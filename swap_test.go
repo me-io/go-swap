@@ -17,8 +17,8 @@ func TestAll(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		Add(p.NewGoogleApi(), map[string]string{"access_key": "your-access-key"}).
-		//Add(p.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
+		Add(p.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
+		Add(p.NewGoogleApi(), nil).
 		Build()
 
 	rate := SwapTest.latest("EUR/USD")
@@ -27,7 +27,7 @@ func TestAll(t *testing.T) {
 	println(rate.GetDate())
 
 	//var RateTest = SwapTest.latest("EUR/USD")
-	//assert.Equal(t, "", reflect.TypeOf(RateTest).Name())
+	assert.Equal(t, float64(1.16), rate.GetValue())
 
 	// 1.129
 	//var value = RateTest.value

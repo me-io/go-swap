@@ -54,6 +54,7 @@ func (c *GoogleApi) GetDate() string {
 
 func (c *GoogleApi) Latest(from string, to string) {
 
+	// todo cache layer
 	c.RequestLatest(from, to)
 	var validID = regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
 	f := validID.FindStringSubmatch(c.responseBody)
