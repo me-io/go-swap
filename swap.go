@@ -2,18 +2,19 @@ package swap
 
 import (
 	p "github.com/me-io/go-swap/provider"
+	"strings"
 )
 
-type Builder struct {
-	services []p.ExchangeProvide
+type Swap struct {
+	services []p.ExchangeProvider
 }
 
 //
-func NewBuilder() *Builder {
-	return &Builder{}
+func NewSwap() *Swap {
+	return &Swap{}
 }
 
-func (b *Builder) Add(interfaceClass p.ExchangeProvide, opt map[string]string) *Builder {
+func (b *Swap) Add(interfaceClass p.ExchangeProvider, opt map[string]string) *Swap {
 	//fmt.Println(fmt.Sprintf("%+v", class))
 	//fmt.Println(fmt.Sprintf("%+v", b.services))
 	// b.services = append(b.services, reflect.TypeOf(interfaceClass).String())
@@ -25,14 +26,14 @@ func (b *Builder) Add(interfaceClass p.ExchangeProvide, opt map[string]string) *
 	return b
 }
 
-func (b *Builder) Build() *Builder {
+func (b *Swap) Build() *Swap {
 	// println(fmt.Sprintf("%+v", b.services))
 	//class.Test()
 
 	return b
 }
 
-func (b *Builder) latest(currencyPair string) p.ExchangeProvide {
+func (b *Swap) latest(currencyPair string) p.ExchangeProvider {
 	// provider
 	// loop on services
 	// call
@@ -42,6 +43,10 @@ func (b *Builder) latest(currencyPair string) p.ExchangeProvide {
 	//	println(key, val)
 	//}
 	v := b.services[0]
+	args := strings.Split(currencyPair, "/")
+	v.Latest(args[0], args[1])
+
+	//print(res)
 	//println(currencyPair)
 	//println(r)
 	//println(reflect.TypeOf(r).String())

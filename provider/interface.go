@@ -5,7 +5,7 @@ type Rate interface {
 	GetDate() string
 }
 
-type ExchangeProvide interface {
-	TestMe() string
+type ExchangeProvider interface {
+	Latest(string, string)
 	Rate
 }

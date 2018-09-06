@@ -5,7 +5,7 @@ type CurrencyLayerApi struct {
 	apiData string
 }
 
-func (c *CurrencyLayerApi) TestMe() string {
+func (c *CurrencyLayerApi) Request(from string, to string) string {
 	println("TESTEST CurrencyLayerApi")
 	return ""
 }
