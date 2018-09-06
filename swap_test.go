@@ -17,7 +17,7 @@ func TestAll(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		Add(p.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
+		//Add(p.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
 		Add(p.NewGoogleApi(), nil).
 		Build()
 
