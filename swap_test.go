@@ -7,12 +7,21 @@ import (
 	"testing"
 )
 
-func TestClientRequestMiddleware(t *testing.T) {
-	client := NewSwap()
-	assert.Equal(t, "*swap.Swap", reflect.TypeOf(client).String())
+func TestSwap_New(t *testing.T) {
+	SwapTest := NewSwap()
+	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
+}
+func TestSwap_AddExchanger(t *testing.T) {
+	SwapTest := NewSwap()
+	SwapTest.
+		AddExchanger(ex.NewGoogleApi(), nil).
+		AddExchanger(ex.NewGoogleApi(), nil).
+		AddExchanger(ex.NewGoogleApi(), nil).
+		Build()
+	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
 }
 
-func TestAll(t *testing.T) {
+func TestSwap_Build(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
@@ -22,14 +31,9 @@ func TestAll(t *testing.T) {
 
 	rate := SwapTest.latest("EUR/USD")
 
-	println(rate.GetValue())
-	println(rate.GetDate())
+	//println(rate.GetValue())
+	//println(rate.GetDate())
 
 	//var RateTest = SwapTest.latest("EUR/USD")
 	assert.Equal(t, float64(1.16), rate.GetValue())
-
-	// 1.129
-	//var value = RateTest.value
-	//2016-08-26
-	//var date = RateTest.date
 }

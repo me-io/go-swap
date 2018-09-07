@@ -15,20 +15,11 @@ func NewSwap() *Swap {
 }
 
 func (b *Swap) AddExchanger(interfaceClass ex.Exchanger, opt map[string]string) *Swap {
-	//fmt.Println(fmt.Sprintf("%+v", class))
-	//fmt.Println(fmt.Sprintf("%+v", b.services))
-	// b.services = append(b.services, reflect.TypeOf(interfaceClass).String())
 	b.services = append(b.services, interfaceClass)
-	//interfaceClass.TestMe()
-	//fmt.Println(fmt.Sprintf("%+v", class))
-	//fmt.Println(fmt.Sprintf("%+v", b.services))
-	//Fin.testMe(class)
 	return b
 }
 
 func (b *Swap) Build() *Swap {
-	// println(fmt.Sprintf("%+v", b.services))
-	//class.Test()
 	return b
 }
 
@@ -44,7 +35,7 @@ func (b *Swap) latest(currencyPair string) ex.Exchanger {
 	//}
 	v := b.services[0]
 	args := strings.Split(currencyPair, "/")
-	v.Latest(args[0], args[1])
+	v.Latest(args[0], args[1], nil)
 
 	//print(res)
 	//println(currencyPair)

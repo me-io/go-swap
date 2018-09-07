@@ -18,14 +18,16 @@ type GoogleApi struct {
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
+
 var GoogleApiUrl = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
 var GoogleApiHeaders = map[string][]string{
 	"Accept":     {"text/html"},
 	"User-Agent": {"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"},
 }
 
-func (c *GoogleApi) RequestRate(from string, to string) (*GoogleApi, error) {
+func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (*GoogleApi, error) {
 
+	// todo add option opt to add more headers or client configurations
 	// free mem-leak
 	// optimize for memory leak
 	// todo optimize curl connection
@@ -77,10 +79,10 @@ func (c *GoogleApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *GoogleApi) Latest(from string, to string) error {
+func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
-	_, err := c.RequestRate(from, to)
+	_, err := c.RequestRate(from, to, opt)
 	if err != nil {
 		// todo handle error
 		return err
