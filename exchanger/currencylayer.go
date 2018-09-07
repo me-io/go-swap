@@ -1,4 +1,4 @@
-package provider
+package exchanger
 
 type CurrencyLayerApi struct {
 	apiKey  string

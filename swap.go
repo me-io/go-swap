@@ -1,12 +1,12 @@
 package swap
 
 import (
-	p "github.com/me-io/go-swap/provider"
+	ex "github.com/me-io/go-swap/exchanger"
 	"strings"
 )
 
 type Swap struct {
-	services []p.ExchangeProvider
+	services []ex.Exchanger
 }
 
 //
@@ -14,7 +14,7 @@ func NewSwap() *Swap {
 	return &Swap{}
 }
 
-func (b *Swap) Add(interfaceClass p.ExchangeProvider, opt map[string]string) *Swap {
+func (b *Swap) AddExchanger(interfaceClass ex.Exchanger, opt map[string]string) *Swap {
 	//fmt.Println(fmt.Sprintf("%+v", class))
 	//fmt.Println(fmt.Sprintf("%+v", b.services))
 	// b.services = append(b.services, reflect.TypeOf(interfaceClass).String())
@@ -29,11 +29,11 @@ func (b *Swap) Add(interfaceClass p.ExchangeProvider, opt map[string]string) *Sw
 func (b *Swap) Build() *Swap {
 	// println(fmt.Sprintf("%+v", b.services))
 	//class.Test()
-
 	return b
 }
 
-func (b *Swap) latest(currencyPair string) p.ExchangeProvider {
+func (b *Swap) latest(currencyPair string) ex.Exchanger {
+	// todo
 	// provider
 	// loop on services
 	// call

@@ -1,7 +1,7 @@
 package swap
 
 import (
-	p "github.com/me-io/go-swap/provider"
+	ex "github.com/me-io/go-swap/exchanger"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
@@ -10,15 +10,14 @@ import (
 func TestClientRequestMiddleware(t *testing.T) {
 	client := NewSwap()
 	assert.Equal(t, "*swap.Swap", reflect.TypeOf(client).String())
-	//client.Add();
 }
 
 func TestAll(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		//Add(p.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
-		Add(p.NewGoogleApi(), nil).
+		//AddExchanger(ex.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
+		AddExchanger(ex.NewGoogleApi(), nil).
 		Build()
 
 	rate := SwapTest.latest("EUR/USD")

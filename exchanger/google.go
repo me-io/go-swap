@@ -1,11 +1,13 @@
-package provider
+package exchanger
 
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"regexp"
 	"strconv"
+	"time"
 )
 
 type GoogleApi struct {
@@ -22,9 +24,28 @@ var GoogleApiHeaders = map[string][]string{
 	"User-Agent": {"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"},
 }
 
-func (c *GoogleApi) RequestLatest(from string, to string) *GoogleApi {
+func (c *GoogleApi) RequestRate(from string, to string) (*GoogleApi, error) {
 
-	client := http.Client{}
+	// free mem-leak
+	// optimize for memory leak
+	// todo optimize curl connection
+	keepAliveTimeout := 600 * time.Second
+	timeout := 2 * time.Second
+	defaultTransport := &http.Transport{
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: keepAliveTimeout,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 100,
+	}
+
+	client := &http.Client{
+		Transport: defaultTransport,
+		Timeout:   timeout,
+	}
+
 	url := fmt.Sprintf(GoogleApiUrl, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header = GoogleApiHeaders
@@ -32,18 +53,20 @@ func (c *GoogleApi) RequestLatest(from string, to string) *GoogleApi {
 
 	if err != nil {
 		// todo handle error
-		panic("Body in Null")
+		return nil, err
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		// todo handle error
-		panic("Body in Null")
+		return nil, err
 	}
 
+	// free mem-leak
+	// todo discard data
 	c.responseBody = string(body)
-	return c
+	return c, nil
 }
 
 func (c *GoogleApi) GetValue() float64 {
@@ -54,14 +77,19 @@ func (c *GoogleApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *GoogleApi) Latest(from string, to string) {
+func (c *GoogleApi) Latest(from string, to string) error {
 
 	// todo cache layer
-	c.RequestLatest(from, to)
-	var validID = regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
-	f := validID.FindStringSubmatch(c.responseBody)
+	_, err := c.RequestRate(from, to)
+	if err != nil {
+		// todo handle error
+		return err
+	}
+	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
+	stringMatches := validID.FindStringSubmatch(c.responseBody)
 	// todo handle error
-	c.rateValue, _ = strconv.ParseFloat(f[2], 64)
+	c.rateValue, _ = strconv.ParseFloat(stringMatches[2], 64)
+	return nil
 }
 
 func NewGoogleApi() *GoogleApi {
