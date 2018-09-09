@@ -5,7 +5,7 @@ BIN := swap
 PKG := github.com/me-io/go-swap
 
 # Where to push the docker image.
-REGISTRY ?= thockin
+REGISTRY ?= me-io
 
 # Which architecture to build - see $(ALL_ARCH) for options.
 ARCH ?= amd64
@@ -20,7 +20,7 @@ VERSION := $(shell git describe --tags --always --dirty)
 ### These variables should not need tweaking.
 ###
 
-SRC_DIRS := cmd pkg # directories which hold app source (not vendored)
+SRC_DIRS := . # directories which hold app source (not vendored)
 
 ALL_ARCH := amd64 arm arm64 ppc64le
 
