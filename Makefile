@@ -1,5 +1,5 @@
 # The binary to build (just the basename).
-BIN := swap
+BIN := go-swap
 
 # This repo's root import path (under GOPATH).
 PKG := github.com/me-io/go-swap
