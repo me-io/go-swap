@@ -6,11 +6,7 @@ set -o pipefail
 
 export CGO_ENABLED=0
 
-/usr/bin/wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-
 TARGETS=$(for d in "$@"; do echo ./$d/...; done)
-
-/go/bin/dep ensure --vendor-only
 
 echo "Running tests:"
 go test -i -installsuffix "static" ${TARGETS}

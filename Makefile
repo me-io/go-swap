@@ -133,7 +133,9 @@ version:
 	@echo $(VERSION)
 
 test: build-dirs
-	@docker run                                                             \
+	@dep version >/dev/null 2>&1 || ( wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh )
+	@dep ensure --vendor-only
+	@docker run                                                          	\
 	    -ti                                                                 \
 	    --rm                                                                \
 	    -u $$(id -u):$$(id -g)                                              \
