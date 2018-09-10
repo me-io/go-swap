@@ -10,6 +10,8 @@ export CGO_ENABLED=0
 
 TARGETS=$(for d in "$@"; do echo ./$d/...; done)
 
+/go/bin/dep ensure
+
 echo "Running tests:"
 go test -i -installsuffix "static" ${TARGETS}
 go test -installsuffix "static" ${TARGETS}
