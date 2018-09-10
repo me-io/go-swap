@@ -6,7 +6,7 @@ set -o pipefail
 
 export CGO_ENABLED=0
 
-curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+/usr/bin/wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 TARGETS=$(for d in "$@"; do echo ./$d/...; done)
 
