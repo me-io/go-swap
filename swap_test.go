@@ -27,13 +27,12 @@ func TestSwap_Build(t *testing.T) {
 	SwapTest.
 		//AddExchanger(ex.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
 		AddExchanger(ex.NewGoogleApi(), nil).
+		//AddExchanger(ex.NewYahooApi(), nil).
 		Build()
 
-	rate := SwapTest.latest("EUR/USD")
+	euroToUsdRate := SwapTest.latest("EUR/USD")
+	assert.Equal(t, float64(1.16), euroToUsdRate.GetValue())
 
-	//println(rate.GetValue())
-	//println(rate.GetDate())
-
-	//var RateTest = SwapTest.latest("EUR/USD")
-	assert.Equal(t, float64(1.16), rate.GetValue())
+	// usdToUsdRate := SwapTest.latest("USD/USD")
+	// assert.Equal(t, float64(1), usdToUsdRate.GetValue())
 }

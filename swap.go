@@ -25,21 +25,13 @@ func (b *Swap) Build() *Swap {
 
 func (b *Swap) latest(currencyPair string) ex.Exchanger {
 	// todo
-	// provider
-	// loop on services
-	// call
-	// on success
-	// set ApiData
-	//for key, val := range b.services {
-	//	println(key, val)
-	//}
-	v := b.services[0]
+	var currentSrc ex.Exchanger = nil
 	args := strings.Split(currencyPair, "/")
-	v.Latest(args[0], args[1], nil)
+	for _, srv := range b.services {
+		srv.Latest(args[0], args[1], nil)
+		// todo handle error and go to second in stack
+		currentSrc = srv
+	}
 
-	//print(res)
-	//println(currencyPair)
-	//println(r)
-	//println(reflect.TypeOf(r).String())
-	return v
+	return currentSrc
 }

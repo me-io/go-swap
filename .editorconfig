@@ -11,9 +11,19 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[Makefile]
-indent_style = tab
-
 [*.json]
 indent_size = 2
 indent_style = space
+
+[Makefile]
+indent_style = tab
+
+[makefile]
+indent_style = tab
+
+[*.go]
+indent_style = tab
+
+[*.go]
+indent_style = tab
+

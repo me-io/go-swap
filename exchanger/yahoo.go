@@ -10,24 +10,23 @@ import (
 	"time"
 )
 
-type GoogleApi struct {
+type YahooApi struct {
 	apiKey       string
 	responseBody string
 	rateValue    float64
 	rateDate     string
 }
 
-// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
-// example : https://www.google.com/search?q=1+USD+to+USD&ncr=1
-// example : https://www.google.com/search?q=1+USD+to+EGP&ncr=1
-// example : https://www.google.com/search?q=1+USD+to+AED&ncr=1
-var GoogleApiUrl = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
-var GoogleApiHeaders = map[string][]string{
+// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
+// var YahooApiUrl = `https://query.yahooapis.com/v1/public/yql?q=%s&env=store://datatables.org/alltableswithkeys&format=json`
+var YahooApiUrl = `https://quote.yahoo.com/d/quotes.csv?s=%s%s=X`
+
+var YahooApiHeaders = map[string][]string{
 	`Accept`:     {`text/html`},
 	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
-func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (*GoogleApi, error) {
+func (c *YahooApi) RequestRate(from string, to string, opt map[string]string) (*YahooApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -50,9 +49,11 @@ func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (
 		Timeout:   timeout,
 	}
 
-	url := fmt.Sprintf(GoogleApiUrl, from, to)
+	// query := fmt.Sprintf(`select+*+from+yahoo.finance.xchange+where+pair+in+("%s%s")`, from, to)
+	url := fmt.Sprintf(YahooApiUrl, from, to)
+	println(url)
 	req, _ := http.NewRequest("GET", url, nil)
-	req.Header = GoogleApiHeaders
+	req.Header = YahooApiHeaders
 	res, err := client.Do(req)
 
 	if err != nil {
@@ -73,15 +74,15 @@ func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (
 	return c, nil
 }
 
-func (c *GoogleApi) GetValue() float64 {
+func (c *YahooApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *GoogleApi) GetDate() string {
+func (c *YahooApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error {
+func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
 	_, err := c.RequestRate(from, to, opt)
@@ -89,6 +90,10 @@ func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error 
 		// todo handle error
 		return err
 	}
+	println(c.responseBody)
+	println(c.responseBody)
+	println(c.responseBody)
+	println(c.responseBody)
 	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
 	stringMatches := validID.FindStringSubmatch(c.responseBody)
 	// todo handle error
@@ -96,7 +101,7 @@ func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error 
 	return nil
 }
 
-func NewGoogleApi() *GoogleApi {
-	r := &GoogleApi{apiKey: "12344"}
+func NewYahooApi() *YahooApi {
+	r := &YahooApi{apiKey: "12344"}
 	return r
 }
