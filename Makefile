@@ -2,10 +2,10 @@
 BIN := go-swap
 
 # This repo's root import path (under GOPATH).
-PKG := github.com/me-io/go-swap
+PKG := github.com/meabed/go-swap
 
 # Where to push the docker image.
-REGISTRY ?= me-io
+REGISTRY ?= meabed
 
 # Which architecture to build - see $(ALL_ARCH) for options.
 ARCH ?= amd64
