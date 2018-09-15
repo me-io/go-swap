@@ -5,3 +5,4 @@
 /.dockerfile-*
 .idea/
 /vendor
+/_vendor*
