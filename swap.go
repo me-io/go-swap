@@ -1,7 +1,7 @@
 package swap
 
 import (
-	ex "github.com/me-io/go-swap/exchanger"
+	ex "github.com/meabed/go-swap/exchanger"
 	"strings"
 )
 
