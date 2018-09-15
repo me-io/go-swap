@@ -2,11 +2,11 @@ package exchanger
 
 import (
 	"fmt"
+	"github.com/bitly/go-simplejson"
 	"io/ioutil"
+	"math"
 	"net"
 	"net/http"
-	"regexp"
-	"strconv"
 	"time"
 )
 
@@ -18,8 +18,7 @@ type YahooApi struct {
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
-// var YahooApiUrl = `https://query.yahooapis.com/v1/public/yql?q=%s&env=store://datatables.org/alltableswithkeys&format=json`
-var YahooApiUrl = `https://quote.yahoo.com/d/quotes.csv?s=%s%s=X`
+var YahooApiUrl = `https://query2.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
 
 var YahooApiHeaders = map[string][]string{
 	`Accept`:     {`text/html`},
@@ -33,7 +32,7 @@ func (c *YahooApi) RequestRate(from string, to string, opt map[string]string) (*
 	// optimize for memory leak
 	// todo optimize curl connection
 	keepAliveTimeout := 600 * time.Second
-	timeout := 2 * time.Second
+	timeout := 10 * time.Second
 	defaultTransport := &http.Transport{
 		DialContext: (&net.Dialer{
 			Timeout:   30 * time.Second,
@@ -49,9 +48,7 @@ func (c *YahooApi) RequestRate(from string, to string, opt map[string]string) (*
 		Timeout:   timeout,
 	}
 
-	// query := fmt.Sprintf(`select+*+from+yahoo.finance.xchange+where+pair+in+("%s%s")`, from, to)
 	url := fmt.Sprintf(YahooApiUrl, from, to)
-	println(url)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header = YahooApiHeaders
 	res, err := client.Do(req)
@@ -87,17 +84,27 @@ func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 	// todo cache layer
 	_, err := c.RequestRate(from, to, opt)
 	if err != nil {
+		fmt.Println(err)
 		// todo handle error
 		return err
 	}
-	println(c.responseBody)
-	println(c.responseBody)
-	println(c.responseBody)
-	println(c.responseBody)
-	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
-	stringMatches := validID.FindStringSubmatch(c.responseBody)
+
+	json, err := simplejson.NewJson([]byte(c.responseBody))
+
+	if err != nil {
+		// todo handle error
+		return err
+	}
+
+	value := json.GetPath(`chart`, `result`).
+		GetIndex(0).
+		GetPath(`indicators`, `quote`).
+		GetIndex(0).
+		GetPath(`open`).
+		GetIndex(0).
+		MustFloat64()
 	// todo handle error
-	c.rateValue, _ = strconv.ParseFloat(stringMatches[2], 64)
+	c.rateValue = math.Round(value*10000) / 10000
 	return nil
 }
 

@@ -34,7 +34,7 @@ func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (
 	// optimize for memory leak
 	// todo optimize curl connection
 	keepAliveTimeout := 600 * time.Second
-	timeout := 2 * time.Second
+	timeout := 5 * time.Second
 	defaultTransport := &http.Transport{
 		DialContext: (&net.Dialer{
 			Timeout:   30 * time.Second,

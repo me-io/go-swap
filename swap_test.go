@@ -15,19 +15,16 @@ func TestSwap_AddExchanger(t *testing.T) {
 	SwapTest := NewSwap()
 	SwapTest.
 		AddExchanger(ex.NewGoogleApi(), nil).
-		AddExchanger(ex.NewGoogleApi(), nil).
-		AddExchanger(ex.NewGoogleApi(), nil).
+		AddExchanger(ex.NewYahooApi(), nil).
 		Build()
 	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
 }
 
-func TestSwap_Build(t *testing.T) {
+func TestSwap_BuildGoogle(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		//AddExchanger(ex.NewCurrencyLayerApi(), map[string]string{"access_key": "your-access-key"}).
 		AddExchanger(ex.NewGoogleApi(), nil).
-		//AddExchanger(ex.NewYahooApi(), nil).
 		Build()
 
 	euroToUsdRate := SwapTest.latest("EUR/USD")
@@ -35,4 +32,15 @@ func TestSwap_Build(t *testing.T) {
 
 	// usdToUsdRate := SwapTest.latest("USD/USD")
 	// assert.Equal(t, float64(1), usdToUsdRate.GetValue())
+}
+
+func TestSwap_BuildYahoo(t *testing.T) {
+	SwapTest := NewSwap()
+
+	SwapTest.
+		AddExchanger(ex.NewYahooApi(), nil).
+		Build()
+
+	euroToUsdRate := SwapTest.latest("EUR/USD")
+	assert.Equal(t, float64(1.169), euroToUsdRate.GetValue())
 }
