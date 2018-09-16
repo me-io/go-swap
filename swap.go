@@ -8,24 +8,28 @@ import (
 	"strings"
 )
 
+// swap struct
 type Swap struct {
 	services []ex.Exchanger
 }
 
-//
+// configure new swap instance
 func NewSwap(opt ...string) *Swap {
 	return &Swap{}
 }
 
+// add service to the swap stack
 func (b *Swap) AddExchanger(interfaceClass ex.Exchanger) *Swap {
 	b.services = append(b.services, interfaceClass)
 	return b
 }
 
+// build and init swap object
 func (b *Swap) Build() *Swap {
 	return b
 }
 
+// get latest rate exchange from the first api that respond from the swap stack
 func (b *Swap) Latest(currencyPair string) ex.Exchanger {
 	// todo
 	var currentSrc ex.Exchanger = nil
