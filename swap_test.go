@@ -14,8 +14,8 @@ func TestSwap_New(t *testing.T) {
 func TestSwap_AddExchanger(t *testing.T) {
 	SwapTest := NewSwap()
 	SwapTest.
-		AddExchanger(ex.NewGoogleApi(nil)).
-		AddExchanger(ex.NewYahooApi(nil)).
+		AddExchanger(ex.NewGoogleApi()).
+		AddExchanger(ex.NewYahooApi()).
 		Build()
 	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
 }
@@ -24,7 +24,7 @@ func TestSwap_Build_Google(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		AddExchanger(ex.NewGoogleApi(nil)).
+		AddExchanger(ex.NewGoogleApi()).
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
@@ -39,7 +39,7 @@ func TestSwap_Build_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		AddExchanger(ex.NewYahooApi(nil)).
+		AddExchanger(ex.NewYahooApi()).
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
@@ -51,8 +51,8 @@ func TestSwap_Build_Stack_Yahoo_Google(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
-		AddExchanger(ex.NewYahooApi(nil)).
-		AddExchanger(ex.NewGoogleApi(nil)).
+		AddExchanger(ex.NewYahooApi()).
+		AddExchanger(ex.NewGoogleApi()).
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")

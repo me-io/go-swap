@@ -13,7 +13,7 @@ type Swap struct {
 }
 
 //
-func NewSwap() *Swap {
+func NewSwap(opt ...string) *Swap {
 	return &Swap{}
 }
 

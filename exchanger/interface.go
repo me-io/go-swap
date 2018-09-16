@@ -7,6 +7,6 @@ type Rate interface {
 }
 
 type Exchanger interface {
-	Latest(string, string, map[string]string) error
+	Latest(string, string, ...interface{}) error
 	Rate
 }

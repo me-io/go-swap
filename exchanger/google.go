@@ -29,7 +29,7 @@ var GoogleApiHeaders = map[string][]string{
 	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
-func (c *GoogleApi) requestRate(from string, to string, opt map[string]string) (*GoogleApi, error) {
+func (c *GoogleApi) requestRate(from string, to string, opt ...interface{}) (*GoogleApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -85,7 +85,7 @@ func (c *GoogleApi) GetExchangerName() string {
 	return c.name
 }
 
-func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error {
+func (c *GoogleApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
@@ -93,10 +93,17 @@ func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error 
 		log.Print(err)
 		return err
 	}
-	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
+
+	// if from currency is same as converted currency simulate html with value of 1
+	if from == to {
+		c.responseBody = `knowledge-currency__tgt-input value="1" "`
+	}
+
+	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([0-9.]{0,12})" (.*)"`)
 	stringMatches := validID.FindStringSubmatch(c.responseBody)
 
 	c.rateValue, err = strconv.ParseFloat(stringMatches[2], 64)
+
 	if err != nil {
 		log.Print(err)
 		return err
@@ -104,7 +111,7 @@ func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error 
 	return nil
 }
 
-func NewGoogleApi(opt map[string]string) *GoogleApi {
+func NewGoogleApi(opt ...interface{}) *GoogleApi {
 	r := &GoogleApi{name: `GoogleApi`}
 	return r
 }

@@ -5,14 +5,14 @@ import (
 	"testing"
 )
 
-func TestYahooApi_Latest(t *testing.T) {
-	rate := NewYahooApi()
+func TestGoogleApi_Latest(t *testing.T) {
+	rate := NewGoogleApi()
 	rate.Latest(`EUR`, `EUR`)
 	assert.Equal(t, float64(1), rate.GetValue())
 
 	rate.Latest(`EUR`, `USD`)
-	assert.Equal(t, float64(1.169), rate.GetValue())
+	assert.Equal(t, float64(1.16), rate.GetValue())
 
 	rate.Latest(`USD`, `EUR`)
-	assert.Equal(t, float64(0.8554), rate.GetValue())
+	assert.Equal(t, float64(0.86), rate.GetValue())
 }

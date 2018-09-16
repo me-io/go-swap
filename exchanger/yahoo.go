@@ -27,7 +27,7 @@ var YahooApiHeaders = map[string][]string{
 	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
-func (c *YahooApi) requestRate(from string, to string, opt map[string]string) (*YahooApi, error) {
+func (c *YahooApi) requestRate(from string, to string, opt ...interface{}) (*YahooApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -83,7 +83,7 @@ func (c *YahooApi) GetExchangerName() string {
 	return c.name
 }
 
-func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
+func (c *YahooApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
@@ -111,7 +111,7 @@ func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 	return nil
 }
 
-func NewYahooApi(opt map[string]string) *YahooApi {
+func NewYahooApi(opt ...interface{}) *YahooApi {
 	r := &YahooApi{name: `YahooApi`}
 	return r
 }
