@@ -26,7 +26,7 @@ func (b *Swap) Build() *Swap {
 	return b
 }
 
-func (b *Swap) latest(currencyPair string) ex.Exchanger {
+func (b *Swap) Latest(currencyPair string) ex.Exchanger {
 	// todo
 	var currentSrc ex.Exchanger = nil
 	errArr := map[string]string{}
