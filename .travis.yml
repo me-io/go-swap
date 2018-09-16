@@ -2,7 +2,7 @@ language: go
 services:
 - docker
 script:
-- make test
+- make test-docker
 #after_success:
 #- bash <(curl -s https://codecov.io/bash)
 #

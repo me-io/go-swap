@@ -2,10 +2,10 @@
 BIN := go-swap
 
 # This repo's root import path (under GOPATH).
-PKG := github.com/meabed/go-swap
+PKG := github.com/me-io/go-swap
 
 # Where to push the docker image.
-REGISTRY ?= meabed
+REGISTRY ?= me-io
 
 # Which architecture to build - see $(ALL_ARCH) for options.
 ARCH ?= amd64
@@ -135,7 +135,7 @@ version:
 test-local:
 	go test -v ./...
 
-test: build-dirs
+test-docker: build-dirs
 	@dep version >/dev/null 2>&1 || ( wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh )
 	@dep ensure --vendor-only
 	@docker run                                                          	\

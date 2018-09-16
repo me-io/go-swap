@@ -2,7 +2,7 @@ package swap
 
 import (
 	"fmt"
-	ex "github.com/meabed/go-swap/exchanger"
+	ex "github.com/me-io/go-swap/exchanger"
 	"log"
 	"reflect"
 	"strings"

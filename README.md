@@ -1,8 +1,8 @@
 
 ## Go Currency Exchange Library [WIP]
 
-[![Build Status](https://travis-ci.org/meabed/go-swap.svg?branch=master)](https://travis-ci.org/meabed/go-swap)
-[![Go Report Card](https://goreportcard.com/badge/github.com/meabed/go-swap)](https://goreportcard.com/report/github.com/meabed/go-swap)
+[![Build Status](https://travis-ci.org/me-io/go-swap.svg?branch=master)](https://travis-ci.org/me-io/go-swap)
+[![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
 
 
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[currencylayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
@@ -11,7 +11,7 @@ and optionally cache the results.
 ## QuickStart
 
 ```bash
-$ go get github.com/meabed/go-swap
+$ go get github.com/me-io/go-swap
 ```
 
 ```go
@@ -19,8 +19,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/meabed/go-swap"
-	ex "github.com/meabed/go-swap/exchanger"
+	"github.com/me-io/go-swap"
+	ex "github.com/me-io/go-swap/exchanger"
 )
 
 func main() {

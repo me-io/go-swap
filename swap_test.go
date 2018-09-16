@@ -1,7 +1,7 @@
 package swap
 
 import (
-	ex "github.com/meabed/go-swap/exchanger"
+	ex "github.com/me-io/go-swap/exchanger"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
