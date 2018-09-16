@@ -3,6 +3,7 @@ package exchanger
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"regexp"
@@ -27,7 +28,7 @@ var GoogleApiHeaders = map[string][]string{
 	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
-func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (*GoogleApi, error) {
+func (c *GoogleApi) requestRate(from string, to string, opt map[string]string) (*GoogleApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -56,14 +57,12 @@ func (c *GoogleApi) RequestRate(from string, to string, opt map[string]string) (
 	res, err := client.Do(req)
 
 	if err != nil {
-		// todo handle error
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		// todo handle error
 		return nil, err
 	}
 
@@ -84,19 +83,23 @@ func (c *GoogleApi) GetDate() string {
 func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
-	_, err := c.RequestRate(from, to, opt)
+	_, err := c.requestRate(from, to, opt)
 	if err != nil {
-		// todo handle error
+		log.Print(err)
 		return err
 	}
 	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([1-9.]{0,10})" (.*)"`)
 	stringMatches := validID.FindStringSubmatch(c.responseBody)
-	// todo handle error
-	c.rateValue, _ = strconv.ParseFloat(stringMatches[2], 64)
+
+	c.rateValue, err = strconv.ParseFloat(stringMatches[2], 64)
+	if err != nil {
+		log.Print(err)
+		return err
+	}
 	return nil
 }
 
-func NewGoogleApi() *GoogleApi {
-	r := &GoogleApi{apiKey: "12344"}
+func NewGoogleApi(opt map[string]string) *GoogleApi {
+	r := &GoogleApi{}
 	return r
 }

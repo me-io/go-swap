@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bitly/go-simplejson"
 	"io/ioutil"
+	"log"
 	"math"
 	"net"
 	"net/http"
@@ -25,7 +26,7 @@ var YahooApiHeaders = map[string][]string{
 	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
-func (c *YahooApi) RequestRate(from string, to string, opt map[string]string) (*YahooApi, error) {
+func (c *YahooApi) requestRate(from string, to string, opt map[string]string) (*YahooApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -54,14 +55,12 @@ func (c *YahooApi) RequestRate(from string, to string, opt map[string]string) (*
 	res, err := client.Do(req)
 
 	if err != nil {
-		// todo handle error
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		// todo handle error
 		return nil, err
 	}
 
@@ -82,17 +81,16 @@ func (c *YahooApi) GetDate() string {
 func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
-	_, err := c.RequestRate(from, to, opt)
+	_, err := c.requestRate(from, to, opt)
 	if err != nil {
-		fmt.Println(err)
-		// todo handle error
+		log.Print(err)
 		return err
 	}
 
 	json, err := simplejson.NewJson([]byte(c.responseBody))
 
 	if err != nil {
-		// todo handle error
+		log.Print(err)
 		return err
 	}
 
@@ -108,7 +106,7 @@ func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 	return nil
 }
 
-func NewYahooApi() *YahooApi {
-	r := &YahooApi{apiKey: "12344"}
+func NewYahooApi(opt map[string]string) *YahooApi {
+	r := &YahooApi{}
 	return r
 }

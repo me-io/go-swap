@@ -14,7 +14,7 @@ func NewSwap() *Swap {
 	return &Swap{}
 }
 
-func (b *Swap) AddExchanger(interfaceClass ex.Exchanger, opt map[string]string) *Swap {
+func (b *Swap) AddExchanger(interfaceClass ex.Exchanger) *Swap {
 	b.services = append(b.services, interfaceClass)
 	return b
 }
