@@ -6,3 +6,4 @@
 .idea/
 /vendor
 /_vendor*
+/coverage.txt

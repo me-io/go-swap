@@ -132,6 +132,9 @@ push-name:
 version:
 	@echo $(VERSION)
 
+test-local:
+	go test -v ./...
+
 test: build-dirs
 	@dep version >/dev/null 2>&1 || ( wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh )
 	@dep ensure --vendor-only
@@ -146,9 +149,7 @@ test: build-dirs
 	    -v "$$(pwd)/.go/cache:/.cache"                                      \
 	    -w /go/src/$(PKG)                                                   \
 	    $(BUILD_IMAGE)                                                      \
-	    /bin/sh -c "                                                        \
-	        ./build/test.sh $(SRC_DIRS)                                     \
-	    "
+	    /bin/sh -c " ./build/test.sh $(SRC_DIRS) "
 
 build-dirs:
 	@mkdir -p bin/$(ARCH)
