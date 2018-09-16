@@ -11,6 +11,14 @@ func TestSwap_New(t *testing.T) {
 	SwapTest := NewSwap()
 	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
 }
+
+//func TestSwap_Latest_Error(t *testing.T) {
+//	SwapTest := NewSwap()
+//	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
+//	SwapTest.Build()
+//	SwapTest.Latest("EUR/USD")
+//}
+
 func TestSwap_AddExchanger(t *testing.T) {
 	SwapTest := NewSwap()
 	SwapTest.

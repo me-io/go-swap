@@ -8,31 +8,36 @@ import (
 	"strings"
 )
 
-// swap struct
+// Swap ... main struct
 type Swap struct {
 	services []ex.Exchanger
 }
 
-// configure new swap instance
+// NewSwap ... configure new swap instance
 func NewSwap(opt ...string) *Swap {
 	return &Swap{}
 }
 
-// add service to the swap stack
+// AddExchanger ... add service to the swap stack
 func (b *Swap) AddExchanger(interfaceClass ex.Exchanger) *Swap {
 	b.services = append(b.services, interfaceClass)
 	return b
 }
 
-// build and init swap object
+// Build ... build and init swap object
 func (b *Swap) Build() *Swap {
 	return b
 }
 
-// get latest rate exchange from the first api that respond from the swap stack
+// Latest ... get latest rate exchange from the first api that respond from the swap stack
 func (b *Swap) Latest(currencyPair string) ex.Exchanger {
+	if len(b.services) < 1 {
+		// configure at least one service
+		log.Panic(400)
+	}
+
 	// todo
-	var currentSrc ex.Exchanger = nil
+	var currentSrc ex.Exchanger
 	errArr := map[string]string{}
 
 	args := strings.Split(currencyPair, "/")
