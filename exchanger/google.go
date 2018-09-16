@@ -16,6 +16,7 @@ type GoogleApi struct {
 	responseBody string
 	rateValue    float64
 	rateDate     string
+	name         string
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
@@ -80,6 +81,10 @@ func (c *GoogleApi) GetDate() string {
 	return c.rateDate
 }
 
+func (c *GoogleApi) GetExchangerName() string {
+	return c.name
+}
+
 func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
@@ -100,6 +105,6 @@ func (c *GoogleApi) Latest(from string, to string, opt map[string]string) error 
 }
 
 func NewGoogleApi(opt map[string]string) *GoogleApi {
-	r := &GoogleApi{}
+	r := &GoogleApi{name: `GoogleApi`}
 	return r
 }

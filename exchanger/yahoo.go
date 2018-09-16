@@ -16,6 +16,7 @@ type YahooApi struct {
 	responseBody string
 	rateValue    float64
 	rateDate     string
+	name         string
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
@@ -78,6 +79,10 @@ func (c *YahooApi) GetDate() string {
 	return c.rateDate
 }
 
+func (c *YahooApi) GetExchangerName() string {
+	return c.name
+}
+
 func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 
 	// todo cache layer
@@ -107,6 +112,6 @@ func (c *YahooApi) Latest(from string, to string, opt map[string]string) error {
 }
 
 func NewYahooApi(opt map[string]string) *YahooApi {
-	r := &YahooApi{}
+	r := &YahooApi{name: `YahooApi`}
 	return r
 }

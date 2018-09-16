@@ -20,7 +20,7 @@ func TestSwap_AddExchanger(t *testing.T) {
 	assert.Equal(t, "*swap.Swap", reflect.TypeOf(SwapTest).String())
 }
 
-func TestSwap_BuildGoogle(t *testing.T) {
+func TestSwap_Build_Google(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
@@ -29,12 +29,13 @@ func TestSwap_BuildGoogle(t *testing.T) {
 
 	euroToUsdRate := SwapTest.latest("EUR/USD")
 	assert.Equal(t, float64(1.16), euroToUsdRate.GetValue())
+	assert.Equal(t, `GoogleApi`, euroToUsdRate.GetExchangerName())
 
 	// usdToUsdRate := SwapTest.latest("USD/USD")
 	// assert.Equal(t, float64(1), usdToUsdRate.GetValue())
 }
 
-func TestSwap_BuildYahoo(t *testing.T) {
+func TestSwap_Build_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
 
 	SwapTest.
@@ -43,4 +44,18 @@ func TestSwap_BuildYahoo(t *testing.T) {
 
 	euroToUsdRate := SwapTest.latest("EUR/USD")
 	assert.Equal(t, float64(1.169), euroToUsdRate.GetValue())
+	assert.Equal(t, `YahooApi`, euroToUsdRate.GetExchangerName())
+}
+
+func TestSwap_Build_Stack_Yahoo_Google(t *testing.T) {
+	SwapTest := NewSwap()
+
+	SwapTest.
+		AddExchanger(ex.NewYahooApi(nil)).
+		AddExchanger(ex.NewGoogleApi(nil)).
+		Build()
+
+	euroToUsdRate := SwapTest.latest("EUR/USD")
+	assert.Equal(t, float64(1.169), euroToUsdRate.GetValue())
+	assert.Equal(t, `YahooApi`, euroToUsdRate.GetExchangerName())
 }
