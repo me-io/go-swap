@@ -20,11 +20,12 @@ type YahooApi struct {
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
-var YahooApiUrl = `https://query2.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
+var YahooApiUrl = `https://query1.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
 
 var YahooApiHeaders = map[string][]string{
-	`Accept`:     {`text/html`},
-	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
+	`Accept`:          {`text/html,application/xhtml+xml,application/xml`},
+	`Accept-Encoding`: {`text`},
+	`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 }
 
 func (c *YahooApi) requestRate(from string, to string, opt ...interface{}) (*YahooApi, error) {
@@ -99,8 +100,13 @@ func (c *YahooApi) Latest(from string, to string, opt ...interface{}) error {
 		return err
 	}
 
+	// opening price
 	value := json.GetPath(`chart`, `result`).
 		GetIndex(0).
+		//GetPath(`indicators`, `adjclose`).
+		//GetIndex(0).
+		//GetPath(`adjclose`).
+		//GetIndex(0).
 		GetPath(`indicators`, `quote`).
 		GetIndex(0).
 		GetPath(`open`).

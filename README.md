@@ -6,7 +6,9 @@
 
 
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[currencylayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
-and optionally cache the results.
+and optionally cache the results. 
+
+> Inspired by [florianv/swap](https://github.com/florianv/swap).
 
 ## QuickStart
 

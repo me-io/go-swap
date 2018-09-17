@@ -10,17 +10,21 @@ import (
 
 // Swap ... main struct
 type Swap struct {
-	services []ex.Exchanger
+	exchangers []ex.Exchanger
+	cache      interface{}
 }
 
 // NewSwap ... configure new swap instance
 func NewSwap(opt ...string) *Swap {
+	// todo add options
+	// cache
+	// timeout etc ...
 	return &Swap{}
 }
 
 // AddExchanger ... add service to the swap stack
 func (b *Swap) AddExchanger(interfaceClass ex.Exchanger) *Swap {
-	b.services = append(b.services, interfaceClass)
+	b.exchangers = append(b.exchangers, interfaceClass)
 	return b
 }
 
@@ -31,7 +35,7 @@ func (b *Swap) Build() *Swap {
 
 // Latest ... get latest rate exchange from the first api that respond from the swap stack
 func (b *Swap) Latest(currencyPair string) ex.Exchanger {
-	if len(b.services) < 1 {
+	if len(b.exchangers) < 1 {
 		// configure at least one service
 		log.Panic(400)
 	}
@@ -41,7 +45,7 @@ func (b *Swap) Latest(currencyPair string) ex.Exchanger {
 	errArr := map[string]string{}
 
 	args := strings.Split(currencyPair, "/")
-	for _, srv := range b.services {
+	for _, srv := range b.exchangers {
 		err := srv.Latest(args[0], args[1], nil)
 
 		if err != nil {
