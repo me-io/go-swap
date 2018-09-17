@@ -44,13 +44,23 @@ The documentation for the current branch can be found [here](#documentation).
 
 
 ## Services
-|Exchanger|type|
-|:---|:----|
-|[Google][1]|Regex|
-|[Yahoo][2]|API|
+|Exchanger|type|#|
+|:---|:----|:---|
+|[Google][1]|Regex|:heavy_check_mark:|
+|[Yahoo][2]|API|:heavy_check_mark:|
+|[Currency Layer][3]|API| TODO |
+|[Fixer.io][4]|API| TODO |
+|[The Money Converter][5]|API| TODO |
+|[Open Exchange Rates][6]|API| TODO |
+|[1forge][7]|API| TODO |
 
-[1]: google.com
-[2]: yahoo.com
+[1]: //google.com
+[2]: //yahoo.com
+[3]: //currencylayer.com
+[4]: //fixer.io
+[5]: //themoneyconverter.com
+[6]: //openexchangerates.org
+[7]: //1forge.com
 
 ## License
 
