@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type GoogleApi struct {
+type googleApi struct {
 	apiKey       string
 	responseBody string
 	rateValue    float64
@@ -23,13 +23,15 @@ type GoogleApi struct {
 // example : https://www.google.com/search?q=1+USD+to+USD&ncr=1
 // example : https://www.google.com/search?q=1+USD+to+EGP&ncr=1
 // example : https://www.google.com/search?q=1+USD+to+AED&ncr=1
-var GoogleApiUrl = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
-var GoogleApiHeaders = map[string][]string{
-	`Accept`:     {`text/html`},
-	`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
-}
+var (
+	googleApiUrl     = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
+	googleApiHeaders = map[string][]string{
+		`Accept`:     {`text/html`},
+		`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
+	}
+)
 
-func (c *GoogleApi) requestRate(from string, to string, opt ...interface{}) (*GoogleApi, error) {
+func (c *googleApi) requestRate(from string, to string, opt ...interface{}) (*googleApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -52,9 +54,9 @@ func (c *GoogleApi) requestRate(from string, to string, opt ...interface{}) (*Go
 		Timeout:   timeout,
 	}
 
-	url := fmt.Sprintf(GoogleApiUrl, from, to)
+	url := fmt.Sprintf(googleApiUrl, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
-	req.Header = GoogleApiHeaders
+	req.Header = googleApiHeaders
 	res, err := client.Do(req)
 
 	if err != nil {
@@ -73,19 +75,19 @@ func (c *GoogleApi) requestRate(from string, to string, opt ...interface{}) (*Go
 	return c, nil
 }
 
-func (c *GoogleApi) GetValue() float64 {
+func (c *googleApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *GoogleApi) GetDate() string {
+func (c *googleApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *GoogleApi) GetExchangerName() string {
+func (c *googleApi) GetExchangerName() string {
 	return c.name
 }
 
-func (c *GoogleApi) Latest(from string, to string, opt ...interface{}) error {
+func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
@@ -111,7 +113,7 @@ func (c *GoogleApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
-func NewGoogleApi(opt ...interface{}) *GoogleApi {
-	r := &GoogleApi{name: `GoogleApi`}
+func NewGoogleApi(opt ...interface{}) *googleApi {
+	r := &googleApi{name: `googleApi`}
 	return r
 }

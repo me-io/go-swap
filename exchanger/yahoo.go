@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type YahooApi struct {
+type yahooApi struct {
 	apiKey       string
 	responseBody string
 	rateValue    float64
@@ -20,15 +20,16 @@ type YahooApi struct {
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
-var YahooApiUrl = `https://query1.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
+var (
+	yahooApiUrl     = `https://query1.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
+	yahooApiHeaders = map[string][]string{
+		`Accept`:          {`text/html,application/xhtml+xml,application/xml`},
+		`Accept-Encoding`: {`text`},
+		`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
+	}
+)
 
-var YahooApiHeaders = map[string][]string{
-	`Accept`:          {`text/html,application/xhtml+xml,application/xml`},
-	`Accept-Encoding`: {`text`},
-	`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
-}
-
-func (c *YahooApi) requestRate(from string, to string, opt ...interface{}) (*YahooApi, error) {
+func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yahooApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
@@ -51,9 +52,9 @@ func (c *YahooApi) requestRate(from string, to string, opt ...interface{}) (*Yah
 		Timeout:   timeout,
 	}
 
-	url := fmt.Sprintf(YahooApiUrl, from, to)
+	url := fmt.Sprintf(yahooApiUrl, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
-	req.Header = YahooApiHeaders
+	req.Header = yahooApiHeaders
 	res, err := client.Do(req)
 
 	if err != nil {
@@ -72,19 +73,19 @@ func (c *YahooApi) requestRate(from string, to string, opt ...interface{}) (*Yah
 	return c, nil
 }
 
-func (c *YahooApi) GetValue() float64 {
+func (c *yahooApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *YahooApi) GetDate() string {
+func (c *yahooApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *YahooApi) GetExchangerName() string {
+func (c *yahooApi) GetExchangerName() string {
 	return c.name
 }
 
-func (c *YahooApi) Latest(from string, to string, opt ...interface{}) error {
+func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
@@ -117,7 +118,7 @@ func (c *YahooApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
-func NewYahooApi(opt ...interface{}) *YahooApi {
-	r := &YahooApi{name: `YahooApi`}
+func NewYahooApi(opt ...interface{}) *yahooApi {
+	r := &yahooApi{name: `yahooApi`}
 	return r
 }
