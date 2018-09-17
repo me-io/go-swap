@@ -1,4 +1,4 @@
-package static_mock
+package staticMock
 
 import (
 	"io/ioutil"
@@ -10,6 +10,7 @@ import (
 
 type mT struct{}
 
+// NewTestMT ... return new RoundTripper for mocking http response
 func NewTestMT() http.RoundTripper {
 	return &mT{}
 }

@@ -2,7 +2,7 @@ package swap
 
 import (
 	ex "github.com/me-io/go-swap/exchanger"
-	"github.com/me-io/go-swap/static_mock"
+	"github.com/me-io/go-swap/staticMock"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
@@ -24,9 +24,9 @@ func TestSwap_AddExchanger(t *testing.T) {
 	SwapTest := NewSwap()
 
 	g := ex.NewGoogleApi()
-	g.Client.Transport = static_mock.NewTestMT()
+	g.Client.Transport = staticMock.NewTestMT()
 	y := ex.NewGoogleApi()
-	y.Client.Transport = static_mock.NewTestMT()
+	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
 		AddExchanger(g).
@@ -39,7 +39,7 @@ func TestSwap_Build_Google(t *testing.T) {
 	SwapTest := NewSwap()
 
 	g := ex.NewGoogleApi()
-	g.Client.Transport = static_mock.NewTestMT()
+	g.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
 		AddExchanger(g).
@@ -58,7 +58,7 @@ func TestSwap_Build_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
 
 	y := ex.NewYahooApi()
-	y.Client.Transport = static_mock.NewTestMT()
+	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
 		AddExchanger(y).
@@ -72,9 +72,9 @@ func TestSwap_Build_Yahoo(t *testing.T) {
 func TestSwap_Build_Stack_Google_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
 	g := ex.NewGoogleApi()
-	g.Client.Transport = static_mock.NewTestMT()
+	g.Client.Transport = staticMock.NewTestMT()
 	y := ex.NewGoogleApi()
-	y.Client.Transport = static_mock.NewTestMT()
+	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
 		AddExchanger(g).
