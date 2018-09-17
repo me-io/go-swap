@@ -12,11 +12,11 @@ import (
 )
 
 type googleApi struct {
-	apiKey       string
 	responseBody string
 	rateValue    float64
 	rateDate     string
 	name         string
+	Client       *http.Client // exposed for custom http clients or testing
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
@@ -37,27 +37,15 @@ func (c *googleApi) requestRate(from string, to string, opt ...interface{}) (*go
 	// free mem-leak
 	// optimize for memory leak
 	// todo optimize curl connection
-	keepAliveTimeout := 600 * time.Second
-	timeout := 5 * time.Second
-	defaultTransport := &http.Transport{
-		DialContext: (&net.Dialer{
-			Timeout:   30 * time.Second,
-			KeepAlive: keepAliveTimeout,
-			DualStack: true,
-		}).DialContext,
-		MaxIdleConns:        100,
-		MaxIdleConnsPerHost: 100,
-	}
 
-	client := &http.Client{
-		Transport: defaultTransport,
-		Timeout:   timeout,
-	}
-
+	// format the url and replace currency
 	url := fmt.Sprintf(googleApiUrl, from, to)
+	// prepare the request
 	req, _ := http.NewRequest("GET", url, nil)
+	// assign the request headers
 	req.Header = googleApiHeaders
-	res, err := client.Do(req)
+	// execute the request
+	res, err := c.Client.Do(req)
 
 	if err != nil {
 		return nil, err
@@ -101,7 +89,7 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 		c.responseBody = `knowledge-currency__tgt-input value="1" "`
 	}
 
-	validID := regexp.MustCompile(`knowledge-currency__tgt-input(.*)value="([0-9.]{0,12})" (.*)"`)
+	validID := regexp.MustCompile(`(?s)knowledge-currency__tgt-input(.*)value="([0-9.]{0,12})"(.*)"`)
 	stringMatches := validID.FindStringSubmatch(c.responseBody)
 
 	c.rateValue, err = strconv.ParseFloat(stringMatches[2], 64)
@@ -114,6 +102,28 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 }
 
 func NewGoogleApi(opt ...interface{}) *googleApi {
-	r := &googleApi{name: `googleApi`}
+
+	keepAliveTimeout := 600 * time.Second
+	timeout := 5 * time.Second
+	defaultTransport := &http.Transport{
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: keepAliveTimeout,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 100,
+	}
+
+	client := &http.Client{
+		Transport: defaultTransport,
+		Timeout:   timeout,
+	}
+
+	r := &googleApi{
+		name:   `googleApi`,
+		Client: client,
+	}
+
 	return r
 }

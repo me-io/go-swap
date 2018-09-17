@@ -12,11 +12,11 @@ import (
 )
 
 type yahooApi struct {
-	apiKey       string
 	responseBody string
 	rateValue    float64
 	rateDate     string
 	name         string
+	Client       *http.Client // exposed for custom http clients or testing
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
@@ -35,27 +35,11 @@ func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yah
 	// free mem-leak
 	// optimize for memory leak
 	// todo optimize curl connection
-	keepAliveTimeout := 600 * time.Second
-	timeout := 10 * time.Second
-	defaultTransport := &http.Transport{
-		DialContext: (&net.Dialer{
-			Timeout:   30 * time.Second,
-			KeepAlive: keepAliveTimeout,
-			DualStack: true,
-		}).DialContext,
-		MaxIdleConns:        100,
-		MaxIdleConnsPerHost: 100,
-	}
-
-	client := &http.Client{
-		Transport: defaultTransport,
-		Timeout:   timeout,
-	}
 
 	url := fmt.Sprintf(yahooApiUrl, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header = yahooApiHeaders
-	res, err := client.Do(req)
+	res, err := c.Client.Do(req)
 
 	if err != nil {
 		return nil, err
@@ -119,6 +103,26 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 }
 
 func NewYahooApi(opt ...interface{}) *yahooApi {
-	r := &yahooApi{name: `yahooApi`}
+	keepAliveTimeout := 600 * time.Second
+	timeout := 5 * time.Second
+	defaultTransport := &http.Transport{
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: keepAliveTimeout,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 100,
+	}
+
+	client := &http.Client{
+		Transport: defaultTransport,
+		Timeout:   timeout,
+	}
+
+	r := &yahooApi{
+		name:   `yahooApi`,
+		Client: client,
+	}
 	return r
 }

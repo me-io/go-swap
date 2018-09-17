@@ -1,0 +1,86 @@
+{
+    "chart": {
+        "result": [
+            {
+                "meta": {
+                    "currency": "USD",
+                    "symbol": "AEDUSD=X",
+                    "exchangeName": "CCY",
+                    "instrumentType": "CURRENCY",
+                    "firstTradeDate": 1070236800,
+                    "gmtoffset": 3600,
+                    "timezone": "BST",
+                    "exchangeTimezoneName": "Europe/London",
+                    "chartPreviousClose": 0.2723,
+                    "priceHint": 4,
+                    "currentTradingPeriod": {
+                        "pre": {
+                            "timezone": "BST",
+                            "start": 1537138800,
+                            "end": 1537138800,
+                            "gmtoffset": 3600
+                        },
+                        "regular": {
+                            "timezone": "BST",
+                            "start": 1537138800,
+                            "end": 1537225140,
+                            "gmtoffset": 3600
+                        },
+                        "post": {
+                            "timezone": "BST",
+                            "start": 1537225140,
+                            "end": 1537225140,
+                            "gmtoffset": 3600
+                        }
+                    },
+                    "dataGranularity": "1d",
+                    "validRanges": [
+                        "1d",
+                        "5d",
+                        "1mo",
+                        "3mo",
+                        "6mo",
+                        "1y",
+                        "2y",
+                        "5y",
+                        "10y",
+                        "ytd",
+                        "max"
+                    ]
+                },
+                "timestamp": [
+                    1537186345
+                ],
+                "indicators": {
+                    "quote": [
+                        {
+                            "open": [
+                                0.2722718417644501
+                            ],
+                            "volume": [
+                                0
+                            ],
+                            "high": [
+                                0.27238309383392334
+                            ],
+                            "low": [
+                                0.27226442098617554
+                            ],
+                            "close": [
+                                0.2722792625427246
+                            ]
+                        }
+                    ],
+                    "adjclose": [
+                        {
+                            "adjclose": [
+                                0.2722792625427246
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "error": null
+    }
+}
