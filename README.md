@@ -64,7 +64,7 @@ The documentation for the current branch can be found [here](#documentation).
 
 ## TODO LIST
 - [ ] cache integration
-- [ ] Add Mocks
+- [x] Add Test Mocks
 - [ ] Benchmark & Performance optimization ` memory leak`
 - [ ] examples
 - [ ] code coverage
