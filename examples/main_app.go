@@ -1,4 +1,4 @@
-package examples
+package main
 
 import (
 	"fmt"
@@ -11,8 +11,11 @@ func main() {
 
 	SwapTest.
 		AddExchanger(ex.NewGoogleApi(nil)).
+		AddExchanger(ex.NewYahooApi(nil)).
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
 	fmt.Println(euroToUsdRate.GetValue())
+	fmt.Println(euroToUsdRate.GetDate())
+	fmt.Println(euroToUsdRate.GetExchangerName())
 }

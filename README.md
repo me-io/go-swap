@@ -62,6 +62,25 @@ The documentation for the current branch can be found [here](#documentation).
 [6]: //openexchangerates.org
 [7]: //1forge.com
 
+## TODO LIST
+- [ ] cache integration
+- [ ] Add Mocks
+- [ ] Benchmark & Performance optimization ` memory leak`
+- [ ] examples
+- [ ] code coverage
+- [ ] godoc 
+- [ ] herokuapp demo with links
+- [ ] contributors list 
+
+
+## Contributing
+
+Anyone is welcome to [contribute](CONTRIBUTING.md), however, if you decide to get involved, please take a moment to review the guidelines:
+
+* [Only one feature or change per pull request](CONTRIBUTING.md#only-one-feature-or-change-per-pull-request)
+* [Write meaningful commit messages](CONTRIBUTING.md#write-meaningful-commit-messages)
+* [Follow the existing coding standards](CONTRIBUTING.md#follow-the-existing-coding-standards)
+
 ## License
 
-The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
+The code is available under the [MIT license](LICENSE.md).
