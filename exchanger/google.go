@@ -117,7 +117,7 @@ func NewGoogleApi(opt map[string]string) *googleApi {
 		Timeout:   timeout,
 	}
 
-	r := &googleApi{attributes{name: `googleApi`, Client: client,}}
+	r := &googleApi{attributes{name: `googleApi`, Client: client}}
 
 	return r
 }

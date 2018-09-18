@@ -113,6 +113,6 @@ func NewCurrencyLayerApi(opt map[string]string) *currencyLayerApi {
 		Timeout:   timeout,
 	}
 
-	r := &currencyLayerApi{attributes: attributes{name: `currencyLayerApi`, Client: client,}, apiKey: opt[`apiKey`]}
+	r := &currencyLayerApi{attributes: attributes{name: `currencyLayerApi`, Client: client}, apiKey: opt[`apiKey`]}
 	return r
 }

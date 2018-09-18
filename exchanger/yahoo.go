@@ -116,6 +116,6 @@ func NewYahooApi(opt map[string]string) *yahooApi {
 		Timeout:   timeout,
 	}
 
-	r := &yahooApi{attributes{name: `yahooApi`, Client: client,}}
+	r := &yahooApi{attributes{name: `yahooApi`, Client: client}}
 	return r
 }
