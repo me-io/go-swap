@@ -48,7 +48,7 @@ The documentation for the current branch can be found [here](#documentation).
 |:---|:----|:---|
 |[Google][1]|Regex|:heavy_check_mark:|
 |[Yahoo][2]|API|:heavy_check_mark:|
-|[Currency Layer][3]|API| TODO |
+|[Currency Layer][3]|API| :heavy_check_mark: |
 |[Fixer.io][4]|API| TODO |
 |[The Money Converter][5]|API| TODO |
 |[Open Exchange Rates][6]|API| TODO |
