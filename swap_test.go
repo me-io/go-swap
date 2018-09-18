@@ -23,9 +23,9 @@ func TestSwap_New(t *testing.T) {
 func TestSwap_AddExchanger(t *testing.T) {
 	SwapTest := NewSwap()
 
-	g := ex.NewGoogleApi()
+	g := ex.NewGoogleApi(nil)
 	g.Client.Transport = staticMock.NewTestMT()
-	y := ex.NewGoogleApi()
+	y := ex.NewYahooApi(nil)
 	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
@@ -38,7 +38,7 @@ func TestSwap_AddExchanger(t *testing.T) {
 func TestSwap_Build_Google(t *testing.T) {
 	SwapTest := NewSwap()
 
-	g := ex.NewGoogleApi()
+	g := ex.NewGoogleApi(nil)
 	g.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
@@ -57,7 +57,7 @@ func TestSwap_Build_Google(t *testing.T) {
 func TestSwap_Build_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
 
-	y := ex.NewYahooApi()
+	y := ex.NewYahooApi(nil)
 	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.
@@ -71,9 +71,9 @@ func TestSwap_Build_Yahoo(t *testing.T) {
 
 func TestSwap_Build_Stack_Google_Yahoo(t *testing.T) {
 	SwapTest := NewSwap()
-	g := ex.NewGoogleApi()
+	g := ex.NewGoogleApi(nil)
 	g.Client.Transport = staticMock.NewTestMT()
-	y := ex.NewGoogleApi()
+	y := ex.NewYahooApi(nil)
 	y.Client.Transport = staticMock.NewTestMT()
 
 	SwapTest.

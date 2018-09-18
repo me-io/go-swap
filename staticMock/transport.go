@@ -43,6 +43,11 @@ func (t *mT) RoundTrip(req *http.Request) (*http.Response, error) {
 		fc, _ := ioutil.ReadFile(fp)
 		responseBody = string(fc)
 		break
+	case host == `apilayer.net`:
+		fp, _ := filepath.Abs(tPath + `/currencylayer_json_aed_usd.json`)
+		fc, _ := ioutil.ReadFile(fp)
+		responseBody = string(fc)
+		break
 	default:
 
 	}

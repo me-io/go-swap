@@ -7,7 +7,7 @@ import (
 )
 
 func TestYahooApi_Latest(t *testing.T) {
-	rate := NewYahooApi()
+	rate := NewYahooApi(nil)
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`USD`, `EUR`)

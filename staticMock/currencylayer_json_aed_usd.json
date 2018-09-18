@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "terms": "https:\/\/currencylayer.com\/terms",
+  "privacy": "https:\/\/currencylayer.com\/privacy",
+  "query": {
+    "from": "AED",
+    "to": "USD",
+    "amount": 25
+  },
+  "info": {
+    "timestamp": 1537250111,
+    "quote": 0.272256
+  },
+  "result": 6.8064
+}

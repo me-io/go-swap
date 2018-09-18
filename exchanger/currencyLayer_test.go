@@ -6,13 +6,13 @@ import (
 	"testing"
 )
 
-func TestGoogleApi_Latest(t *testing.T) {
-	rate := NewGoogleApi(nil)
+func TestCurrencyLayerApi_Latest(t *testing.T) {
+	rate := NewCurrencyLayerApi(nil)
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)
 	assert.Equal(t, float64(1), rate.GetValue())
 
 	rate.Latest(`EUR`, `USD`)
-	assert.Equal(t, float64(3.67), rate.GetValue())
+	assert.Equal(t, float64(6.8064), rate.GetValue())
 }

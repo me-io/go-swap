@@ -12,11 +12,7 @@ import (
 )
 
 type googleApi struct {
-	responseBody string
-	rateValue    float64
-	rateDate     string
-	name         string
-	Client       *http.Client // exposed for custom http clients or testing
+	attributes
 }
 
 // ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Google.php
@@ -84,9 +80,10 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 		return err
 	}
 
-	// if from currency is same as converted currency simulate html with value of 1
+	// if from currency is same as converted currency return value of 1
 	if from == to {
-		c.responseBody = `knowledge-currency__tgt-input value="1" "`
+		c.rateValue = 1
+		return nil
 	}
 
 	validID := regexp.MustCompile(`(?s)knowledge-currency__tgt-input(.*)value="([0-9.]{0,12})"(.*)"`)
@@ -101,7 +98,7 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
-func NewGoogleApi(opt ...interface{}) *googleApi {
+func NewGoogleApi(opt map[string]string) *googleApi {
 
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second
@@ -120,10 +117,7 @@ func NewGoogleApi(opt ...interface{}) *googleApi {
 		Timeout:   timeout,
 	}
 
-	r := &googleApi{
-		name:   `googleApi`,
-		Client: client,
-	}
+	r := &googleApi{attributes{name: `googleApi`, Client: client,}}
 
 	return r
 }

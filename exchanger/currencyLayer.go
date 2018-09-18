@@ -5,36 +5,36 @@ import (
 	"github.com/bitly/go-simplejson"
 	"io/ioutil"
 	"log"
-	"math"
 	"net"
 	"net/http"
 	"time"
 )
 
-type yahooApi struct {
+type currencyLayerApi struct {
+	apiKey string
 	attributes
 }
 
-// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
+// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/currencylayer.php
 var (
-	yahooApiUrl     = `https://query1.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
-	yahooApiHeaders = map[string][]string{
+	currencyLayerApiUrl     = `https://apilayer.net/api/convert?access_key=%s&from=%s&to=%s&amount=1&format=1`
+	currencyLayerApiHeaders = map[string][]string{
 		`Accept`:          {`text/html,application/xhtml+xml,application/xml,application/json`},
 		`Accept-Encoding`: {`text`},
 		`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 	}
 )
 
-func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yahooApi, error) {
+func (c *currencyLayerApi) requestRate(from string, to string, opt ...interface{}) (*currencyLayerApi, error) {
 
 	// todo add option opt to add more headers or client configurations
 	// free mem-leak
 	// optimize for memory leak
 	// todo optimize curl connection
 
-	url := fmt.Sprintf(yahooApiUrl, from, to)
+	url := fmt.Sprintf(currencyLayerApiUrl, c.apiKey, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
-	req.Header = yahooApiHeaders
+	req.Header = currencyLayerApiHeaders
 	res, err := c.Client.Do(req)
 
 	if err != nil {
@@ -53,25 +53,31 @@ func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yah
 	return c, nil
 }
 
-func (c *yahooApi) GetValue() float64 {
+func (c *currencyLayerApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *yahooApi) GetDate() string {
+func (c *currencyLayerApi) GetDate() string {
 	return c.rateDate
 }
 
-func (c *yahooApi) GetExchangerName() string {
+func (c *currencyLayerApi) GetExchangerName() string {
 	return c.name
 }
 
-func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
+func (c *currencyLayerApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
 	if err != nil {
 		log.Print(err)
 		return err
+	}
+
+	// if from currency is same as converted currency return value of 1
+	if from == to {
+		c.rateValue = 1
+		return nil
 	}
 
 	json, err := simplejson.NewJson([]byte(c.responseBody))
@@ -82,23 +88,14 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 	}
 
 	// opening price
-	value := json.GetPath(`chart`, `result`).
-		GetIndex(0).
-		//GetPath(`indicators`, `adjclose`).
-		//GetIndex(0).
-		//GetPath(`adjclose`).
-		//GetIndex(0).
-		GetPath(`indicators`, `quote`).
-		GetIndex(0).
-		GetPath(`open`).
-		GetIndex(0).
+	value := json.GetPath(`result`).
 		MustFloat64()
 	// todo handle error
-	c.rateValue = math.Round(value*10000) / 10000
+	c.rateValue = value
 	return nil
 }
 
-func NewYahooApi(opt map[string]string) *yahooApi {
+func NewCurrencyLayerApi(opt map[string]string) *currencyLayerApi {
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second
 	defaultTransport := &http.Transport{
@@ -116,6 +113,6 @@ func NewYahooApi(opt map[string]string) *yahooApi {
 		Timeout:   timeout,
 	}
 
-	r := &yahooApi{attributes{name: `yahooApi`, Client: client,}}
+	r := &currencyLayerApi{attributes: attributes{name: `currencyLayerApi`, Client: client,}, apiKey: opt[`apiKey`]}
 	return r
 }
