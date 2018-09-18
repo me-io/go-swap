@@ -48,6 +48,11 @@ func (t *mT) RoundTrip(req *http.Request) (*http.Response, error) {
 		fc, _ := ioutil.ReadFile(fp)
 		responseBody = string(fc)
 		break
+	case host == `data.fixer.io`:
+		fp, _ := filepath.Abs(tPath + `/fixer_json_aed_usd.json`)
+		fc, _ := ioutil.ReadFile(fp)
+		responseBody = string(fc)
+		break
 	default:
 
 	}
