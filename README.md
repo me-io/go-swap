@@ -71,7 +71,9 @@ The documentation for the current branch can be found [here](#documentation).
 - [ ] godoc 
 - [ ] herokuapp demo with links
 - [ ] contributors list 
-
+- [ ] v 1.0.0 release binary
+- [ ] v 1.0.0 release docker image
+- [ ] Server Postman API collection 
 
 ## Contributing
 
