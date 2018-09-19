@@ -14,7 +14,7 @@ var (
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
 		`/convert`: convert,
-		`/`:      etc,
+		`/`:        etc,
 	}
 )
 
