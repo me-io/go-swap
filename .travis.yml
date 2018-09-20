@@ -12,8 +12,9 @@ services:
 script:
 - make test-docker
 - make build
-- test -f bin/linux-amd64/server
+- test -f bin/linux-amd64/swap-server
 - make container
+- docker images | grep me-io/swap-server-linux-amd64
 #after_success:
 #- bash <(curl -s https://codecov.io/bash)
 #

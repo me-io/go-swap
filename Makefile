@@ -1,5 +1,6 @@
 # The binary to build (just the basename).
-BIN := server
+BIN := swap-server
+SRC_BIN := server
 
 # This repo's root import path (under GOPATH).
 PKG := github.com/me-io/go-swap
@@ -115,6 +116,7 @@ container: .container-$(DOTFILE_IMAGE) container-name
 .container-$(DOTFILE_IMAGE): bin/$(OS)-$(ARCH)/$(BIN) Dockerfile.in
 	@sed \
 	    -e 's|ARG_BIN|$(BIN)|g' \
+	    -e 's|ARG_SRC_BIN|$(SRC_BIN)|g' \
 	    -e 's|ARG_OS|$(OS)|g' \
 	    -e 's|ARG_ARCH|$(ARCH)|g' \
 	    -e 's|ARG_FROM|$(BASEIMAGE)|g' \
