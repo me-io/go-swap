@@ -8,12 +8,6 @@ import (
 	"strings"
 )
 
-// Swap ... main struct
-type Swap struct {
-	exchangers []ex.Exchanger
-	cache      interface{}
-}
-
 // NewSwap ... configure new swap instance
 func NewSwap(opt ...string) *Swap {
 	// todo add options
