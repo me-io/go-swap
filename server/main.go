@@ -2,54 +2,26 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"time"
 )
 
 var (
-	allowedExchanger = map[string]string{
-		`google`: `googleApi`,
-		`yahoo`:  `yahooApi`,
-		`fixer`:  `fixer`,
-	}
+	//allowedExchanger = map[string]string{
+	//	`google`: `googleApi`,
+	//	`yahoo`:  `yahooApi`,
+	//	`fixer`:  `fixer`,
+	//}
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
-		`/convert`: convert,
+		`/convert`: Convert,
 		`/`:        etc,
 	}
 )
 
 var etc = func(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("etc")
-}
-
-var convert = func(w http.ResponseWriter, r *http.Request) {
-	payload := `{
-  "amount": 1,
-  "exchanger": [
-    {
-      "name": "google",
-      "userAgent": "firefox"
-    },
-    {
-      "name": "yahoo",
-      "userAgent": "Chrome"
-    },
-    {
-      "name": "currencyLayer",
-      "apiKey": "12312",
-      "userAgent": "currencyLayer Chrome"
-    },
-    {
-      "name": "fixer",
-      "apiKey": "12312",
-      "userAgent": "currencyLayer fixer"
-    }
-  ],
-  "from": "USD",
-  "to": "AED"
-}`
-	fmt.Println(payload)
-
 }
 
 func main() {
@@ -59,9 +31,31 @@ func main() {
 		http.HandleFunc(k, v)
 	}
 
-	fmt.Println(`server started`)
 	// todo
 	// port and config
 	// cache
-	http.ListenAndServe(":3003", nil)
+	go serveHTTP(`0.0.0.0`, 3003)
+	select {}
+}
+
+func serveHTTP(host string, port int) {
+
+	mux := http.NewServeMux()
+	for k, v := range routes {
+		mux.HandleFunc(k, v)
+	}
+
+	addr := fmt.Sprintf("%v:%d", host, port)
+	server := &http.Server{
+		Addr:           addr,
+		Handler:        mux,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	fmt.Println(`Server Started`)
+
+	err := server.ListenAndServe()
+	log.Println(err.Error())
 }
