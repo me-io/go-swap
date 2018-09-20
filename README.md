@@ -24,8 +24,8 @@ package main
 
 import (
 	"fmt"
-	ex "github.com/me-io/go-swap/exchanger"
-	"github.com/me-io/go-swap/swap"
+	ex "github.com/me-io/go-swap/pkg/exchanger"
+	"github.com/me-io/go-swap/pkg/swap"
 )
 
 func main() {
@@ -47,15 +47,15 @@ The documentation for the current branch can be found [here](#documentation).
 
 
 ## Services
-|Exchanger|type|#|
-|:---|:----|:---|
-|[Google][1]|HTML / Regex|:heavy_check_mark:|
-|[Yahoo][2]|JSON / API|:heavy_check_mark:|
-|[Currency Layer][3]|JSON / API| :heavy_check_mark: |
-|[Fixer.io][4]|JSON / API| :heavy_check_mark: |
-|[The Money Converter][5]|API| TODO |
-|[Open Exchange Rates][6]|API| TODO |
-|[1forge][7]|API| TODO |
+|Exchanger|type|#|$|
+|:---|:----|:---|:---|
+|[Google][1]|HTML / Regex|:heavy_check_mark:|Free|
+|[Yahoo][2]|JSON / API|:heavy_check_mark:|Free|
+|[Currency Layer][3]|JSON / API| :heavy_check_mark: |Paid - ApiKey|
+|[Fixer.io][4]|JSON / API| :heavy_check_mark: |Paid - ApiKey|
+|[The Money Converter][5]|HTML / Regex| TODO |Free|
+|[Open Exchange Rates][6]|API| TODO |Freemium / Paid - ApiKey|
+|[1forge][7]|API| TODO |Freemium / Paid - ApiKey|
 
 [1]: //google.com
 [2]: //yahoo.com
