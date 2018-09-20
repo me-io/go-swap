@@ -82,7 +82,7 @@ bin/$(ARCH)/$(BIN): build-dirs
 	        ARCH=$(ARCH)                                                    \
 	        VERSION=$(VERSION)                                              \
 	        PKG=$(PKG)                                                      \
-	        ./build/build.sh                                                \
+	        ./scripts/build.sh                                                \
 	    "
 
 # Example: make shell CMD="-c 'date > datefile'"
@@ -149,7 +149,7 @@ test-docker: build-dirs
 	    -v "$$(pwd)/.go/cache:/.cache"                                      \
 	    -w /go/src/$(PKG)                                                   \
 	    $(BUILD_IMAGE)                                                      \
-	    /bin/sh -c " ./build/test.sh $(SRC_DIRS) "
+	    /bin/sh -c " ./scripts/test.sh $(SRC_DIRS) "
 
 build-dirs:
 	@mkdir -p bin/$(ARCH)

@@ -1,7 +1,7 @@
 package exchanger
 
 import (
-	"github.com/me-io/go-swap/pkg/staticMock"
+	"github.com/me-io/go-swap/test/staticMock"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
