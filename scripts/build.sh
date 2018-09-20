@@ -17,8 +17,14 @@ if [ -z "${VERSION}" ]; then
     exit 1
 fi
 
+if [ -z "${OS}" ]; then
+    echo "OS must be set"
+    exit 1
+fi
+
 export CGO_ENABLED=0
 export GOARCH="${ARCH}"
+export GOOS="${OS}"
 
 go install                                                         \
     -installsuffix "static"                                        \

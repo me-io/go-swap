@@ -11,6 +11,9 @@ services:
 
 script:
 - make test-docker
+- make build
+- test -f bin/linux-amd64/myapp
+- make container
 #after_success:
 #- bash <(curl -s https://codecov.io/bash)
 #
