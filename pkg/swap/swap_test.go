@@ -1,8 +1,8 @@
 package swap
 
 import (
-	ex "github.com/me-io/go-swap/exchanger"
-	"github.com/me-io/go-swap/staticMock"
+	ex "github.com/me-io/go-swap/pkg/exchanger"
+	"github.com/me-io/go-swap/pkg/staticMock"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"

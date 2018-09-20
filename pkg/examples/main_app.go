@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	ex "github.com/me-io/go-swap/exchanger"
-	"github.com/me-io/go-swap/swap"
+	ex "github.com/me-io/go-swap/pkg/exchanger"
+	"github.com/me-io/go-swap/pkg/swap"
 )
 
 func main() {

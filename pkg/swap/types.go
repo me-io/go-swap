@@ -1,7 +1,7 @@
 package swap
 
 import (
-	ex "github.com/me-io/go-swap/exchanger"
+	ex "github.com/me-io/go-swap/pkg/exchanger"
 )
 
 // Swap ... main struct
