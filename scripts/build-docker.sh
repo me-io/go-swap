@@ -7,6 +7,14 @@ OS="linux"
 ARCH="amd64"
 DOCKER_TAG=${OS}-${ARCH}-${GIT_TAG}
 
+if [[ ${GIT_TAG} =~ ^[[:digit:].[:digit:].[:digit:]]+$ ]]; then
+    true
+else
+    echo "TAG: ${GIT_TAG} - skip build"
+    exit 0
+fi
+
+
 if [[ ! -z "${DOCKER_PASSWORD}" && ! -z "${DOCKER_USERNAME}" ]]
 then
     echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
