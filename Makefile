@@ -1,5 +1,5 @@
 # The binary to build (just the basename).
-BIN := swap-server
+BIN := go-swap-server
 SRC_BIN := server
 
 # This repo's root import path (under GOPATH).
