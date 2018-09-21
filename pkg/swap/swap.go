@@ -18,7 +18,9 @@ func NewSwap(opt ...string) *Swap {
 
 // AddExchanger ... add service to the swap stack
 func (b *Swap) AddExchanger(interfaceClass ex.Exchanger) *Swap {
-	b.exchangers = append(b.exchangers, interfaceClass)
+	if interfaceClass != nil {
+		b.exchangers = append(b.exchangers, interfaceClass)
+	}
 	return b
 }
 

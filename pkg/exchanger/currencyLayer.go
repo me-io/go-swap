@@ -58,7 +58,7 @@ func (c *currencyLayerApi) GetValue() float64 {
 }
 
 func (c *currencyLayerApi) GetDate() string {
-	return c.rateDate
+	return c.rateDate.String()
 }
 
 func (c *currencyLayerApi) GetExchangerName() string {
@@ -113,6 +113,6 @@ func NewCurrencyLayerApi(opt map[string]string) *currencyLayerApi {
 		Timeout:   timeout,
 	}
 
-	r := &currencyLayerApi{attributes: attributes{name: `currencyLayerApi`, Client: client}, apiKey: opt[`apiKey`]}
+	r := &currencyLayerApi{attributes: attributes{name: `currencylayer`, Client: client}, apiKey: opt[`apiKey`]}
 	return r
 }

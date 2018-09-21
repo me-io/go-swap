@@ -58,7 +58,7 @@ func (c *fixerApi) GetValue() float64 {
 }
 
 func (c *fixerApi) GetDate() string {
-	return c.rateDate
+	return c.rateDate.String()
 }
 
 func (c *fixerApi) GetExchangerName() string {
@@ -113,6 +113,6 @@ func NewFixerApi(opt map[string]string) *fixerApi {
 		Timeout:   timeout,
 	}
 
-	r := &fixerApi{attributes: attributes{name: `fixerApi`, Client: client}, apiKey: opt[`apiKey`]}
+	r := &fixerApi{attributes: attributes{name: `fixer`, Client: client}, apiKey: opt[`apiKey`]}
 	return r
 }

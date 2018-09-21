@@ -58,7 +58,7 @@ func (c *yahooApi) GetValue() float64 {
 }
 
 func (c *yahooApi) GetDate() string {
-	return c.rateDate
+	return c.rateDate.String()
 }
 
 func (c *yahooApi) GetExchangerName() string {
@@ -116,6 +116,6 @@ func NewYahooApi(opt map[string]string) *yahooApi {
 		Timeout:   timeout,
 	}
 
-	r := &yahooApi{attributes{name: `yahooApi`, Client: client}}
+	r := &yahooApi{attributes{name: `yahoo`, Client: client}}
 	return r
 }

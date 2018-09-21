@@ -1,6 +1,9 @@
 package exchanger
 
-import "net/http"
+import (
+	"net/http"
+	"time"
+)
 
 type Rate interface {
 	GetValue() float64
@@ -16,7 +19,7 @@ type Exchanger interface {
 type attributes struct {
 	responseBody string
 	rateValue    float64
-	rateDate     string
+	rateDate     time.Time
 	name         string
 	Client       *http.Client // exposed for custom http clients or testing
 }

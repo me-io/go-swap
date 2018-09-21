@@ -64,7 +64,7 @@ func (c *googleApi) GetValue() float64 {
 }
 
 func (c *googleApi) GetDate() string {
-	return c.rateDate
+	return c.rateDate.String()
 }
 
 func (c *googleApi) GetExchangerName() string {
@@ -117,7 +117,7 @@ func NewGoogleApi(opt map[string]string) *googleApi {
 		Timeout:   timeout,
 	}
 
-	r := &googleApi{attributes{name: `googleApi`, Client: client}}
+	r := &googleApi{attributes{name: `google`, Client: client}}
 
 	return r
 }

@@ -147,7 +147,7 @@ test-local:
 
 test-docker: build-dirs
 	@dep version >/dev/null 2>&1 || ( wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh )
-	@dep ensure --vendor-only
+	@dep ensure -vendor-only
 	@docker run                                                                   \
 	    -ti                                                                       \
 	    --rm                                                                      \
