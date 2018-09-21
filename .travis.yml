@@ -4,7 +4,7 @@ go:
 - 1.11.x
 - 1.10.x
 - '1.8'
-- master
+#- master
 
 # Only clone the most recent commit.
 git:
