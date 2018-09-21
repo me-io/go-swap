@@ -1,20 +1,19 @@
 language: go
 go:
-- "1.x"
-- "1.8"
-- "1.10.x"
-- "1.11.x"
+- 1.x
+- '1.8'
+- 1.10.x
+- 1.11.x
 - master
-
 services:
 - docker
-
 script:
 - make test-docker
 - make build
 - test -f bin/linux-amd64/server
 - make container
 - docker images | grep me-io/swap-server-linux-amd64
-#after_success:
-#- bash <(curl -s https://codecov.io/bash)
-#
+- ./scripts/build-docker.sh
+env:
+  global:
+    secure: F0UO2ja1qVTlNfqIGrROc3q8oJAZMIGQT+jA3pDyQLTE3cPiJUCr3OwAA/wOAPQTAhUaBGVWIYWx5H+4bvpWgn1JJ1eWf2mh3GR8cRoNpiXFTsSua6pWNXN74LAO8PslDYP1Kj6ZrybVcH663dmIu4qScScggOAsVX4BL20r+PlaQo+Og1l1q6WRSZIdrb5aM6jPutKHE+kDbuHkOT8K3YlFskbXUQWTbXO6AdUulMTrIp7h/QYuj/JbaZLC6aB/sRt3cF3GZYhqYUrxVsbYsqBUNlG4Abygskc4vd0LxpjUW4II8++o2kSSCTsaAtax0pNueDhZZ4YfaBGTpwxlLNG4GrjQWaXZ269pd39WpnrmTGXJBczlGCajxJOAHs7x7mGdD7CpsEFeABqRKOfdivxO/oLo8jwz/JDgquQAMsmAdSmFmgsYX2REWFB8vwj4eyXFMrk1hsOSKlSNBjJP/JX8VgA22hoxDXpPtznX5oboTK0eWWtETDL9q/RR5zpAogF5aa52y5tshQ2G9ceaG68EEh86Eu0JLfZa6gHjzWXbcf4KV+TeozKuvAgGKS1AbYJaDPKPW62xq/wVrebMyzUs50oipwPdezp21lllsLgQpo3oo8yD2ViUcJW12RVwIYNVzhA7JljJhBv4ua/yJY3JkU83Gn7PgJxtCPIMxBM=
