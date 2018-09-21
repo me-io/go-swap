@@ -1,8 +1,5 @@
 language: go
 
-# Forces travis to use VM instead container, required to be able to build containers.
-sudo: required
-
 go:
 - 1.x
 - '1.8'
@@ -20,15 +17,18 @@ env:
 
 jobs:
   include:
+
   - stage: test
     script:
     - make test-docker
+
   - stage: build
     script:
     - make build
     - test -f bin/linux-amd64/server
     - make container
     - docker images | grep me-io/go-swap-server-linux-amd64
+
   - stage: docker
     script:
     - "./scripts/build-docker.sh"
