@@ -1,0 +1,11 @@
+{
+  "amount": 4.5,
+  "exchanger": [
+    {
+      "name": "yahoo",
+      "userAgent": "firefox"
+    }
+  ],
+  "from": "USD",
+  "to": "AED"
+}

@@ -1,0 +1,29 @@
+{
+  "amount": 4.5,
+  "exchanger": [
+    {
+      "name": "currencyLayer",
+      "apiKey": "12312",
+      "userAgent": "currencyLayer Chrome"
+    },
+    {
+      "name": "yahoo",
+      "userAgent": "Chrome"
+    },
+    {
+      "name": "google",
+      "userAgent": "firefox"
+    },
+    {
+      "name": "fixer",
+      "apiKey": "12312",
+      "userAgent": "currencyLayer fixer"
+    },
+    {
+      "name": "google",
+      "userAgent": "firefox"
+    }
+  ],
+  "from": "USD",
+  "to": "AED"
+}

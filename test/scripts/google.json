@@ -1,0 +1,11 @@
+{
+  "amount": 4.5,
+  "exchanger": [
+    {
+      "name": "google",
+      "userAgent": "firefox"
+    }
+  ],
+  "from": "USD",
+  "to": "AED"
+}

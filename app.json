@@ -1,11 +1,15 @@
 {
-  "name": "Node.js Sample",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-sample",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "name": "Currency Converter Server",
+  "description": "Golang Currency Converter Server",
+  "repository": "https://github.com/me-io/go-swap",
+  "logo": "https://github.com/me-io/go-swap/node.png",
   "keywords": [
-    "node",
-    "express",
-    "static"
+    "golang",
+    "currency",
+    "currencylayer",
+    "yahoo currency",
+    "google currency",
+    "fixer",
+    "1forge"
   ]
 }

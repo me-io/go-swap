@@ -72,6 +72,7 @@ The documentation for the current branch can be found [here](#documentation).
 [7]: //1forge.com
 
 ## TODO LIST
+- [ ] verbose logging
 - [ ] cache integration
 - [x] Add Test Mocks
 - [ ] Benchmark & Performance optimization ` memory leak`
