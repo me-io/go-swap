@@ -7,13 +7,21 @@ go:
 - master
 services:
 - docker
-script:
-- make test-docker
-- make build
-- test -f bin/linux-amd64/server
-- make container
-- docker images | grep me-io/swap-server-linux-amd64
-- "./scripts/build-docker.sh"
+jobs:
+  include:
+  - stage: test
+    script:
+    - make test-docker
+  - stage: build
+    script:
+    - make build
+    - test -f bin/linux-amd64/server
+    - make container
+    - docker images | grep me-io/go-swap-server-linux-amd64
+  - stage: docker
+    script:
+    - "./scripts/build-docker.sh"
+
 env:
   global:
   - secure: 2I0+pzIvKKi9RbmAjOBCS4gQFf7+KTDLIcGpoTPsvMUG6XMRiv5WUV0GWGRtKEpBs/iHOEOL2OkCI1SsN/mMyK/HcRLyotVDht12KILhmQxc5+ApawcaoU0LM4pnMthOztm3y+jX58F8NBqksLt3JCSinLr4eX/wTjsaJnjnGjncACFEiXUZK2566rFoTpJZR+UOCvhGGK6Nq8OWgh4K3OHAIeJB7xjGI8R3YTHkWtqhgQZAmMCbjxQHASqbfgYAFrMwvajnHWUpKtULLt1h4h6VDKoCE7yWyTGiF/8jQ4jDswlwfkRKZhG08AFtQQWf0ow3ojuZzz2SnmzV31zK73hLTuDHBCr3tjMAV69ErdK15FAvgCdlfQS1/MCNOsVcYRhpsNV79Qt644oS7yOh4uJglh9bx49cd1BiEremzsbxNK2MA2s6RmW0dG2ROYeHNXpcowPJIfuKFdHtDhTyza8qLQEiFAGYG64lJ87Hm4SYOT59aoAT7l3wSM+U9uTC8+PS/OyBTfanFe8jJ5L9OVL6v6SRzhLOPxrgcjSCn9HkUIzpRMlxnY4RMFVQ/tdpLl5s/9GRoEk2P3gimIgNlkzid6EzJ3XfcOmxm95RMbH2bBAg4a8qegFT4Q1+j2NnJ4f3AW8e20LQ3x4lPjz+MYtIdLeXLemiIEo2UECsTWU=
