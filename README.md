@@ -15,6 +15,12 @@ and optionally cache the results.
 
 ## QuickStart
 
+<a href="https://heroku.com/deploy?template=https://github.com/me-io/go-swap">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
+
+### Programmatically
 ```bash
 $ go get github.com/me-io/go-swap
 ```
