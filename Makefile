@@ -6,7 +6,7 @@ SRC_BIN := server
 PKG := github.com/me-io/go-swap
 
 # Where to push the docker image.
-REGISTRY ?= me-io
+REGISTRY ?= meio
 
 # Which architecture to build - see $(BUILD_PLATFORMS) for options.
 ARCH ?= amd64
