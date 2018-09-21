@@ -23,6 +23,6 @@ script:
 - make build
 - test -f bin/linux-amd64/server
 - make container
-- docker images | grep me-io/go-swap-server-linux-amd64
+- docker images | grep meio/go-swap-server
 - "./scripts/build-docker.sh"
 
