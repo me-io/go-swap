@@ -37,6 +37,10 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 			e = ex.NewGoogleApi(nil)
 		case `yahoo`:
 			e = ex.NewYahooApi(nil)
+		case `currencylayer`:
+			e = ex.NewCurrencyLayerApi(nil)
+		case `fixer`:
+			e = ex.NewFixerApi(nil)
 		}
 		Swap.AddExchanger(e)
 	}
@@ -47,8 +51,11 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	//Set Content-Type header so that clients will know how to read response
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	// todo rounding
+	amount := convertReq.Amount * rate.GetValue()
 
 	convertRes := convertResObj{
+		Amount:        amount,
 		Value:         rate.GetValue(),
 		Date:          rate.GetDate(),
 		ExchangerName: rate.GetExchangerName(),

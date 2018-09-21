@@ -15,6 +15,7 @@ type convertReqObj struct {
 
 type convertResObj struct {
 	Value         float64 `json:"value"`
+	Amount        float64 `json:"amount"`
 	Date          string  `json:"date"`
 	ExchangerName string  `json:"exchangerName"`
 }
