@@ -21,7 +21,6 @@ var (
 	yahooApiHeaders = map[string][]string{
 		`Accept`:          {`text/html,application/xhtml+xml,application/xml,application/json`},
 		`Accept-Encoding`: {`text`},
-		`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 	}
 )
 
@@ -34,7 +33,10 @@ func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yah
 
 	url := fmt.Sprintf(yahooApiUrl, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
+
+	yahooApiHeaders[`User-Agent`] = []string{c.userAgent}
 	req.Header = yahooApiHeaders
+
 	res, err := c.Client.Do(req)
 
 	if err != nil {
@@ -116,6 +118,15 @@ func NewYahooApi(opt map[string]string) *yahooApi {
 		Timeout:   timeout,
 	}
 
-	r := &yahooApi{attributes{name: `yahoo`, Client: client}}
+	attr := attributes{
+		name:      `yahoo`,
+		Client:    client,
+		userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`,
+	}
+	if opt[`userAgent`] != "" {
+		attr.userAgent = opt[`userAgent`]
+	}
+
+	r := &yahooApi{attr}
 	return r
 }

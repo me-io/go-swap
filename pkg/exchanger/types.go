@@ -17,6 +17,8 @@ type Exchanger interface {
 }
 
 type attributes struct {
+	apiKey       string
+	userAgent    string
 	responseBody string
 	rateValue    float64
 	rateDate     time.Time

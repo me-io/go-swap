@@ -25,22 +25,21 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	//fmt.Println(convertReq)
-
 	Swap := swap.NewSwap()
 	for _, v := range convertReq.Exchanger {
-		//fmt.Println(k)
+
 		var e ex.Exchanger
+		opt := map[string]string{`userAgent`: v.UserAgent, `apiKey`: v.ApiKey}
 
 		switch v.Name {
 		case `google`:
-			e = ex.NewGoogleApi(nil)
+			e = ex.NewGoogleApi(opt)
 		case `yahoo`:
-			e = ex.NewYahooApi(nil)
+			e = ex.NewYahooApi(opt)
 		case `currencylayer`:
-			e = ex.NewCurrencyLayerApi(nil)
+			e = ex.NewCurrencyLayerApi(opt)
 		case `fixer`:
-			e = ex.NewFixerApi(nil)
+			e = ex.NewFixerApi(opt)
 		}
 		Swap.AddExchanger(e)
 	}

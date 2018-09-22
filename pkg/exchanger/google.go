@@ -22,8 +22,7 @@ type googleApi struct {
 var (
 	googleApiUrl     = `https://www.google.com/search?q=1+%s+to+%s&ncr=1`
 	googleApiHeaders = map[string][]string{
-		`Accept`:     {`text/html`},
-		`User-Agent`: {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
+		`Accept`: {`text/html`},
 	}
 )
 
@@ -39,7 +38,9 @@ func (c *googleApi) requestRate(from string, to string, opt ...interface{}) (*go
 	// prepare the request
 	req, _ := http.NewRequest("GET", url, nil)
 	// assign the request headers
+	googleApiHeaders[`User-Agent`] = []string{c.userAgent}
 	req.Header = googleApiHeaders
+
 	// execute the request
 	res, err := c.Client.Do(req)
 
@@ -117,7 +118,16 @@ func NewGoogleApi(opt map[string]string) *googleApi {
 		Timeout:   timeout,
 	}
 
-	r := &googleApi{attributes{name: `google`, Client: client}}
+	attr := attributes{
+		name:      `google`,
+		Client:    client,
+		userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`,
+	}
+	if opt[`userAgent`] != "" {
+		attr.userAgent = opt[`userAgent`]
+	}
+
+	r := &googleApi{attr}
 
 	return r
 }

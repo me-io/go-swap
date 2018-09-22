@@ -32,7 +32,7 @@ func TestConvertObj_Convert(t *testing.T) {
   "exchanger": [
     {
       "name": "google",
-      "userAgent": "firefox"
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
     }
   ],
   "from": "USD",
@@ -43,7 +43,7 @@ func TestConvertObj_Convert(t *testing.T) {
   "exchanger": [
     {
       "name": "yahoo",
-      "userAgent": "firefox"
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
     }
   ],
   "from": "USD",
@@ -54,7 +54,7 @@ func TestConvertObj_Convert(t *testing.T) {
   "exchanger": [
     {
       "name": "google",
-      "userAgent": "firefox"
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
     },
     {
       "name": "yahoo",
