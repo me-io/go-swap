@@ -20,7 +20,7 @@ and optionally cache the results.
 </a>
 
 ```bash
-docker run -u 0 -p 5000:5000 -it me-io/swap-server-linux-amd64:latest
+docker run -u 0 -p 5000:5000 -it meio/go-swap-server
 ```
 
 ### Programmatically
