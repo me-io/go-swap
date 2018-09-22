@@ -19,6 +19,9 @@ and optionally cache the results.
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 
+```bash
+docker run -u 0 -p 5000:5000 -it me-io/swap-server-linux-amd64:latest
+```
 
 ### Programmatically
 ```bash
@@ -83,6 +86,7 @@ The documentation for the current branch can be found [here](#documentation).
 - [ ] contributors list 
 - [ ] v 1.0.0 release binary
 - [ ] v 1.0.0 release docker image
+- [ ] docker image mac os example
 - [ ] Server Postman API collection 
 
 ## Contributing
