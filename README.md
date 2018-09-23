@@ -6,10 +6,10 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
 [![Coverage Status](https://coveralls.io/repos/github/me-io/go-swap/badge.svg?branch=master)](https://coveralls.io/github/me-io/go-swap?branch=master)
 [![GoDoc](https://godoc.org/github.com/me-io/go-swap?status.svg)](https://godoc.org/github.com/me-io/go-swap)
-[![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://links.beevelop.com/d-shields)
-[![Layers](https://shields.beevelop.com/docker/image/layers/meio/go-swap-server/latest.svg?style=flat-square)](https://links.beevelop.com/d-shields)
-[![Size](https://shields.beevelop.com/docker/image/image-size/meio/go-swap-server/latest.svg?style=flat-square)](https://links.beevelop.com/d-shields)
-[![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/beevelop/docker-shields/releases)
+[![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
+[![Layers](https://shields.beevelop.com/docker/image/layers/meio/go-swap-server/latest.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
+[![Size](https://shields.beevelop.com/docker/image/image-size/meio/go-swap-server/latest.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
+[![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/me-io/go-swap/releases)
 
 https://hub.docker.com/r/meio/go-swap-server/
 
