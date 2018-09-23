@@ -6,7 +6,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
 [![Coverage Status](https://coveralls.io/repos/github/me-io/go-swap/badge.svg?branch=master)](https://coveralls.io/github/me-io/go-swap?branch=master)
 [![GoDoc](https://godoc.org/github.com/me-io/go-swap?status.svg)](https://godoc.org/github.com/me-io/go-swap)
+[![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://links.beevelop.com/d-shields)
+[![Layers](https://shields.beevelop.com/docker/image/layers/meio/go-swap-server/latest.svg?style=flat-square)](https://links.beevelop.com/d-shields)
+[![Size](https://shields.beevelop.com/docker/image/image-size/meio/go-swap-server/latest.svg?style=flat-square)](https://links.beevelop.com/d-shields)
+[![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/beevelop/docker-shields/releases)
 
+https://hub.docker.com/r/meio/go-swap-server/
 
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
@@ -18,6 +23,7 @@ and optionally cache the results.
 <a href="https://heroku.com/deploy?template=https://github.com/me-io/go-swap">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
+
 
 ```bash
 docker run -u 0 -p 5000:5000 -it meio/go-swap-server

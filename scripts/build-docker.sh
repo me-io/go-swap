@@ -47,4 +47,10 @@ fi
 if [[ -z ${TAG_EXIST}  ]]; then
     docker push ${REPO_NAME}:${DOCKER_TAG}
     echo "${REPO_NAME}:${DOCKER_TAG} pushed successfully"
+
 fi
+
+# push latest
+docker build -t ${REPO_NAME}:latest -f .dockerfile-${OS}-${ARCH} .
+docker push ${REPO_NAME}:latest
+echo "${REPO_NAME}:latest pushed successfully"
