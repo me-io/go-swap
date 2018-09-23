@@ -1,5 +1,10 @@
 FROM ARG_FROM
 
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache ca-certificates \
+    && update-ca-certificates
+
 ADD bin/ARG_OS-ARG_ARCH/ARG_SRC_BIN /ARG_BIN
 
 EXPOSE 5000
