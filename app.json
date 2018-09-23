@@ -1,6 +1,7 @@
 {
   "name": "Currency Converter Server",
   "description": "Golang Currency Converter Server",
+  "website": "https://github.com/me-io/go-swap",
   "repository": "https://github.com/me-io/go-swap",
   "logo": "https://github.com/me-io/go-swap/icon.png",
   "keywords": [
@@ -11,5 +12,9 @@
     "google currency",
     "fixer",
     "1forge"
+  ],
+  "success_url": "/",
+  "addons": [
+    "openredis"
   ]
 }

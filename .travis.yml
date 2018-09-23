@@ -12,6 +12,7 @@ git:
 
 services:
 - docker
+- redis-server
 
 env:
   global:

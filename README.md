@@ -13,6 +13,10 @@
 [![](https://images.microbadger.com/badges/commit/meio/go-swap-server.svg)](https://hub.docker.com/r/meio/go-swap-server)
 [![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/me-io/go-swap/releases)
 
+<a href="#" style="text-align:center;">
+<img src="icon.png"/>
+</a>
+
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
 

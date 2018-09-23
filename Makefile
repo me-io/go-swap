@@ -24,6 +24,9 @@ VERSION := $(shell git describe --tags --always --dirty)
 
 SRC_DIRS := cmd pkg # directories which hold app source (not vendored)
 
+##
+REDIS_URL ?= redis://localhost:6379
+
 # $(OS)-$(ARCH) pairs to build binaries and containers for
 BUILD_PLATFORMS := linux-amd64 linux-arm linux-arm64 linux-ppc64le freebsd-amd64 freebsd-386
 CONTAINER_PLATFORMS := linux-amd64 linux-arm64 linux-ppc64le # must be a subset of BUILD_PLATFORMS
@@ -143,25 +146,34 @@ version:
 	@echo $(VERSION)
 
 test-local:
-	go test -v ./...
+	REDIS_URL=${REDIS_URL} go test -v ./...
 
 test-docker: build-dirs
 	@dep version >/dev/null 2>&1 || ( wget -O - https://raw.githubusercontent.com/golang/dep/master/install.sh | sh )
 	@dep ensure -vendor-only
+	@docker container rm go-swap-server-redis -f > /dev/null 2>&1 || true
 	@docker run                                                                   \
+	    -ti                                                                       \
+	    --rm 	     														      \
+	    --name go-swap-server-redis 											  \
+	    -d redis:alpine redis-server --appendonly yes
+	@docker run                                                                   \
+	    -e "REDIS_URL=redis://redis:6379"										  \
+	    --link go-swap-server-redis:redis                                         \
 	    -ti                                                                       \
 	    --rm                                                                      \
 	    -u $$(id -u):$$(id -g)                                                    \
 	    -v "$$(pwd)/.go:/go"                                                      \
 	    -v "$$(pwd):/go/src/$(PKG)"                                               \
-	    -v "$$(pwd)/bin/$(OS)-$(ARCH):/go/bin"                                          \
+	    -v "$$(pwd)/bin/$(OS)-$(ARCH):/go/bin"                                    \
 	    -v "$$(pwd)/.go/std/$(OS)-$(ARCH):/usr/local/go/pkg/$(OS)_$(ARCH)_static" \
 		-v "$$(pwd)/.go/cache:/.cache"                                      	  \
 	    -w /go/src/$(PKG)                                                         \
 	    $(BUILD_IMAGE)                                                            \
 	    /bin/sh -c "                                                              \
-	        ./scripts/test.sh $(SRC_DIRS)                                           \
-	    "
+	        ./scripts/test.sh $(SRC_DIRS)                                         \
+	    " ; 																	  \
+		docker container rm go-swap-server-redis -f > /dev/null 2>&1
 
 build-dirs:
 	@mkdir -p bin/$(OS)-$(ARCH)

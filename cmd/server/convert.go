@@ -34,12 +34,16 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		switch v.Name {
 		case `google`:
 			e = ex.NewGoogleApi(opt)
+			break
 		case `yahoo`:
 			e = ex.NewYahooApi(opt)
+			break
 		case `currencylayer`:
 			e = ex.NewCurrencyLayerApi(opt)
+			break
 		case `fixer`:
 			e = ex.NewFixerApi(opt)
+			break
 		}
 		Swap.AddExchanger(e)
 	}

@@ -1,9 +1,14 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"github.com/me-io/go-swap/pkg/cache"
+	"github.com/me-io/go-swap/pkg/cache/memory"
 	"log"
 	"net/http"
+	"path/filepath"
+	"runtime"
 	"time"
 )
 
@@ -15,13 +20,32 @@ var (
 	//}
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
-		`/convert`: Convert,
-		`/`:        etc,
+		`/favicon.ico`: favIcon,
+		`/convert`:     Convert,
+		`/`:            home,
 	}
+	_, filename, _, _ = runtime.Caller(0)
+	sPath             = filepath.Dir(filename) + `/static/`
+	Storage           cache.Storage
 )
 
-var etc = func(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("etc")
+var favIcon = func(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, sPath+`favicon.ico`)
+}
+
+var home = func(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, sPath+`index.html`)
+}
+
+func init() {
+	cacheDriver := flag.String("s", "memory", "Cache strategy (memory or redis)")
+	flag.Parse()
+	switch *cacheDriver {
+	case `redis`:
+		break
+	default:
+		Storage = memory.NewStorage()
+	}
 }
 
 func main() {

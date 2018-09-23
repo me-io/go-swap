@@ -18,6 +18,23 @@
   version = "v1.1.1"
 
 [[projects]]
+  digest = "1:7c2fd446293ff7799cc496d3446e674ee67902d119f244de645caf95dff1bb98"
+  name = "github.com/go-redis/redis"
+  packages = [
+    ".",
+    "internal",
+    "internal/consistenthash",
+    "internal/hashtag",
+    "internal/pool",
+    "internal/proto",
+    "internal/singleflight",
+    "internal/util",
+  ]
+  pruneopts = "UT"
+  revision = "f3bba01df2026fc865f7782948845db9cf44cf23"
+  version = "v6.14.1"
+
+[[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
@@ -38,6 +55,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/bitly/go-simplejson",
+    "github.com/go-redis/redis",
     "github.com/stretchr/testify/assert",
   ]
   solver-name = "gps-cdcl"
