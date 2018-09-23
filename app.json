@@ -3,7 +3,7 @@
   "description": "Golang Currency Converter Server",
   "website": "https://github.com/me-io/go-swap",
   "repository": "https://github.com/me-io/go-swap",
-  "logo": "https://github.com/me-io/go-swap/icon.png",
+  "logo": "https://raw.githubusercontent.com/me-io/go-swap/master/icon.png",
   "keywords": [
     "golang",
     "currency",

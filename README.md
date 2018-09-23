@@ -9,13 +9,10 @@
 
 
 [![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
-[![](https://images.microbadger.com/badges/image/meio/go-swap-server.svg)](https://hub.docker.com/r/meio/go-swap-server)
-[![](https://images.microbadger.com/badges/commit/meio/go-swap-server.svg)](https://hub.docker.com/r/meio/go-swap-server)
+[![SIZE-LAYERS](https://images.microbadger.com/badges/image/meio/go-swap-server.svg)](https://hub.docker.com/r/meio/go-swap-server)
+[![COMMIT](https://images.microbadger.com/badges/commit/meio/go-swap-server.svg)](https://hub.docker.com/r/meio/go-swap-server)
 [![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/me-io/go-swap/releases)
-
-<a href="#" style="text-align:center;">
-<img src="icon.png"/>
-</a>
+[![](https://images.microbadger.com/badges/version/meio/go-swap-server.svg)](https://microbadger.com/images/meio/go-swap-server)
 
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
