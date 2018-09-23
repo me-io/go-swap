@@ -11,6 +11,7 @@ type convertReqObj struct {
 	Exchanger []exchangerReqObj
 	From      string `json:"from"`
 	To        string `json:"to"`
+	CacheTime string `json:"cacheTime"`
 }
 
 type convertResObj struct {

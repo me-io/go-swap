@@ -28,7 +28,8 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 
 	currencyKey := convertReq.From + `/` + convertReq.To
 	currencyCachedVal := Storage.Get(currencyKey)
-	currencyCacheTime, _ := time.ParseDuration(`1m`)
+	currencyCacheTime, _ := time.ParseDuration(convertReq.CacheTime)
+
 	// todo verbose logging
 
 	if string(currencyCachedVal) == "" {

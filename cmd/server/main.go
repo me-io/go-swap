@@ -42,6 +42,7 @@ var home = func(w http.ResponseWriter, r *http.Request) {
 func init() {
 	cacheDriver := flag.String("s", "memory", "Cache strategy (memory or redis)")
 	flag.Parse()
+
 	var err error
 	switch *cacheDriver {
 	case `redis`:
