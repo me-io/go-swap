@@ -28,7 +28,7 @@ and optionally cache the results.
 
 ```bash
 # Or using docker  
-$ docker run -u 0 -p 5000:5000 -it meio/go-swap-server
+$ docker run --rm --name go-swap-server -u 0 -p 5000:5000 -it meio/go-swap-server:latest
 ```
 
 ### Programmatically
@@ -83,19 +83,20 @@ The documentation for the current branch can be found [here](#documentation).
 [7]: //1forge.com
 
 ## TODO LIST
-- [ ] verbose logging
-- [ ] cache integration
 - [x] Add Test Mocks
-- [ ] Benchmark & Performance optimization ` memory leak`
-- [ ] examples
+- [ ] cache integration
+- [ ] verbose logging
+- [ ] config file for default tokens
 - [ ] code coverage
-- [ ] godoc 
 - [ ] herokuapp demo with links
-- [ ] contributors list 
+- [ ] godoc 
+- [ ] examples
 - [ ] v 1.0.0 release binary
 - [ ] v 1.0.0 release docker image
 - [ ] docker image mac os example
 - [ ] Server Postman API collection 
+- [ ] Benchmark & Performance optimization ` memory leak`
+- [ ] contributors list 
 
 ## Contributing
 

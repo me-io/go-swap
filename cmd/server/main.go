@@ -54,7 +54,7 @@ func serveHTTP(host string, port int) {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	fmt.Printf("Server Started %v:%d", host, port)
+	fmt.Printf("Server Started @ %v:%d", host, port)
 
 	err := server.ListenAndServe()
 	log.Println(err.Error())
