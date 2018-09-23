@@ -5,6 +5,7 @@ import (
 	ex "github.com/me-io/go-swap/pkg/exchanger"
 	"github.com/me-io/go-swap/pkg/swap"
 	"net/http"
+	"time"
 )
 
 func (c convertReqObj) Validate() error {
@@ -25,47 +26,60 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	Swap := swap.NewSwap()
-	for _, v := range convertReq.Exchanger {
+	currencyKey := convertReq.From + `/` + convertReq.To
+	currencyCachedVal := Storage.Get(currencyKey)
+	currencyCacheTime, _ := time.ParseDuration(`1m`)
+	// todo verbose logging
 
-		var e ex.Exchanger
-		opt := map[string]string{`userAgent`: v.UserAgent, `apiKey`: v.ApiKey}
+	if string(currencyCachedVal) == "" {
+		Swap := swap.NewSwap()
+		for _, v := range convertReq.Exchanger {
 
-		switch v.Name {
-		case `google`:
-			e = ex.NewGoogleApi(opt)
-			break
-		case `yahoo`:
-			e = ex.NewYahooApi(opt)
-			break
-		case `currencylayer`:
-			e = ex.NewCurrencyLayerApi(opt)
-			break
-		case `fixer`:
-			e = ex.NewFixerApi(opt)
-			break
+			var e ex.Exchanger
+			opt := map[string]string{`userAgent`: v.UserAgent, `apiKey`: v.ApiKey}
+
+			switch v.Name {
+			case `google`:
+				e = ex.NewGoogleApi(opt)
+				break
+			case `yahoo`:
+				e = ex.NewYahooApi(opt)
+				break
+			case `currencylayer`:
+				e = ex.NewCurrencyLayerApi(opt)
+				break
+			case `fixer`:
+				e = ex.NewFixerApi(opt)
+				break
+			}
+			Swap.AddExchanger(e)
 		}
-		Swap.AddExchanger(e)
-	}
-	Swap.Build()
+		Swap.Build()
 
-	rate := Swap.Latest(convertReq.From + `/` + convertReq.To)
+		rate := Swap.Latest(currencyKey)
+		// todo rounding
+		amount := convertReq.Amount * rate.GetValue()
+
+		convertRes := convertResObj{
+			Amount:        amount,
+			Value:         rate.GetValue(),
+			Date:          rate.GetDate(),
+			ExchangerName: rate.GetExchangerName(),
+		}
+		var err error
+		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
+			// todo handle error
+		}
+		// todo verbose logging
+		Storage.Set(currencyKey, currencyCachedVal, currencyCacheTime)
+		w.Header().Set("X-Cache", "Miss")
+	} else {
+		// get from cache
+		w.Header().Set("X-Cache", "Hit")
+	}
 
 	//Set Content-Type header so that clients will know how to read response
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	// todo rounding
-	amount := convertReq.Amount * rate.GetValue()
-
-	convertRes := convertResObj{
-		Amount:        amount,
-		Value:         rate.GetValue(),
-		Date:          rate.GetDate(),
-		ExchangerName: rate.GetExchangerName(),
-	}
-	resJson, err := json.Marshal(convertRes)
-	if err != nil {
-		// todo handle error
-	}
-	w.Write(resJson)
+	w.Write(currencyCachedVal)
 }

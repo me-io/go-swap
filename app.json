@@ -14,7 +14,14 @@
     "1forge"
   ],
   "success_url": "/",
+  "stack": "heroku-16",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
   "addons": [
-    "openredis"
+    "heroku-redis:hobby-dev"
   ]
 }

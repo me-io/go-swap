@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"github.com/me-io/go-swap/pkg/cache"
 	"github.com/me-io/go-swap/pkg/cache/memory"
+	"github.com/me-io/go-swap/pkg/cache/redis"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"runtime"
 	"time"
@@ -40,8 +42,12 @@ var home = func(w http.ResponseWriter, r *http.Request) {
 func init() {
 	cacheDriver := flag.String("s", "memory", "Cache strategy (memory or redis)")
 	flag.Parse()
+	var err error
 	switch *cacheDriver {
 	case `redis`:
+		if Storage, err = redis.NewStorage(os.Getenv(`REDIS_URL`)); err != nil {
+			panic(err)
+		}
 		break
 	default:
 		Storage = memory.NewStorage()
