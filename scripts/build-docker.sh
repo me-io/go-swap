@@ -36,7 +36,12 @@ if [[ ! -z ${TAG_EXIST}  ]]; then
     exit 0
 fi
 
-docker build -t ${REPO_NAME}:${DOCKER_TAG} -f .dockerfile-${OS}-${ARCH} .
+
+docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+             --build-arg VCS_REF=`git rev-parse --short HEAD` \
+             --build-arg DOCKER_TAG=${DOCKER_TAG} \
+             --build-arg VERSION=`cat VERSION` \
+             -t ${REPO_NAME}:${DOCKER_TAG} -f .dockerfile-${OS}-${ARCH} .
 
 if [[ $? != 0 ]]; then
     echo "${REPO_NAME}:${DOCKER_TAG} build failed"
