@@ -2,17 +2,27 @@
 
 REPO_NAME="meio/go-swap-server"
 GIT_TAG=`git describe --tags --always --dirty`
+GO_VER=`go version`
 OS="linux"
 ARCH="amd64"
 DOCKER_TAG=${OS}-${ARCH}-${GIT_TAG}
 
+# build only tag branch in this format 0.0.0
 if [[ ${GIT_TAG} =~ ^[[:digit:].[:digit:].[:digit:]]+$ ]]; then
     true
+    echo "TAG: ${GIT_TAG} - start build"
 else
     echo "TAG: ${GIT_TAG} - skip build"
     exit 0
 fi
 
+# build only with go version 1.11
+if [[ ${GO_VER} =~ 1\.11 ]]; then
+    echo "GO_VER: ${GO_VER} - start build"
+else
+    echo "GO_VER: ${GO_VER} - skip build"
+    exit 0
+fi
 
 if [[ ! -z "${DOCKER_PASSWORD}" && ! -z "${DOCKER_USERNAME}" ]]
 then
