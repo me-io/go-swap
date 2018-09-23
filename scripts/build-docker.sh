@@ -56,6 +56,14 @@ if [[ -z ${TAG_EXIST}  ]]; then
 fi
 
 # push latest
-docker build -t ${REPO_NAME}:latest -f .dockerfile-${OS}-${ARCH} .
+docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+             --build-arg VCS_REF=`git rev-parse --short HEAD` \
+             --build-arg DOCKER_TAG=${DOCKER_TAG} \
+             --build-arg VERSION=`cat VERSION` \
+             -t ${REPO_NAME}:latest -f .dockerfile-${OS}-${ARCH} .
+
 docker push ${REPO_NAME}:latest
 echo "${REPO_NAME}:latest pushed successfully"
+
+# update microbadger.com
+curl -XPOST "https://hooks.microbadger.com/images/meio/go-swap-server/TOoBKgNqzCZH6dNBlAopouqsLF0="
