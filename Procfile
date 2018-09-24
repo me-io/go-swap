@@ -1,1 +1,2 @@
-web: ./go-swap-server
+release: ./scripts/build-local.sh
+web: ./bin/go-swap-server
