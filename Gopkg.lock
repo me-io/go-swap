@@ -35,6 +35,14 @@
   version = "v6.14.1"
 
 [[projects]]
+  digest = "1:5b3b29ce0e569f62935d9541dff2e16cc09df981ebde48e82259076a73a3d0c7"
+  name = "github.com/op/go-logging"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
+  version = "v1"
+
+[[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
@@ -56,6 +64,7 @@
   input-imports = [
     "github.com/bitly/go-simplejson",
     "github.com/go-redis/redis",
+    "github.com/op/go-logging",
     "github.com/stretchr/testify/assert",
   ]
   solver-name = "gps-cdcl"

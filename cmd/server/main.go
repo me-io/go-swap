@@ -6,7 +6,7 @@ import (
 	"github.com/me-io/go-swap/pkg/cache"
 	"github.com/me-io/go-swap/pkg/cache/memory"
 	"github.com/me-io/go-swap/pkg/cache/redis"
-	"log"
+	"github.com/op/go-logging"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -20,15 +20,24 @@ var (
 	//	`yahoo`:  `yahooApi`,
 	//	`fixer`:  `fixer`,
 	//}
+	host    *string
+	port    *int
+	Storage cache.Storage
+
+	Logger = logging.MustGetLogger("go-swap-server")
+
+	format = logging.MustStringFormatter(
+		`%{color}%{time:15:04:05.000} %{shortfunc} ▶ %{level:.4s} %{id:03x}%{color:reset} %{message}`,
+	)
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
 		`/favicon.ico`: favIcon,
 		`/convert`:     Convert,
 		`/`:            home,
 	}
+
 	_, filename, _, _ = runtime.Caller(0)
 	sPath             = filepath.Dir(filename) + `/static/`
-	Storage           cache.Storage
 )
 
 var favIcon = func(w http.ResponseWriter, r *http.Request) {
@@ -38,12 +47,37 @@ var favIcon = func(w http.ResponseWriter, r *http.Request) {
 var home = func(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, sPath+`index.html`)
 }
+// Password is just an example type implementing the Redactor interface. Any
+// time this is logged, the Redacted() function will be called.
+type Password string
+
+func (p Password) Redacted() interface{} {
+	return logging.Redact(string(p))
+}
 
 func init() {
-	cacheDriver := flag.String("s", "memory", "Cache strategy (memory or redis)")
+	// Logging
+	backendStderr := logging.NewLogBackend(os.Stderr, "", 0)
+	backendFormatted := logging.NewBackendFormatter(backendStderr, format)
+	// Only DEBUG and more severe messages should be sent to backend1
+	backendLevelFormatted := logging.AddModuleLevel(backendFormatted)
+	backendLevelFormatted.SetLevel(logging.DEBUG, "")
+	// Set the backend to be used.
+	logging.SetBackend(backendLevelFormatted)
+
+	// Caching
+	host = flag.String(`h`, `0.0.0.0`, `HTTP Server Hostname or IP`)
+	port = flag.Int(`p`, 5000, `HTTP Server Port`)
+	cacheDriver := flag.String(`s`, `memory`, `Cache strategy (memory or redis)`)
+
+	Logger.Debugf("host %s", *host)
+	Logger.Debugf("port %d", *port)
+	Logger.Debugf("cacheDriver %s", *cacheDriver)
+
 	flag.Parse()
 
 	var err error
+
 	switch *cacheDriver {
 	case `redis`:
 		if Storage, err = redis.NewStorage(os.Getenv(`REDIS_URL`)); err != nil {
@@ -53,6 +87,14 @@ func init() {
 	default:
 		Storage = memory.NewStorage()
 	}
+
+	//Logger.Debugf("debug %s", Password(`secret`))
+	//Logger.Info("info")
+	//Logger.Notice("notice")
+	//Logger.Warning("warning")
+	//Logger.Error("err")
+	//Logger.Critical("crit")
+
 }
 
 func main() {
@@ -64,8 +106,7 @@ func main() {
 
 	// todo
 	// port and config
-	// cache
-	go serveHTTP(`0.0.0.0`, 5000)
+	go serveHTTP(*host, *port)
 	select {}
 }
 
@@ -85,8 +126,8 @@ func serveHTTP(host string, port int) {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	fmt.Printf("Server Started @ %v:%d", host, port)
+	Logger.Infof("Server Started @ %v:%d", host, port)
 
 	err := server.ListenAndServe()
-	log.Println(err.Error())
+	Logger.Error(err.Error())
 }
