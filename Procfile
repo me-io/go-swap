@@ -1,1 +1,1 @@
-web: /app/bin/server
+web: P=80 /app/bin/server
