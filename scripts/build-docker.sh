@@ -5,7 +5,7 @@ GIT_TAG=`git describe --tags --always --dirty`
 GO_VER=`go version`
 OS="linux"
 ARCH="amd64"
-DOCKER_TAG=${OS}-${ARCH}-${GIT_TAG}
+DOCKER_TAG="${OS}-${ARCH}-${GIT_TAG}"
 
 # build only tag branch in this format 0.0.0
 if [[ ${GIT_TAG} =~ ^[[:digit:].[:digit:].[:digit:]]+$ ]]; then
@@ -39,7 +39,7 @@ fi
 
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
-             --build-arg DOCKER_TAG=${DOCKER_TAG} \
+             --build-arg DOCKER_TAG="${DOCKER_TAG}" \
              --build-arg VERSION=`cat VERSION` \
              -t ${REPO_NAME}:${DOCKER_TAG} -f .dockerfile-${OS}-${ARCH} .
 
@@ -58,7 +58,7 @@ fi
 # push latest
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
-             --build-arg DOCKER_TAG=${DOCKER_TAG} \
+             --build-arg DOCKER_TAG="${DOCKER_TAG}" \
              --build-arg VERSION=`cat VERSION` \
              -t ${REPO_NAME}:latest -f .dockerfile-${OS}-${ARCH} .
 
