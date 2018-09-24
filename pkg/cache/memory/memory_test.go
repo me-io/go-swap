@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// todo write more tests
 func parse(s string) time.Duration {
 	d, _ := time.ParseDuration(s)
 	return d

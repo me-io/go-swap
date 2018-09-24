@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// todo write more tests
 var redisURL = os.Getenv(`REDIS_URL`)
 
 func parse(s string) time.Duration {

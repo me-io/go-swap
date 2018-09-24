@@ -10,6 +10,7 @@ import (
 )
 
 func (c convertReqObj) Validate() error {
+	// todo implement
 	return nil
 }
 
@@ -20,11 +21,11 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	if err := json.
 		NewDecoder(r.Body).
 		Decode(convertReq); err != nil {
-		panic(err)
+		Logger.Panic(err)
 	}
 
 	if err := convertReq.Validate(); err != nil {
-		panic(err)
+		Logger.Panic(err)
 	}
 
 	decimalPoint := convertReq.DecimalPoints
@@ -35,8 +36,6 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	currencyKey := convertReq.From + `/` + convertReq.To
 	currencyCachedVal := Storage.Get(currencyKey)
 	currencyCacheTime, _ := time.ParseDuration(convertReq.CacheTime)
-
-	// todo verbose logging
 
 	if string(currencyCachedVal) == "" {
 		Swap := swap.NewSwap()
@@ -72,11 +71,11 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 			Date:          rate.GetDate(),
 			ExchangerName: rate.GetExchangerName(),
 		}
+
 		var err error
 		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
-			// todo handle error
+			Logger.Panic(err)
 		}
-		// todo verbose logging
 		Storage.Set(currencyKey, currencyCachedVal, currencyCacheTime)
 		w.Header().Set("X-Cache", "Miss")
 	} else {
