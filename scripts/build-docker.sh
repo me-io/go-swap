@@ -1,8 +1,4 @@
-#!/usr/bin/env bash
-
-set -o errexit
-set -o nounset
-set -o pipefail
+#!/bin/sh
 
 REPO_NAME="meio/go-swap-server"
 GIT_TAG=`git describe --tags --always --dirty`
