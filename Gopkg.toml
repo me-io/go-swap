@@ -24,10 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-[metadata.heroku]
-  root-package = "github.com/me-io/go-swap/cmd/server"
-  go-version = "1.11"
-  install = [ "./..." ]
 
 [[constraint]]
   name = "github.com/bitly/go-simplejson"
@@ -48,3 +44,8 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "github.com/me-io/go-swap/cmd/server"
+  go-version = "1.11"
+  install = ["./cmd/..."]
