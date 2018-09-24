@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 REPO_NAME="meio/go-swap-server"
 GIT_TAG=`git describe --tags --always --dirty`
