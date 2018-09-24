@@ -1,1 +1,1 @@
-web: P=$PORT ./bin/server
+web: P=$PORT CACHE=redis ./bin/server
