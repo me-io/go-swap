@@ -56,9 +56,9 @@ func init() {
 	logging.SetBackend(backendLevelFormatted)
 
 	// Caching
-	host = GetEnv(`h`, `0.0.0.0`)
-	port, _ = strconv.Atoi(GetEnv(`p`, `5000`))
-	cacheDriver = GetEnv(`cache`, `memory`)
+	host = GetEnv(`H`, `0.0.0.0`)
+	port, _ = strconv.Atoi(GetEnv(`P`, `5000`))
+	cacheDriver = GetEnv(`CACHE`, `memory`)
 	redisUrl = GetEnv(`REDIS_URL`, ``)
 
 	flag.Parse()
