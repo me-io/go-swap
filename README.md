@@ -25,7 +25,7 @@ and optionally cache the results.
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 <br>
--
+
 
 ```bash
 # Or using docker  
@@ -86,7 +86,7 @@ The documentation for the current branch can be found [here](#documentation).
 
 ## TODO LIST
 - [x] Add Test Mocks
-- [ ] cache integration
+- [X] cache integration
 - [ ] verbose logging
 - [ ] config file for default tokens
 - [ ] code coverage

@@ -48,13 +48,6 @@ var favIcon = func(w http.ResponseWriter, r *http.Request) {
 var home = func(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, sPath+`index.html`)
 }
-// Password is just an example type implementing the Redactor interface. Any
-// time this is logged, the Redacted() function will be called.
-type Password string
-
-func (p Password) Redacted() interface{} {
-	return logging.Redact(string(p))
-}
 
 func init() {
 	// Logging
@@ -84,13 +77,6 @@ func init() {
 	default:
 		Storage = memory.NewStorage()
 	}
-
-	//Logger.Debugf("debug %s", Password(`secret`))
-	//Logger.Info("info")
-	//Logger.Notice("notice")
-	//Logger.Warning("warning")
-	//Logger.Error("err")
-	//Logger.Critical("crit")
 
 }
 

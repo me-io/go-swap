@@ -8,5 +8,6 @@
   ],
   "from": "USD",
   "to": "AED",
-  "cacheTime": "10s"
+  "cacheTime": "10s",
+  "decimalPoints": 6
 }

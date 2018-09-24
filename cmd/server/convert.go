@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	ex "github.com/me-io/go-swap/pkg/exchanger"
 	"github.com/me-io/go-swap/pkg/swap"
+	"math"
 	"net/http"
 	"time"
 )
@@ -24,6 +25,11 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 
 	if err := convertReq.Validate(); err != nil {
 		panic(err)
+	}
+
+	decimalPoint := convertReq.DecimalPoints
+	if decimalPoint == 0 {
+		decimalPoint = 4
 	}
 
 	currencyKey := convertReq.From + `/` + convertReq.To
@@ -58,8 +64,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		Swap.Build()
 
 		rate := Swap.Latest(currencyKey)
-		// todo rounding
-		amount := convertReq.Amount * rate.GetValue()
+		amount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
 
 		convertRes := convertResObj{
 			Amount:        amount,

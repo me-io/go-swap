@@ -65,7 +65,7 @@ func TestSwap_Build_Yahoo(t *testing.T) {
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
-	assert.Equal(t, float64(0.2723), euroToUsdRate.GetValue())
+	assert.Equal(t, float64(0.272272), euroToUsdRate.GetValue())
 	assert.Equal(t, `yahoo`, euroToUsdRate.GetExchangerName())
 }
 

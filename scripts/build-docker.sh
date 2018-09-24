@@ -40,7 +40,7 @@ fi
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
              --build-arg DOCKER_TAG="${DOCKER_TAG}" \
-             --build-arg VERSION=`cat VERSION` \
+             --build-arg VERSION="${GIT_TAG}" \
              -t ${REPO_NAME}:${DOCKER_TAG} -f .dockerfile-${OS}-${ARCH} .
 
 if [[ $? != 0 ]]; then
@@ -59,7 +59,7 @@ fi
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
              --build-arg DOCKER_TAG="${DOCKER_TAG}" \
-             --build-arg VERSION=`cat VERSION` \
+             --build-arg VERSION="${GIT_TAG}" \
              -t ${REPO_NAME}:latest -f .dockerfile-${OS}-${ARCH} .
 
 docker push ${REPO_NAME}:latest

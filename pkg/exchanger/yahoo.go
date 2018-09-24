@@ -96,7 +96,7 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 		GetIndex(0).
 		MustFloat64()
 	// todo handle error
-	c.rateValue = math.Round(value*10000) / 10000
+	c.rateValue = math.Round(value*1000000) / 1000000
 	return nil
 }
 

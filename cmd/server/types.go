@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/op/go-logging"
+)
+
 type exchangerReqObj struct {
 	Name      string `json:"name"`
 	UserAgent string `json:"userAgent,omitempty"`
@@ -7,11 +11,12 @@ type exchangerReqObj struct {
 }
 
 type convertReqObj struct {
-	Amount    float64 `json:"amount"`
-	Exchanger []exchangerReqObj
-	From      string `json:"from"`
-	To        string `json:"to"`
-	CacheTime string `json:"cacheTime"`
+	Amount        float64 `json:"amount"`
+	Exchanger     []exchangerReqObj
+	From          string `json:"from"`
+	To            string `json:"to"`
+	CacheTime     string `json:"cacheTime"`
+	DecimalPoints int    `json:"decimalPoints"`
 }
 
 type convertResObj struct {
@@ -19,4 +24,12 @@ type convertResObj struct {
 	Amount        float64 `json:"amount"`
 	Date          string  `json:"date"`
 	ExchangerName string  `json:"exchangerName"`
+}
+
+// Password is just an example type implementing the Redactor interface. Any
+// time this is logged, the Redacted() function will be called.
+type Secret string
+
+func (p Secret) Redacted() interface{} {
+	return logging.Redact(string(p))
 }
