@@ -11,21 +11,17 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"time"
 )
 
 var (
-	//allowedExchanger = map[string]string{
-	//	`google`: `googleApi`,
-	//	`yahoo`:  `yahooApi`,
-	//	`fixer`:  `fixer`,
-	//}
-	host        *string
-	port        *int
-	cacheDriver *string
+	host        string
+	port        int
+	cacheDriver string
+	redisUrl    string
 	Storage     cache.Storage
-
-	Logger = logging.MustGetLogger("go-swap-server")
+	Logger      = logging.MustGetLogger("go-swap-server")
 
 	format = logging.MustStringFormatter(
 		`%{color}%{time:2006-01-02T15:04:05.999999} %{shortfunc} ▶ %{level:.8s} %{id:03x}%{color:reset} %{message}`,
@@ -60,18 +56,19 @@ func init() {
 	logging.SetBackend(backendLevelFormatted)
 
 	// Caching
-	host = flag.String(`h`, `0.0.0.0`, `HTTP Server Hostname or IP`)
-	port = flag.Int(`p`, 5000, `HTTP Server Port`)
-	cacheDriver = flag.String(`s`, `memory`, `Cache strategy (memory or redis)`)
+	host = GetEnv(`h`, `0.0.0.0`)
+	port, _ = strconv.Atoi(GetEnv(`p`, `5000`))
+	cacheDriver = GetEnv(`cache`, `memory`)
+	redisUrl = GetEnv(`REDIS_URL`, ``)
 
 	flag.Parse()
 
 	var err error
 
-	switch *cacheDriver {
+	switch cacheDriver {
 	case `redis`:
-		if Storage, err = redis.NewStorage(os.Getenv(`REDIS_URL`)); err != nil {
-			panic(err)
+		if Storage, err = redis.NewStorage(redisUrl); err != nil {
+			Logger.Panic(err)
 		}
 		break
 	default:
@@ -82,19 +79,17 @@ func init() {
 
 func main() {
 
-	Logger.Debugf("host %s", *host)
-	Logger.Debugf("port %d", *port)
-	Logger.Debugf("cacheDriver %s", *cacheDriver)
-	Logger.Warningf("cacheDriver %s", *cacheDriver)
+	Logger.Infof("host %s", host)
+	Logger.Infof("port %d", port)
+	Logger.Infof("cacheDriver %s", cacheDriver)
+	Logger.Infof("REDIS_URL %s", redisUrl)
 
 	// handle routers
 	for k, v := range routes {
 		http.HandleFunc(k, v)
 	}
 
-	// todo
-	// port and config
-	go serveHTTP(*host, *port)
+	go serveHTTP(host, port)
 	select {}
 }
 
