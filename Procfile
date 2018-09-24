@@ -1,1 +1,1 @@
-web: ./scripts/build-local.sh && ./bin/go-swap-server
+web: ./scripts/build-local.sh && P=80 ./bin/go-swap-server
