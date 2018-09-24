@@ -1,9 +1,5 @@
 #!/bin/sh
 
-set -o errexit
-set -o nounset
-set -o pipefail
-
 my_dir="$(dirname "$0")"
 
 docker pull meio/go-swap-server:latest
