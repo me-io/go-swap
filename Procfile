@@ -1,1 +1,1 @@
-web: P=80 ./bin/server
+web: P=$PORT ./bin/server
