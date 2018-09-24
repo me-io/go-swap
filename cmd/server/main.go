@@ -20,14 +20,15 @@ var (
 	//	`yahoo`:  `yahooApi`,
 	//	`fixer`:  `fixer`,
 	//}
-	host    *string
-	port    *int
-	Storage cache.Storage
+	host        *string
+	port        *int
+	cacheDriver *string
+	Storage     cache.Storage
 
 	Logger = logging.MustGetLogger("go-swap-server")
 
 	format = logging.MustStringFormatter(
-		`%{color}%{time:15:04:05.000} %{shortfunc} ▶ %{level:.4s} %{id:03x}%{color:reset} %{message}`,
+		`%{color}%{time:2006-01-02T15:04:05.999999} %{shortfunc} ▶ %{level:.8s} %{id:03x}%{color:reset} %{message}`,
 	)
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
@@ -68,11 +69,7 @@ func init() {
 	// Caching
 	host = flag.String(`h`, `0.0.0.0`, `HTTP Server Hostname or IP`)
 	port = flag.Int(`p`, 5000, `HTTP Server Port`)
-	cacheDriver := flag.String(`s`, `memory`, `Cache strategy (memory or redis)`)
-
-	Logger.Debugf("host %s", *host)
-	Logger.Debugf("port %d", *port)
-	Logger.Debugf("cacheDriver %s", *cacheDriver)
+	cacheDriver = flag.String(`s`, `memory`, `Cache strategy (memory or redis)`)
 
 	flag.Parse()
 
@@ -98,6 +95,11 @@ func init() {
 }
 
 func main() {
+
+	Logger.Debugf("host %s", *host)
+	Logger.Debugf("port %d", *port)
+	Logger.Debugf("cacheDriver %s", *cacheDriver)
+	Logger.Warningf("cacheDriver %s", *cacheDriver)
 
 	// handle routers
 	for k, v := range routes {
