@@ -1,2 +1,1 @@
-release: ./scripts/build-local.sh
-web: ./bin/go-swap-server
+web: ./scripts/build-local.sh && ./bin/go-swap-server
