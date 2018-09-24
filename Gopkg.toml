@@ -46,6 +46,6 @@
   unused-packages = true
 
 [metadata.heroku]
-  root-package = "github.com/me-io/go-swap/cmd/server"
+  root-package = "github.com/me-io/go-swap"
   go-version = "1.11"
-  install = ["./cmd/..."]
+  install = ["./..."]
