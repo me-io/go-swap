@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
 
 my_dir="$(dirname "$0")"
 
