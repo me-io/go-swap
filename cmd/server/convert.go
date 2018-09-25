@@ -68,7 +68,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		convertRes := convertResObj{
 			Amount:        amount,
 			Value:         rate.GetValue(),
-			Date:          rate.GetDate(),
+			DateTime:      rate.GetDateTime(),
 			ExchangerName: rate.GetExchangerName(),
 		}
 

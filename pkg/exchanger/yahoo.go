@@ -58,7 +58,7 @@ func (c *yahooApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *yahooApi) GetDate() string {
+func (c *yahooApi) GetDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 

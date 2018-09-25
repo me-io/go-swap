@@ -18,6 +18,6 @@ func main() {
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
 	fmt.Println(euroToUsdRate.GetValue())
-	fmt.Println(euroToUsdRate.GetDate())
+	fmt.Println(euroToUsdRate.GetDateTime())
 	fmt.Println(euroToUsdRate.GetExchangerName())
 }

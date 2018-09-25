@@ -57,7 +57,7 @@ func (c *currencyLayerApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *currencyLayerApi) GetDate() string {
+func (c *currencyLayerApi) GetDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 

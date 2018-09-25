@@ -64,7 +64,7 @@ func (c *googleApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *googleApi) GetDate() string {
+func (c *googleApi) GetDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 

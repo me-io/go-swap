@@ -57,7 +57,7 @@ func (c *fixerApi) GetValue() float64 {
 	return c.rateValue
 }
 
-func (c *fixerApi) GetDate() string {
+func (c *fixerApi) GetDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
