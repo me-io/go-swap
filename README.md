@@ -19,16 +19,18 @@ and optionally cache the results.
 > Inspired by [florianv/swap](https://github.com/florianv/swap) 
 
 ## Playground
-<a href="https://go-swap-server.herokuapp.com/swagger">
-  <img src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Deploy">
+<a href="https://go-swap-server.herokuapp.com/swagger" target="_blank">
+  <img src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Swagger UI">
 </a>
 <br>
+<a href="https://go-swap-server.herokuapp.com" target="_blank">
+    heroku test instance @ https://go-swap-server.herokuapp.com
+</a>
 
-[heroku test instance @ https://go-swap-server.herokuapp.com](https://go-swap-server.herokuapp.com)
 
 ## QuickStart 
 
-<a href="https://heroku.com/deploy?template=https://github.com/me-io/go-swap">
+<a href="https://heroku.com/deploy?template=https://github.com/me-io/go-swap" target="_blank">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 <br>
@@ -94,18 +96,17 @@ The documentation for the current branch can be found [here](#documentation).
 
 ## TODO LIST
 - [x] Add Test Mocks
-- [X] cache integration
-- [ ] static bundle public folder `./cmd/server/public`
+- [x] cache integration
+- [x] herokuapp demo
+- [x] swagger ui
+- [x] examples
 - [ ] verbose logging
-- [ ] config file for default tokens
-- [ ] code coverage
-- [ ] herokuapp demo with links
 - [ ] godoc 
-- [ ] examples
+- [ ] code coverage
+- [ ] static bundle public folder `./cmd/server/public`
 - [ ] v 1.0.0 release binary
 - [ ] v 1.0.0 release docker image
 - [ ] docker image mac os example
-- [ ] Server Postman API collection 
 - [ ] Benchmark & Performance optimization ` memory leak`
 - [ ] contributors list 
 
