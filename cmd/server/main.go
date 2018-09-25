@@ -32,7 +32,7 @@ var (
 	}
 
 	_, filename, _, _ = runtime.Caller(0)
-	defaultStaticPath = filepath.Dir(filename) + `/static`
+	defaultStaticPath = filepath.Dir(filename) + `/public`
 	staticPath        = defaultStaticPath
 )
 

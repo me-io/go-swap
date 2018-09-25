@@ -88,6 +88,7 @@ The documentation for the current branch can be found [here](#documentation).
 ## TODO LIST
 - [x] Add Test Mocks
 - [X] cache integration
+- [ ] static bundle public folder `./cmd/server/public`
 - [ ] verbose logging
 - [ ] config file for default tokens
 - [ ] code coverage

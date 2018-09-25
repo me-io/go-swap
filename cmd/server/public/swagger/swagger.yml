@@ -12,34 +12,32 @@ info:
 host: "go-swap-server.herokuapp.com"
 basePath: "/"
 tags:
-- name: "convert"
-  description: "Convert and Swap between Currencies"
+- name: "Currency"
+  description: "Swap & Convert between Currencies"
   externalDocs:
     description: "Find out more"
-    url: "http://swagger.io"
+    url: "https://github.com/me-io/go-swap"
 schemes:
 - "https"
 paths:
-  /pet:
+  /convert:
     post:
       tags:
-      - "pet"
-      summary: "Add a new pet to the store"
+      - "Currency"
+      summary: "Request Currency Conversion Rate & Value"
       description: ""
       operationId: "addPet"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
       - in: "body"
         name: "body"
-        description: "Pet object that needs to be added to the store"
+        description: "Currency Conversion Request"
         required: true
         schema:
-          $ref: "#/definitions/Pet"
+          $ref: "#/definitions/ConvertRequest"
       responses:
         405:
           description: "Invalid input"
@@ -60,34 +58,37 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
-  Pet:
+  ConvertRequest:
     type: "object"
     required:
-    - "name"
-    - "photoUrls"
+    - "amount"
+    - "from"
+    - "to"
+    - "exchanger"
     properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
+      amount:
+        type: "number"
+        format: "float"
+        example: 1.54
+      from:
         type: "string"
-        example: "doggie"
-      photoUrls:
+        example: "USD"
+      to:
+        type: "string"
+        example: "AED"
+      decimalPoints:
+        type: "integer"
+        example: 4
+      exchanger:
         type: "array"
         xml:
           name: "photoUrl"
           wrapped: true
         items:
           type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
+      cacheTime:
+        type: "string"
+        example: "60s"
       status:
         type: "string"
         description: "pet status in the store"

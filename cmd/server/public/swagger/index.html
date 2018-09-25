@@ -35,7 +35,7 @@
 
         // Build a system
         const ui = SwaggerUIBundle({
-            url: "/swagger/swagger.yml",
+            url: "/swagger/swagger.yml?v=" + Date.now(),
             dom_id: '#swagger-ui',
             deepLinking: true,
             presets: [
