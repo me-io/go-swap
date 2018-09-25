@@ -26,7 +26,7 @@
     "heroku-redis:hobby-dev"
   ],
   "env": {
-    "CACHE": {
+    "CACHE_ENV": {
       "description": "Cache driver ( memory or redis )",
       "value": "redis"
     }

@@ -1,1 +1,1 @@
-web: P=$PORT CACHE=redis ./bin/server
+web: P=$PORT CACHE=$CACHE_ENV ./bin/server
