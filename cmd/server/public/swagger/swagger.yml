@@ -9,7 +9,7 @@ info:
   license:
     name: "MIT"
     url: "https://github.com/me-io/go-swap/blob/master/LICENSE.md"
-host: "0.0.0.0:5000"
+host: "go-swap-server.herokuapp.com"
 basePath: "/"
 tags:
 - name: "Currency"
@@ -85,15 +85,6 @@ definitions:
       cacheTime:
         type: "string"
         example: "60s"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: "Find out more about Go-Swap-Server"
+  url: "https://github.com/me-io/go-swap"
