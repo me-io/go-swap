@@ -28,22 +28,12 @@ var (
 	)
 
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
-		`/favicon.ico`: favIcon,
-		`/convert`:     Convert,
-		`/`:            home,
+		`/convert`: Convert,
 	}
 
 	_, filename, _, _ = runtime.Caller(0)
-	sPath             = filepath.Dir(filename) + `/static/`
+	sPath             = filepath.Dir(filename) + `/static`
 )
-
-var favIcon = func(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, sPath+`favicon.ico`)
-}
-
-var home = func(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, sPath+`index.html`)
-}
 
 func init() {
 	// Logging
@@ -98,6 +88,7 @@ func serveHTTP(host string, port int) {
 	mux := http.NewServeMux()
 	for k, v := range routes {
 		mux.HandleFunc(k, v)
+		mux.Handle(`/`, http.FileServer(http.Dir(sPath)))
 	}
 
 	addr := fmt.Sprintf("%v:%d", host, port)
