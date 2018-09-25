@@ -15,7 +15,6 @@ type yahooApi struct {
 	attributes
 }
 
-// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/Yahoo.php
 var (
 	yahooApiUrl     = `https://query1.finance.yahoo.com/v8/finance/chart/%s%s=X?region=US&lang=en-US&includePrePost=false&interval=1d&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance`
 	yahooApiHeaders = map[string][]string{
@@ -60,7 +59,7 @@ func (c *yahooApi) GetValue() float64 {
 }
 
 func (c *yahooApi) GetDate() string {
-	return c.rateDate.String()
+	return c.rateDate.Format(time.RFC3339)
 }
 
 func (c *yahooApi) GetExchangerName() string {
@@ -69,7 +68,6 @@ func (c *yahooApi) GetExchangerName() string {
 
 func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 
-	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
 	if err != nil {
 		log.Print(err)
@@ -97,6 +95,7 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 		MustFloat64()
 	// todo handle error
 	c.rateValue = math.Round(value*1000000) / 1000000
+	c.rateDate = time.Now()
 	return nil
 }
 

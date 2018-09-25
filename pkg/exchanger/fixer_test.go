@@ -8,6 +8,8 @@ import (
 
 func TestFixerApi_Latest(t *testing.T) {
 	rate := NewFixerApi(nil)
+	assert.Equal(t, rate.name, `fixer`)
+
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)

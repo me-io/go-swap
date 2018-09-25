@@ -8,6 +8,8 @@ import (
 
 func TestGoogleApi_Latest(t *testing.T) {
 	rate := NewGoogleApi(nil)
+	assert.Equal(t, rate.name, `google`)
+
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)

@@ -8,6 +8,8 @@ import (
 
 func TestYahooApi_Latest(t *testing.T) {
 	rate := NewYahooApi(nil)
+	assert.Equal(t, rate.name, `yahoo`)
+
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`USD`, `EUR`)

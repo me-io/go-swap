@@ -8,6 +8,8 @@ import (
 
 func TestCurrencyLayerApi_Latest(t *testing.T) {
 	rate := NewCurrencyLayerApi(nil)
+	assert.Equal(t, rate.name, `currencylayer`)
+
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)

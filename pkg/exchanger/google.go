@@ -65,7 +65,7 @@ func (c *googleApi) GetValue() float64 {
 }
 
 func (c *googleApi) GetDate() string {
-	return c.rateDate.String()
+	return c.rateDate.Format(time.RFC3339)
 }
 
 func (c *googleApi) GetExchangerName() string {
@@ -91,6 +91,7 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 	stringMatches := validID.FindStringSubmatch(c.responseBody)
 
 	c.rateValue, err = strconv.ParseFloat(stringMatches[2], 64)
+	c.rateDate = time.Now()
 
 	if err != nil {
 		log.Print(err)

@@ -11,17 +11,14 @@ import (
 )
 
 type fixerApi struct {
-	apiKey string
 	attributes
 }
 
-// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/fixer.php
 var (
 	fixerApiUrl     = `https://data.fixer.io/api/convert?access_key=%s&from=%s&to=%s&amount=1&format=1`
 	fixerApiHeaders = map[string][]string{
 		`Accept`:          {`text/html,application/xhtml+xml,application/xml,application/json`},
 		`Accept-Encoding`: {`text`},
-		`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 	}
 )
 
@@ -34,7 +31,10 @@ func (c *fixerApi) requestRate(from string, to string, opt ...interface{}) (*fix
 
 	url := fmt.Sprintf(fixerApiUrl, c.apiKey, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
+
+	fixerApiHeaders[`User-Agent`] = []string{c.userAgent}
 	req.Header = fixerApiHeaders
+
 	res, err := c.Client.Do(req)
 
 	if err != nil {
@@ -58,7 +58,7 @@ func (c *fixerApi) GetValue() float64 {
 }
 
 func (c *fixerApi) GetDate() string {
-	return c.rateDate.String()
+	return c.rateDate.Format(time.RFC3339)
 }
 
 func (c *fixerApi) GetExchangerName() string {
@@ -113,6 +113,16 @@ func NewFixerApi(opt map[string]string) *fixerApi {
 		Timeout:   timeout,
 	}
 
-	r := &fixerApi{attributes: attributes{name: `fixer`, Client: client}, apiKey: opt[`apiKey`]}
+	attr := attributes{
+		name:      `fixer`,
+		Client:    client,
+		apiKey:    opt[`apiKey`],
+		userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`,
+	}
+	if opt[`userAgent`] != "" {
+		attr.userAgent = opt[`userAgent`]
+	}
+
+	r := &fixerApi{attr}
 	return r
 }

@@ -11,17 +11,14 @@ import (
 )
 
 type currencyLayerApi struct {
-	apiKey string
 	attributes
 }
 
-// ref @link https://github.com/florianv/exchanger/blob/master/src/Service/currencylayer.php
 var (
 	currencyLayerApiUrl     = `https://apilayer.net/api/convert?access_key=%s&from=%s&to=%s&amount=1&format=1`
 	currencyLayerApiHeaders = map[string][]string{
 		`Accept`:          {`text/html,application/xhtml+xml,application/xml,application/json`},
 		`Accept-Encoding`: {`text`},
-		`User-Agent`:      {`Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`},
 	}
 )
 
@@ -34,7 +31,10 @@ func (c *currencyLayerApi) requestRate(from string, to string, opt ...interface{
 
 	url := fmt.Sprintf(currencyLayerApiUrl, c.apiKey, from, to)
 	req, _ := http.NewRequest("GET", url, nil)
+
+	currencyLayerApiHeaders[`User-Agent`] = []string{c.userAgent}
 	req.Header = currencyLayerApiHeaders
+
 	res, err := c.Client.Do(req)
 
 	if err != nil {
@@ -58,7 +58,7 @@ func (c *currencyLayerApi) GetValue() float64 {
 }
 
 func (c *currencyLayerApi) GetDate() string {
-	return c.rateDate.String()
+	return c.rateDate.Format(time.RFC3339)
 }
 
 func (c *currencyLayerApi) GetExchangerName() string {
@@ -67,7 +67,6 @@ func (c *currencyLayerApi) GetExchangerName() string {
 
 func (c *currencyLayerApi) Latest(from string, to string, opt ...interface{}) error {
 
-	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
 	if err != nil {
 		log.Print(err)
@@ -92,6 +91,7 @@ func (c *currencyLayerApi) Latest(from string, to string, opt ...interface{}) er
 		MustFloat64()
 	// todo handle error
 	c.rateValue = value
+	c.rateDate = time.Now()
 	return nil
 }
 
@@ -113,6 +113,16 @@ func NewCurrencyLayerApi(opt map[string]string) *currencyLayerApi {
 		Timeout:   timeout,
 	}
 
-	r := &currencyLayerApi{attributes: attributes{name: `currencylayer`, Client: client}, apiKey: opt[`apiKey`]}
+	attr := attributes{
+		name:      `currencylayer`,
+		Client:    client,
+		apiKey:    opt[`apiKey`],
+		userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0`,
+	}
+	if opt[`userAgent`] != "" {
+		attr.userAgent = opt[`userAgent`]
+	}
+
+	r := &currencyLayerApi{attr}
 	return r
 }
