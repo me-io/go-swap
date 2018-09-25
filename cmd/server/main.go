@@ -73,6 +73,7 @@ func main() {
 	Logger.Infof("port %d", port)
 	Logger.Infof("cacheDriver %s", cacheDriver)
 	Logger.Infof("REDIS_URL %s", redisUrl)
+	Logger.Infof("Static dir %s", sPath)
 
 	// handle routers
 	for k, v := range routes {
