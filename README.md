@@ -20,11 +20,10 @@ and optionally cache the results.
 
 ## Playground
 <a href="https://go-swap-server.herokuapp.com/swagger" target="_blank">
-  <img src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Swagger UI">
-</a>
-<br>
+  <img height="64" src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Swagger UI">
+</a> 
 <a href="https://go-swap-server.herokuapp.com" target="_blank">
-    heroku test instance @ https://go-swap-server.herokuapp.com
+    <img height="64" src="https://image.ibb.co/hvWT2U/go_swap_server_heroku.png" alt="heroku test instance @ https://go-swap-server.herokuapp.com">
 </a>
 
 
