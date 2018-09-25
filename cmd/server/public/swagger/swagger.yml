@@ -9,8 +9,6 @@ info:
   license:
     name: "MIT"
     url: "https://github.com/me-io/go-swap/blob/master/LICENSE.md"
-host: "go-swap-server.herokuapp.com"
-basePath: "/"
 tags:
 - name: "Currency"
   description: "Swap & Convert between Currencies"
@@ -18,8 +16,8 @@ tags:
     description: "Find out more"
     url: "https://github.com/me-io/go-swap"
 schemes:
-- "http"
 - "https"
+- "http"
 paths:
   /convert:
     post:
