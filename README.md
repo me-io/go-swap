@@ -18,8 +18,15 @@ and optionally cache the results.
 
 > Inspired by [florianv/swap](https://github.com/florianv/swap) 
 
-## QuickStart 
+## Playground
+
+<a href="https://go-swap-server.herokuapp.com/swagger">
+  <h2>Swagger UI <img height="30" src="https://watson-api-explorer.ng.bluemix.net/images/swagger-ui.svg" alt="Deploy"></h2>
+</a>
+<br>
 The server is deployed on heroku test instance @ [https://go-swap-server.herokuapp.com](https://go-swap-server.herokuapp.com)
+
+## QuickStart 
 
 <a href="https://heroku.com/deploy?template=https://github.com/me-io/go-swap">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
