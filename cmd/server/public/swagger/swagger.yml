@@ -9,7 +9,7 @@ info:
   license:
     name: "MIT"
     url: "https://github.com/me-io/go-swap/blob/master/LICENSE.md"
-host: "go-swap-server.herokuapp.com"
+host: "0.0.0.0:5000"
 basePath: "/"
 tags:
 - name: "Currency"
@@ -18,6 +18,7 @@ tags:
     description: "Find out more"
     url: "https://github.com/me-io/go-swap"
 schemes:
+- "http"
 - "https"
 paths:
   /convert:
@@ -26,7 +27,7 @@ paths:
       - "Currency"
       summary: "Request Currency Conversion Rate & Value"
       description: ""
-      operationId: "addPet"
+      operationId: "ConvertCurrency"
       consumes:
       - "application/json"
       produces:
@@ -41,22 +42,6 @@ paths:
       responses:
         405:
           description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
 definitions:
   ConvertRequest:
     type: "object"
@@ -81,11 +66,22 @@ definitions:
         example: 4
       exchanger:
         type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
+        minItems: 1
+        maxItems: 10
         items:
-          type: "string"
+          type: "object"
+          required:
+          - "name"
+          properties:
+            name:
+              type: "string"
+              example: "google"
+            apiKey:
+              type: "string"
+              example: "demo_api_key_2018"
+            userAgent:
+              type: "string"
+              example: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
       cacheTime:
         type: "string"
         example: "60s"
