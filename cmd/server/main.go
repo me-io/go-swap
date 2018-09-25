@@ -32,7 +32,8 @@ var (
 	}
 
 	_, filename, _, _ = runtime.Caller(0)
-	sPath             = filepath.Dir(filename) + `/static`
+	defaultStaticPath = filepath.Dir(filename) + `/static`
+	staticPath        = defaultStaticPath
 )
 
 func init() {
@@ -50,6 +51,7 @@ func init() {
 	port, _ = strconv.Atoi(GetEnv(`P`, `5000`))
 	cacheDriver = GetEnv(`CACHE`, `memory`)
 	redisUrl = GetEnv(`REDIS_URL`, ``)
+	staticPath = GetEnv(`STATIC_PATH`, defaultStaticPath)
 
 	flag.Parse()
 
@@ -73,8 +75,7 @@ func main() {
 	Logger.Infof("port %d", port)
 	Logger.Infof("cacheDriver %s", cacheDriver)
 	Logger.Infof("REDIS_URL %s", redisUrl)
-	Logger.Infof("Static dir %s", sPath)
-	LsFiles(sPath)
+	Logger.Infof("Static dir %s", staticPath)
 
 	// handle routers
 	for k, v := range routes {
@@ -90,7 +91,7 @@ func serveHTTP(host string, port int) {
 	mux := http.NewServeMux()
 	for k, v := range routes {
 		mux.HandleFunc(k, v)
-		mux.Handle(`/`, http.FileServer(http.Dir(sPath)))
+		mux.Handle(`/`, http.FileServer(http.Dir(staticPath)))
 	}
 
 	addr := fmt.Sprintf("%v:%d", host, port)
