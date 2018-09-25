@@ -74,6 +74,7 @@ func main() {
 	Logger.Infof("cacheDriver %s", cacheDriver)
 	Logger.Infof("REDIS_URL %s", redisUrl)
 	Logger.Infof("Static dir %s", sPath)
+	LsFiles(sPath)
 
 	// handle routers
 	for k, v := range routes {
