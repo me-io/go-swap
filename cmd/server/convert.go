@@ -66,6 +66,8 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		amount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
 
 		convertRes := convertResObj{
+			From:          convertReq.From,
+			To:            convertReq.To,
 			Amount:        amount,
 			Value:         rate.GetValue(),
 			DateTime:      rate.GetDateTime(),

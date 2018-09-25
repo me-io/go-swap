@@ -20,6 +20,8 @@ type convertReqObj struct {
 }
 
 type convertResObj struct {
+	From          string  `json:"from"`
+	To            string  `json:"to"`
 	Value         float64 `json:"value"`
 	Amount        float64 `json:"amount"`
 	DateTime      string  `json:"dateTime"`
