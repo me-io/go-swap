@@ -20,10 +20,11 @@ and optionally cache the results.
 
 ## Playground
 <a href="https://go-swap-server.herokuapp.com/swagger">
-  Swagger UI <img height="30" src="https://watson-api-explorer.ng.bluemix.net/images/swagger-ui.svg" alt="Deploy">
+  <img src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Deploy">
 </a>
 <br>
-The server is deployed on heroku test instance @ [https://go-swap-server.herokuapp.com](https://go-swap-server.herokuapp.com)
+
+[heroku test instance @ https://go-swap-server.herokuapp.com](https://go-swap-server.herokuapp.com)
 
 ## QuickStart 
 
