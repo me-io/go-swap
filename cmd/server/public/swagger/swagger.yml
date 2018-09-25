@@ -58,14 +58,18 @@ definitions:
       to:
         type: "string"
         example: "AED"
-      value:
+      originalAmount:
         type: "number"
         format: "float"
-        example: 3.6727
-      amount:
+        example: 1.54
+      exchangeValue:
         type: "number"
         format: "float"
-        example: 16.5272
+        example: 17.91
+      convertedAmount:
+        type: "number"
+        format: "float"
+        example: 27.5814
       dateTime:
         type: "string"
         example: "2018-09-25T12:17:17Z"

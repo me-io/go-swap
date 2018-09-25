@@ -63,15 +63,16 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		Swap.Build()
 
 		rate := Swap.Latest(currencyKey)
-		amount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
+		convertedAmount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
 
 		convertRes := convertResObj{
-			From:          convertReq.From,
-			To:            convertReq.To,
-			Amount:        amount,
-			Value:         rate.GetValue(),
-			DateTime:      rate.GetDateTime(),
-			ExchangerName: rate.GetExchangerName(),
+			From:            convertReq.From,
+			To:              convertReq.To,
+			OriginalAmount:  convertReq.Amount,
+			ExchangeValue:   rate.GetValue(),
+			ConvertedAmount: convertedAmount,
+			DateTime:        rate.GetDateTime(),
+			ExchangerName:   rate.GetExchangerName(),
 		}
 
 		var err error

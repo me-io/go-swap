@@ -20,12 +20,13 @@ type convertReqObj struct {
 }
 
 type convertResObj struct {
-	From          string  `json:"from"`
-	To            string  `json:"to"`
-	Value         float64 `json:"value"`
-	Amount        float64 `json:"amount"`
-	DateTime      string  `json:"dateTime"`
-	ExchangerName string  `json:"exchangerName"`
+	From            string  `json:"from"`
+	To              string  `json:"to"`
+	OriginalAmount  float64 `json:"originalAmount"`
+	ExchangeValue   float64 `json:"exchangeValue"`
+	ConvertedAmount float64 `json:"convertedAmount"`
+	DateTime        string  `json:"dateTime"`
+	ExchangerName   string  `json:"exchangerName"`
 }
 
 // Password is just an example type implementing the Redactor interface. Any
