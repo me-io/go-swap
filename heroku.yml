@@ -1,0 +1,16 @@
+setup:
+  addons:
+  - plan: heroku-redis:hobby-dev
+build:
+  languages:
+  - go
+  pre:
+  - ls /tmp
+  post:
+  - ls /tmp
+  packages:
+  - imagemagick
+  config:
+    CACHE: redis
+run:
+  web: P=$PORT ./bin/server
