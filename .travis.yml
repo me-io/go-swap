@@ -22,11 +22,11 @@ env:
 before_install:
 - export COVERALLS_PARALLEL=false
 - export GOMAXPROCS=1
-- go get github.com/mattn/goveralls
 
 script:
 - $HOME/gopath/bin/goveralls -v -service=travis-ci
 - make test-docker
+- go get github.com/mattn/goveralls
 - make build
 - test -f bin/linux-amd64/server
 - make container

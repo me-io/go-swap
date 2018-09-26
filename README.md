@@ -1,18 +1,17 @@
 
 ## Go Currency Exchange Library [WIP]
 
-[![GitHub release](https://img.shields.io/github/release/me-io/go-swap.svg)](https://github.com/me-io/go-swap/releases)
 [![Build Status](https://travis-ci.org/me-io/go-swap.svg?branch=master)](https://travis-ci.org/me-io/go-swap)
 [![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
 [![Coverage Status](https://coveralls.io/repos/github/me-io/go-swap/badge.svg?branch=master)](https://coveralls.io/github/me-io/go-swap?branch=master)
 [![GoDoc](https://godoc.org/github.com/me-io/go-swap?status.svg)](https://godoc.org/github.com/me-io/go-swap)
+[![GitHub release](https://img.shields.io/github/release/me-io/go-swap.svg)](https://github.com/me-io/go-swap/releases)
 
 
 [![](https://images.microbadger.com/badges/version/meio/go-swap-server.svg)](https://microbadger.com/images/meio/go-swap-server)
 [![COMMIT](https://images.microbadger.com/badges/commit/meio/go-swap-server.svg)](https://microbadger.com/images/meio/go-swap-server)
 [![SIZE-LAYERS](https://images.microbadger.com/badges/image/meio/go-swap-server.svg)](https://microbadger.com/images/meio/go-swap-server)
 [![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
-[![Release](https://shields.beevelop.com/github/release/me-io/go-swap.svg?style=flat-square)](https://github.com/me-io/go-swap/releases)
 
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
