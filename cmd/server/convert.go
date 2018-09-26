@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/md5"
 	"encoding/json"
+	"fmt"
 	ex "github.com/me-io/go-swap/pkg/exchanger"
 	"github.com/me-io/go-swap/pkg/swap"
 	"math"
@@ -9,9 +11,14 @@ import (
 	"time"
 )
 
-func (c convertReqObj) Validate() error {
+func (c *convertReqObj) Validate() error {
 	// todo implement
 	return nil
+}
+func (c *convertReqObj) Hash() string {
+	jsonBytes, _ := json.Marshal(c)
+	md5Sum := md5.Sum(jsonBytes)
+	return fmt.Sprintf("%x", md5Sum[:])
 }
 
 var Convert = func(w http.ResponseWriter, r *http.Request) {
@@ -33,8 +40,8 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		decimalPoint = 4
 	}
 
-	currencyKey := convertReq.From + `/` + convertReq.To
-	currencyCachedVal := Storage.Get(currencyKey)
+	currencyCacheKey := convertReq.Hash()
+	currencyCachedVal := Storage.Get(currencyCacheKey)
 	currencyCacheTime, _ := time.ParseDuration(convertReq.CacheTime)
 
 	if string(currencyCachedVal) == "" {
@@ -62,7 +69,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		}
 		Swap.Build()
 
-		rate := Swap.Latest(currencyKey)
+		rate := Swap.Latest(convertReq.From + `/` + convertReq.To)
 		convertedAmount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
 
 		convertRes := convertResObj{
@@ -79,7 +86,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
 			Logger.Panic(err)
 		}
-		Storage.Set(currencyKey, currencyCachedVal, currencyCacheTime)
+		Storage.Set(currencyCacheKey, currencyCachedVal, currencyCacheTime)
 		w.Header().Set("X-Cache", "Miss")
 	} else {
 		// get from cache
