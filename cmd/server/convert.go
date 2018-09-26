@@ -15,7 +15,9 @@ func (c *convertReqObj) Validate() error {
 	// todo implement
 	return nil
 }
-func (c *convertReqObj) Hash() string {
+
+func (c convertReqObj) Hash() string {
+	c.Amount = 1
 	jsonBytes, _ := json.Marshal(c)
 	md5Sum := md5.Sum(jsonBytes)
 	return fmt.Sprintf("%x", md5Sum[:])
@@ -41,9 +43,11 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	currencyCacheKey := convertReq.Hash()
+
 	currencyCachedVal := Storage.Get(currencyCacheKey)
 	currencyCacheTime, _ := time.ParseDuration(convertReq.CacheTime)
 
+	convertRes := &convertResObj{}
 	if string(currencyCachedVal) == "" {
 		Swap := swap.NewSwap()
 		for _, v := range convertReq.Exchanger {
@@ -70,17 +74,12 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		Swap.Build()
 
 		rate := Swap.Latest(convertReq.From + `/` + convertReq.To)
-		convertedAmount := math.Round(convertReq.Amount*rate.GetValue()*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
 
-		convertRes := convertResObj{
-			From:            convertReq.From,
-			To:              convertReq.To,
-			OriginalAmount:  convertReq.Amount,
-			ExchangeValue:   rate.GetValue(),
-			ConvertedAmount: convertedAmount,
-			DateTime:        rate.GetDateTime(),
-			ExchangerName:   rate.GetExchangerName(),
-		}
+		convertRes.From = convertReq.From
+		convertRes.To = convertReq.To
+		convertRes.ExchangeValue = rate.GetValue()
+		convertRes.DateTime = rate.GetDateTime()
+		convertRes.ExchangerName = rate.GetExchangerName()
 
 		var err error
 		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
@@ -91,10 +90,20 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// get from cache
 		w.Header().Set("X-Cache", "Hit")
+		json.Unmarshal(currencyCachedVal, &convertRes)
+	}
+
+	convertedAmount := math.Round(convertReq.Amount*convertRes.ExchangeValue*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
+	convertRes.ConvertedAmount = convertedAmount
+	convertRes.OriginalAmount = convertReq.Amount
+
+	currencyJsonVal, err := json.Marshal(convertRes)
+	if err != nil {
+		Logger.Panic(err)
 	}
 
 	//Set Content-Type header so that clients will know how to read response
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(currencyCachedVal)
+	w.Write(currencyJsonVal)
 }

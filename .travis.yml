@@ -24,7 +24,6 @@ script:
 - make container
 - docker images | grep meio/go-swap-server
 
-# calls goreleaser
 deploy:
 - provider: script
   skip_cleanup: true
