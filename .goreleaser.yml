@@ -2,7 +2,7 @@
 # Make sure to check the documentation at http://goreleaser.com
 builds:
 -
-  main: ./cmd/server/main.go
+  main: ./cmd/server/*.go
   binary: go-swap-server
 
   env:
