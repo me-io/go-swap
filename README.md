@@ -1,6 +1,7 @@
 
 ## Go Currency Exchange Library [WIP]
 
+[![GitHub release](https://img.shields.io/github/release/me-io/go-swap.svg)](https://github.com/me-io/go-swap/releases)
 [![Build Status](https://travis-ci.org/me-io/go-swap.svg?branch=master)](https://travis-ci.org/me-io/go-swap)
 [![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
 [![Coverage Status](https://coveralls.io/repos/github/me-io/go-swap/badge.svg?branch=master)](https://coveralls.io/github/me-io/go-swap?branch=master)

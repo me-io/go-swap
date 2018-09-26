@@ -1,0 +1,17 @@
+# .goreleaser.yml
+# Build customization
+builds:
+- main: cmd/server/main.go
+  binary: go-swap-server
+  goos:
+  - windows
+  - darwin
+  - linux
+  goarch:
+  - amd64
+  - arm64
+  - 386
+  - arm
+# Archive customization
+archive:
+  format: tar.gz
