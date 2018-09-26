@@ -118,6 +118,9 @@ definitions:
       cacheTime:
         type: "string"
         example: "60s"
+      fromCache:
+        type: "boolean"
+        example: false
 externalDocs:
   description: "Find out more about Go-Swap-Server"
   url: "https://github.com/me-io/go-swap"

@@ -17,6 +17,7 @@ func (c *convertReqObj) Validate() error {
 }
 
 func (c convertReqObj) Hash() string {
+	// hash exchange key only with 1 Unit value
 	c.Amount = 1
 	jsonBytes, _ := json.Marshal(c)
 	md5Sum := md5.Sum(jsonBytes)
@@ -45,6 +46,10 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	currencyCacheKey := convertReq.Hash()
 
 	currencyCachedVal := Storage.Get(currencyCacheKey)
+	// default cache time
+	if convertReq.CacheTime == "" {
+		convertReq.CacheTime = "120s"
+	}
 	currencyCacheTime, _ := time.ParseDuration(convertReq.CacheTime)
 
 	convertRes := &convertResObj{}
@@ -80,6 +85,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		convertRes.ExchangeValue = rate.GetValue()
 		convertRes.DateTime = rate.GetDateTime()
 		convertRes.ExchangerName = rate.GetExchangerName()
+		convertRes.FromCache = false
 
 		var err error
 		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
@@ -91,6 +97,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		// get from cache
 		w.Header().Set("X-Cache", "Hit")
 		json.Unmarshal(currencyCachedVal, &convertRes)
+		convertRes.FromCache = true
 	}
 
 	convertedAmount := math.Round(convertReq.Amount*convertRes.ExchangeValue*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
