@@ -18,15 +18,21 @@ before_install:
 - go get github.com/mattn/goveralls
 script:
 - make test-docker
+- "$GOPATH/bin/goveralls -repotoken $COVERALLS -coverprofile=profile.cov -service=travis-ci"
 - make build
 - test -f bin/linux-amd64/server
 - make container
 - docker images | grep meio/go-swap-server
-- "$GOPATH/bin/goveralls -repotoken $COVERALLS -coverprofile=profile.cov -service=travis-ci"
-- "./scripts/build-docker.sh"
 
 # calls goreleaser
 deploy:
+- provider: script
+  skip_cleanup: true
+  script: ./scripts/build-docker.sh
+  on:
+    tags: true
+    condition: $TRAVIS_OS_NAME = linux
+
 - provider: script
   skip_cleanup: true
   script: curl -sL https://git.io/goreleaser | bash
