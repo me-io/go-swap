@@ -27,3 +27,4 @@
 .env
 .docker_build/
 profile.cov
+dist
