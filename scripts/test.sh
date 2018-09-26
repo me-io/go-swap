@@ -11,7 +11,7 @@ TARGETS=$(for d in "$@"; do echo ./$d/...; done)
 echo "Running tests: Install packages: "
 go test -v -i -installsuffix "static" ${TARGETS} # Install packages that are dependencies of the test. Do not run the test..
 echo "Running tests: Run: "
-go test -v -installsuffix "static" ${TARGETS}
+go test -covermode=count -coverprofile=profile.cov -v -installsuffix "static" ${TARGETS}
 echo
 
 echo -n "Checking gofmt: "
