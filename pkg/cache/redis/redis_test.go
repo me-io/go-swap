@@ -40,7 +40,7 @@ func TestStorage_Redis_GetValue(t *testing.T) {
 func TestStorage_Redis_GetExpiredValue(t *testing.T) {
 	storage, _ := NewStorage(redisURL)
 	storage.Set("MY_KEY", []byte("123456"), parse("1s"))
-	time.Sleep(parse("1s"))
+	time.Sleep(parse("2s"))
 	content := storage.Get("MY_KEY")
 
 	assert.EqualValues(t, []byte(""), content)
