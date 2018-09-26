@@ -13,7 +13,7 @@ archive:
     amd64: 64-bit
     386: 32-bit
     darwin: macOS
-    linux: Tux
+    linux: Linux
   format: tar.gz
   format_overrides:
   - goos: windows
