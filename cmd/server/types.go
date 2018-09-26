@@ -27,7 +27,7 @@ type convertResObj struct {
 	ConvertedAmount float64 `json:"convertedAmount"`
 	DateTime        string  `json:"dateTime"`
 	ExchangerName   string  `json:"exchangerName"`
-	FromCache       bool    `json:"fromCache"`
+	RateFromCache   bool    `json:"rateFromCache"`
 }
 
 // Password is just an example type implementing the Redactor interface. Any

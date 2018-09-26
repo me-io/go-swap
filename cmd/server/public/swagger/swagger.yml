@@ -49,33 +49,6 @@ paths:
         404:
           description: "Invalid input"
 definitions:
-  ConvertResponse:
-    type: "object"
-    properties:
-      from:
-        type: "string"
-        example: "USD"
-      to:
-        type: "string"
-        example: "AED"
-      originalAmount:
-        type: "number"
-        format: "float"
-        example: 1.54
-      exchangeValue:
-        type: "number"
-        format: "float"
-        example: 17.91
-      convertedAmount:
-        type: "number"
-        format: "float"
-        example: 27.5814
-      dateTime:
-        type: "string"
-        example: "2018-09-25T12:17:17Z"
-      exchangerName:
-        type: "string"
-        example: "google"
   ConvertRequest:
     type: "object"
     required:
@@ -118,7 +91,34 @@ definitions:
       cacheTime:
         type: "string"
         example: "60s"
-      fromCache:
+  ConvertResponse:
+    type: "object"
+    properties:
+      from:
+        type: "string"
+        example: "USD"
+      to:
+        type: "string"
+        example: "AED"
+      originalAmount:
+        type: "number"
+        format: "float"
+        example: 1.54
+      exchangeValue:
+        type: "number"
+        format: "float"
+        example: 17.91
+      convertedAmount:
+        type: "number"
+        format: "float"
+        example: 27.5814
+      dateTime:
+        type: "string"
+        example: "2018-09-25T12:17:17Z"
+      exchangerName:
+        type: "string"
+        example: "google"
+      rateFromCache:
         type: "boolean"
         example: false
 externalDocs:

@@ -85,7 +85,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		convertRes.ExchangeValue = rate.GetValue()
 		convertRes.DateTime = rate.GetDateTime()
 		convertRes.ExchangerName = rate.GetExchangerName()
-		convertRes.FromCache = false
+		convertRes.RateFromCache = false
 
 		var err error
 		if currencyCachedVal, err = json.Marshal(convertRes); err != nil {
@@ -97,7 +97,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		// get from cache
 		w.Header().Set("X-Cache", "Hit")
 		json.Unmarshal(currencyCachedVal, &convertRes)
-		convertRes.FromCache = true
+		convertRes.RateFromCache = true
 	}
 
 	convertedAmount := math.Round(convertReq.Amount*convertRes.ExchangeValue*math.Pow10(decimalPoint)) / math.Pow10(decimalPoint)
