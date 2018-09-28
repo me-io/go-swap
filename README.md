@@ -16,8 +16,6 @@
 Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
 
-> Inspired by [florianv/swap](https://github.com/florianv/swap) 
-
 ## Playground
 <a href="https://go-swap-server.herokuapp.com/swagger" target="_blank">
   <img height="64" src="https://image.ibb.co/ehsqGp/swagger_ui.jpg" alt="Swagger UI">
@@ -99,13 +97,15 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] herokuapp demo
 - [x] swagger ui
 - [x] examples
+- [ ] increase tests
+- [ ] goreleaser
 - [ ] verbose logging
+- [ ] cli convert google GET without payload to be used in binary image 
+- [ ] cli convert yahoo GET without payload 
 - [ ] godoc 
 - [ ] code coverage
 - [ ] static bundle public folder `./cmd/server/public`
-- [ ] v 1.0.0 release binary
-- [ ] v 1.0.0 release docker image
-- [ ] docker image mac os example
+- [ ] v 1.0.0 release ( docker / binary github / homebrew mac )
 - [ ] Benchmark & Performance optimization ` memory leak`
 - [ ] contributors list 
 
@@ -116,6 +116,9 @@ Anyone is welcome to [contribute](CONTRIBUTING.md), however, if you decide to ge
 * [Only one feature or change per pull request](CONTRIBUTING.md#only-one-feature-or-change-per-pull-request)
 * [Write meaningful commit messages](CONTRIBUTING.md#write-meaningful-commit-messages)
 * [Follow the existing coding standards](CONTRIBUTING.md#follow-the-existing-coding-standards)
+
+#### Credits
+> Inspired by [florianv/swap](https://github.com/florianv/swap) 
 
 ## License
 
