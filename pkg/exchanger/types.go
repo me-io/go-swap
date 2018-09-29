@@ -17,6 +17,7 @@ type Exchanger interface {
 }
 
 type attributes struct {
+	apiVersion   string
 	apiKey       string
 	userAgent    string
 	responseBody string

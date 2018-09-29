@@ -104,6 +104,9 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	convertRes.ConvertedAmount = convertedAmount
 	convertRes.OriginalAmount = convertReq.Amount
 
+	// formatted message like "1 USD is worth 3.675 AED"
+	convertRes.ConvertedText = fmt.Sprintf("%f %s is worth %f %s", convertRes.OriginalAmount, convertRes.From, convertRes.ConvertedAmount, convertRes.To)
+
 	currencyJsonVal, err := json.Marshal(convertRes)
 	if err != nil {
 		Logger.Panic(err)

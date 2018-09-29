@@ -25,6 +25,7 @@ type convertResObj struct {
 	OriginalAmount  float64 `json:"originalAmount"`
 	ExchangeValue   float64 `json:"exchangeValue"`
 	ConvertedAmount float64 `json:"convertedAmount"`
+	ConvertedText   string  `json:"convertedText"`
 	DateTime        string  `json:"dateTime"`
 	ExchangerName   string  `json:"exchangerName"`
 	RateFromCache   bool    `json:"rateFromCache"`

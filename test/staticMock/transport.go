@@ -53,6 +53,16 @@ func (t *mT) RoundTrip(req *http.Request) (*http.Response, error) {
 		fc, _ := ioutil.ReadFile(fp)
 		responseBody = string(fc)
 		break
+	case host == `forex.1forge.com`:
+		fp, _ := filepath.Abs(tPath + `/1forge_json_aed_usd.json`)
+		fc, _ := ioutil.ReadFile(fp)
+		responseBody = string(fc)
+		break
+	case host == `themoneyconverter.com`:
+		fp, _ := filepath.Abs(tPath + `/themoneyconverter_html_aed_usd.html`)
+		fc, _ := ioutil.ReadFile(fp)
+		responseBody = string(fc)
+		break
 	default:
 
 	}
