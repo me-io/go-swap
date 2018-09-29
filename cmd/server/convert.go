@@ -58,7 +58,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		for _, v := range convertReq.Exchanger {
 
 			var e ex.Exchanger
-			opt := map[string]string{`userAgent`: v.UserAgent, `apiKey`: v.ApiKey}
+			opt := map[string]string{`userAgent`: v.UserAgent, `apiKey`: v.ApiKey, `apiVersion`: v.ApiVersion}
 
 			switch v.Name {
 			case `google`:
@@ -72,6 +72,12 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 				break
 			case `fixer`:
 				e = ex.NewFixerApi(opt)
+				break
+			case `1forge`:
+				e = ex.NewOneForgeApi(opt)
+				break
+			case `themoneyconverter`:
+				e = ex.NewTheMoneyConverterApi(opt)
 				break
 			}
 			Swap.AddExchanger(e)

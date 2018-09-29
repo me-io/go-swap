@@ -5,9 +5,10 @@ import (
 )
 
 type exchangerReqObj struct {
-	Name      string `json:"name"`
-	UserAgent string `json:"userAgent,omitempty"`
-	ApiKey    string `json:"apiKey,omitempty"`
+	Name       string `json:"name"`
+	UserAgent  string `json:"userAgent,omitempty"`
+	ApiKey     string `json:"apiKey,omitempty"`
+	ApiVersion string `json:"apiVersion,omitempty"`
 }
 
 type convertReqObj struct {
