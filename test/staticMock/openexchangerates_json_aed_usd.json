@@ -1,0 +1,15 @@
+{
+  "disclaimer": "https://openexchangerates.org/terms/",
+  "license": "https://openexchangerates.org/license/",
+  "request": {
+    "query": "/convert/1/USD/AED",
+    "amount": 1,
+    "from": "USD",
+    "to": "AED"
+  },
+  "meta": {
+    "timestamp": 1449885661,
+    "rate": 3.6571
+  },
+  "response": 3.6571
+}

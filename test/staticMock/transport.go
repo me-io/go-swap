@@ -63,6 +63,11 @@ func (t *mT) RoundTrip(req *http.Request) (*http.Response, error) {
 		fc, _ := ioutil.ReadFile(fp)
 		responseBody = string(fc)
 		break
+	case host == `openexchangerates.org`:
+		fp, _ := filepath.Abs(tPath + `/openexchangerates_json_aed_usd.json`)
+		fc, _ := ioutil.ReadFile(fp)
+		responseBody = string(fc)
+		break
 	default:
 
 	}

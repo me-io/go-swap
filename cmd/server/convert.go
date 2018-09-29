@@ -79,6 +79,9 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 			case `themoneyconverter`:
 				e = ex.NewTheMoneyConverterApi(opt)
 				break
+			case `openexchangerates`:
+				e = ex.NewOpenExchangeRatesApi(opt)
+				break
 			}
 			Swap.AddExchanger(e)
 		}
