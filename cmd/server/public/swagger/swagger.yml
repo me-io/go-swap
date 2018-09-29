@@ -85,6 +85,9 @@ definitions:
             apiKey:
               type: "string"
               example: "demo_api_key_2018"
+            apiVersion:
+              type: "string"
+              example: "1.0.3"
             userAgent:
               type: "string"
               example: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
