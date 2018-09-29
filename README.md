@@ -81,7 +81,7 @@ The documentation for the current branch can be found [here](#documentation).
 |[Fixer.io][4]|JSON / API| :heavy_check_mark: |Paid - ApiKey|
 |[1forge][7]|API| :heavy_check_mark: |Freemium / Paid - ApiKey|
 |[The Money Converter][5]|HTML / Regex| :heavy_check_mark: |Free|
-|[Open Exchange Rates][6]|API| TODO |Freemium / Paid - ApiKey|
+|[Open Exchange Rates][6]|API| :heavy_check_mark: |Freemium / Paid - ApiKey|
 
 [1]: //google.com
 [2]: //yahoo.com
