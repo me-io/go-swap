@@ -31,6 +31,7 @@ required = [
     "github.com/bitly/go-simplejson",
     "github.com/go-redis/redis",
     "github.com/op/go-logging",
+    "github.com/go-ozzo/ozzo-validation",
     "github.com/stretchr/testify"
 ]
 
@@ -61,3 +62,7 @@ required = [
   go-version = "1.11"
   install = ["./cmd/server/..."]
   ensure = "true"
+
+[[constraint]]
+  name = "github.com/go-ozzo/ozzo-validation"
+  version = "3.5.0"

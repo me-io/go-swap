@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"github.com/go-ozzo/ozzo-validation"
 	ex "github.com/me-io/go-swap/pkg/exchanger"
 	"github.com/me-io/go-swap/pkg/swap"
 	"io/ioutil"
@@ -16,12 +17,16 @@ import (
 // Validate ... Validation function for convertReqObj
 func (c *convertReqObj) Validate() error {
 
-	if ex.CurrencyList[c.To] == "" || ex.CurrencyList[c.From] == "" {
-		return fmt.Errorf("currency %s or %s is not supoorted", c.From, c.To)
-	}
+	return validation.ValidateStruct(c,
+		validation.Field(&c.Amount, validation.Required),
+		validation.Field(&c.From, validation.Required, validation.In(ex.CurrencyListArr...)),
+		validation.Field(&c.To, validation.Required, validation.In(ex.CurrencyListArr...)),
+		validation.Field(&c.Exchanger, validation.Required),
+	)
 
-	// todo implement
-	return nil
+	//if ex.CurrencyList[c.To] == "" || ex.CurrencyList[c.From] == "" {
+	//	return fmt.Errorf("currency %s or %s is not supported", c.From, c.To)
+	//}
 }
 
 // Hash ... return md5 string hash of the convertReqObj with 1 Unit Amount to cache the rate only for 1 Unit Amount

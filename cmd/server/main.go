@@ -21,9 +21,9 @@ var (
 	cacheDriver string
 	redisUrl    string
 	// Storage ... Server Cache Storage
-	Storage     cache.Storage
+	Storage cache.Storage
 	// Logger ... Logger Driver
-	Logger      = logging.MustGetLogger("go-swap-server")
+	Logger = logging.MustGetLogger("go-swap-server")
 
 	format = logging.MustStringFormatter(
 		`%{color}%{time:2006-01-02T15:04:05.999999} %{shortfunc} ▶ %{level:.8s} %{id:03x}%{color:reset} %{message}`,
