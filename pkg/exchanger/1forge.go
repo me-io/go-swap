@@ -53,18 +53,22 @@ func (c *oneForgeApi) requestRate(from string, to string, opt ...interface{}) (*
 	return c, nil
 }
 
-func (c *oneForgeApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *oneForgeApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *oneForgeApi) GetDateTime() string {
+// GetExchangerName ... return exchanger name
+func (c *oneForgeApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *oneForgeApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *oneForgeApi) Latest(from string, to string, opt ...interface{}) error {
 
 	_, err := c.requestRate(from, to, opt)
@@ -95,6 +99,7 @@ func (c *oneForgeApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
+// NewOneForgeApi ... return new instance of oneForgeApi
 func NewOneForgeApi(opt map[string]string) *oneForgeApi {
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second

@@ -60,18 +60,22 @@ func (c *googleApi) requestRate(from string, to string, opt ...interface{}) (*go
 	return c, nil
 }
 
-func (c *googleApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *googleApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *googleApi) GetDateTime() string {
+// GetRateDateTime ... return rate datetime
+func (c *googleApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *googleApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
@@ -100,6 +104,7 @@ func (c *googleApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
+// NewGoogleApi ... return new instance of googleApi
 func NewGoogleApi(opt map[string]string) *googleApi {
 
 	keepAliveTimeout := 600 * time.Second

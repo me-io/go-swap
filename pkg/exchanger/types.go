@@ -6,8 +6,8 @@ import (
 )
 
 type Rate interface {
-	GetValue() float64
-	GetDateTime() string
+	GetRateValue() float64
+	GetRateDateTime() string
 	GetExchangerName() string
 }
 

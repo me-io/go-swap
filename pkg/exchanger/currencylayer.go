@@ -53,18 +53,22 @@ func (c *currencyLayerApi) requestRate(from string, to string, opt ...interface{
 	return c, nil
 }
 
-func (c *currencyLayerApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *currencyLayerApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *currencyLayerApi) GetDateTime() string {
+// GetExchangerName ... return exchanger name
+func (c *currencyLayerApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *currencyLayerApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *currencyLayerApi) Latest(from string, to string, opt ...interface{}) error {
 
 	_, err := c.requestRate(from, to, opt)
@@ -95,6 +99,7 @@ func (c *currencyLayerApi) Latest(from string, to string, opt ...interface{}) er
 	return nil
 }
 
+// NewCurrencyLayerApi ... return new instance of currencyLayerApi
 func NewCurrencyLayerApi(opt map[string]string) *currencyLayerApi {
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second

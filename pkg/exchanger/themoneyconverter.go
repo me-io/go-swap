@@ -59,18 +59,22 @@ func (c *theMoneyConverterApi) requestRate(from string, to string, opt ...interf
 	return c, nil
 }
 
-func (c *theMoneyConverterApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *theMoneyConverterApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *theMoneyConverterApi) GetDateTime() string {
+// GetRateDateTime ... return rate datetime
+func (c *theMoneyConverterApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *theMoneyConverterApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *theMoneyConverterApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
@@ -103,6 +107,7 @@ func (c *theMoneyConverterApi) Latest(from string, to string, opt ...interface{}
 	return nil
 }
 
+// NewTheMoneyConverterApi ... return new instance of theMoneyConverterApi
 func NewTheMoneyConverterApi(opt map[string]string) *theMoneyConverterApi {
 
 	keepAliveTimeout := 600 * time.Second

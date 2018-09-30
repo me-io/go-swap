@@ -29,7 +29,7 @@ func TestStorage_Redis_GetEmpty(t *testing.T) {
 	assert.EqualValues(t, []byte(""), content)
 }
 
-func TestStorage_Redis_GetValue(t *testing.T) {
+func TestStorage_Redis_GetRateValue(t *testing.T) {
 	storage, _ := NewStorage(redisURL)
 	storage.Set("MY_KEY", []byte("123456"), parse("5s"))
 	content := storage.Get("MY_KEY")

@@ -53,18 +53,22 @@ func (c *fixerApi) requestRate(from string, to string, opt ...interface{}) (*fix
 	return c, nil
 }
 
-func (c *fixerApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *fixerApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *fixerApi) GetDateTime() string {
+// GetRateDateTime ... return rate datetime
+func (c *fixerApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *fixerApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *fixerApi) Latest(from string, to string, opt ...interface{}) error {
 
 	// todo cache layer
@@ -95,6 +99,7 @@ func (c *fixerApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
+// NewFixerApi ... return new instance of fixerApi
 func NewFixerApi(opt map[string]string) *fixerApi {
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second

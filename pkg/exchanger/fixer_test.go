@@ -13,8 +13,8 @@ func TestFixerApi_Latest(t *testing.T) {
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)
-	assert.Equal(t, float64(1), rate.GetValue())
+	assert.Equal(t, float64(1), rate.GetRateValue())
 
 	rate.Latest(`EUR`, `USD`)
-	assert.Equal(t, float64(3724.305775), rate.GetValue())
+	assert.Equal(t, float64(3724.305775), rate.GetRateValue())
 }

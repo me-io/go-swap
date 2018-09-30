@@ -13,8 +13,8 @@ func TestTheMoneyConverterApi_Latest(t *testing.T) {
 	rate.Client.Transport = staticMock.NewTestMT()
 
 	rate.Latest(`EUR`, `EUR`)
-	assert.Equal(t, float64(1), rate.GetValue())
+	assert.Equal(t, float64(1), rate.GetRateValue())
 
 	rate.Latest(`USD`, `AED`)
-	assert.Equal(t, float64(3.6725), rate.GetValue())
+	assert.Equal(t, float64(3.6725), rate.GetRateValue())
 }

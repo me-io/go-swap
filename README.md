@@ -108,7 +108,7 @@ func main() {
 		Build()
 
 	euroToUsdRate := SwapTest.Latest("EUR/USD")
-	fmt.Println(euroToUsdRate.GetValue())
+	fmt.Println(euroToUsdRate.GetRateValue())
 }
 
 ```

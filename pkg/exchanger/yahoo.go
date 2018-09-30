@@ -54,18 +54,22 @@ func (c *yahooApi) requestRate(from string, to string, opt ...interface{}) (*yah
 	return c, nil
 }
 
-func (c *yahooApi) GetValue() float64 {
+// GetRateValue ... get exchange rate value
+func (c *yahooApi) GetRateValue() float64 {
 	return c.rateValue
 }
 
-func (c *yahooApi) GetDateTime() string {
+// GetRateDateTime ... return rate datetime
+func (c *yahooApi) GetRateDateTime() string {
 	return c.rateDate.Format(time.RFC3339)
 }
 
+// GetExchangerName ... return exchanger name
 func (c *yahooApi) GetExchangerName() string {
 	return c.name
 }
 
+// Latest ... populate latest exchange rate
 func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 
 	_, err := c.requestRate(from, to, opt)
@@ -99,6 +103,7 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 	return nil
 }
 
+// NewYahooApi ... return new instance of yahooApi
 func NewYahooApi(opt map[string]string) *yahooApi {
 	keepAliveTimeout := 600 * time.Second
 	timeout := 5 * time.Second

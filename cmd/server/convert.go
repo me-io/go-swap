@@ -142,8 +142,8 @@ var ConvertPost = func(w http.ResponseWriter, r *http.Request) {
 
 		convertRes.From = convertReq.From
 		convertRes.To = convertReq.To
-		convertRes.ExchangeValue = rate.GetValue()
-		convertRes.RateDateTime = rate.GetDateTime()
+		convertRes.ExchangeValue = rate.GetRateValue()
+		convertRes.RateDateTime = rate.GetRateDateTime()
 		convertRes.ExchangerName = rate.GetExchangerName()
 		convertRes.RateFromCache = false
 
