@@ -13,7 +13,7 @@
 [![SIZE-LAYERS](https://images.microbadger.com/badges/image/meio/go-swap-server.svg)](https://microbadger.com/images/meio/go-swap-server)
 [![Pulls](https://shields.beevelop.com/docker/pulls/meio/go-swap-server.svg?style=flat-square)](https://hub.docker.com/r/meio/go-swap-server)
 
-Swap allows you to retrieve currency exchange rates from various services such as **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
+Swap allows you to retrieve currency exchange rates from various services such as **[Google](https://google.com)**, **[Yahoo](https://yahoo.com)**, **[Fixer](https://fixer.io)**, **[CurrencyLayer](https://currencylayer.com)** or **[1Forge](https://1forge.com)** 
 and optionally cache the results. 
 
 ## Playground
@@ -27,7 +27,7 @@ and optionally cache the results.
 #### /GET Examples for single exchanger:
 - [GET /convert?from=USD&to=AED&amount=2&exchanger=yahoo](https://go-swap-server.herokuapp.com/convert?from=USD&to=AED&amount=100&exchanger=yahoo) 
 - [GET /convert?from=EUR&to=GBP&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=google)
-- [GET /convert?from=EUR&to=GBP&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=themoneyconverter)
+- [GET /convert?from=USD&to=SAR&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=USD&to=SAR&amount=100&exchanger=themoneyconverter)
 
 #### /POST Examples for single or multi exchanger:
 - CURL examples:
@@ -119,15 +119,15 @@ The documentation for the current branch can be found [here](#documentation).
 
 
 ## Services
-|Exchanger|type|#|$|
-|:---|:----|:---|:---|
-|[Google][1]|HTML / Regex|:heavy_check_mark:|Free|
-|[Yahoo][2]|JSON / API|:heavy_check_mark:|Free|
-|[Currency Layer][3]|JSON / API| :heavy_check_mark: |Paid - ApiKey|
-|[Fixer.io][4]|JSON / API| :heavy_check_mark: |Paid - ApiKey|
-|[1forge][7]|API| :heavy_check_mark: |Freemium / Paid - ApiKey|
-|[The Money Converter][5]|HTML / Regex| :heavy_check_mark: |Free|
-|[Open Exchange Rates][6]|API| :heavy_check_mark: |Freemium / Paid - ApiKey|
+|Exchanger                  |type           |#                  |$|
+|:---                       |:----          |:---               |:---|
+|[Google][1]                |HTML / Regex   |:heavy_check_mark: |Free|
+|[Yahoo][2]                 |JSON / API     |:heavy_check_mark: |Free|
+|[Currency Layer][3]        |JSON / API     |:heavy_check_mark: |Paid - ApiKey|
+|[Fixer.io][4]              |JSON / API     |:heavy_check_mark: |Paid - ApiKey|
+|[1forge][7]                |API            |:heavy_check_mark: |Freemium / Paid - ApiKey|
+|[The Money Converter][5]   |HTML / Regex   |:heavy_check_mark: |Free|
+|[Open Exchange Rates][6]   |API            |:heavy_check_mark: |Freemium / Paid - ApiKey|
 
 [1]: //google.com
 [2]: //yahoo.com
@@ -146,14 +146,14 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] code coverage
 - [x] get routes for single provider
 - [x] validate currency from a list before request
-- [ ] panic to json error
+- [ ] convert panic to api json error
 - [ ] increase tests
 - [ ] goreleaser
 - [ ] verbose logging
 - [ ] godoc 
 - [ ] static bundle public folder `./cmd/server/public`
 - [ ] v 1.0.0 release ( docker / binary github / homebrew mac )
-- [ ] Benchmark & Performance optimization ` memory leak`
+- [ ] benchmark & performance optimization ` memory leak`
 - [ ] contributors list 
 
 ## Contributing
