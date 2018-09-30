@@ -24,15 +24,39 @@ and optionally cache the results.
     <img height="64" src="https://image.ibb.co/hvWT2U/go_swap_server_heroku.png" alt="heroku test instance @ https://go-swap-server.herokuapp.com">
 </a>
 
-##### /GET Examples:
+#### /GET Examples for single exchanger:
 - [GET /convert?from=USD&to=AED&amount=2&exchanger=yahoo](https://go-swap-server.herokuapp.com/convert?from=USD&to=AED&amount=100&exchanger=yahoo) 
 - [GET /convert?from=EUR&to=GBP&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=google)
 - [GET /convert?from=EUR&to=GBP&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=themoneyconverter)
 
-##### /POST Examples:
-```bash
-
-```
+#### /POST Examples for single or multi exchanger:
+- Check [SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
+- CURL examples:
+    ```bash
+    curl -X POST \
+      https://go-swap-server.herokuapp.com/convert \
+      -H 'Content-Type: application/json' \
+      -d '{
+      "amount": 2.5,
+      "from": "USD",
+      "to": "AED",
+      "decimalPoints": 4,
+      "cacheTime": "120s",
+      "exchanger": [
+        {
+          "name": "yahoo"
+        },
+        {
+          "name": "google"
+        },
+        {
+          "name": "themoneyconverter",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
+        }
+      ]
+    }'
+    ```
+- Postman Collection [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e721b5007e2df03f1cac)
 
 ## QuickStart 
 
