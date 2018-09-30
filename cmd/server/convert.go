@@ -13,6 +13,7 @@ import (
 	"time"
 )
 
+// Validate ... Validation function for convertReqObj
 func (c *convertReqObj) Validate() error {
 
 	if ex.CurrencyList[c.To] == "" || ex.CurrencyList[c.From] == "" {
@@ -23,6 +24,7 @@ func (c *convertReqObj) Validate() error {
 	return nil
 }
 
+// Hash ... return md5 string hash of the convertReqObj with 1 Unit Amount to cache the rate only for 1 Unit Amount
 func (c convertReqObj) Hash() string {
 	// hash exchange key only with 1 Unit value
 	c.Amount = 1
@@ -31,6 +33,7 @@ func (c convertReqObj) Hash() string {
 	return fmt.Sprintf("%x", md5Sum[:])
 }
 
+// Convert ... Main convert function attached to the router handler
 var Convert = func(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		ConvertPost(w, r)
@@ -40,6 +43,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// ConvertGet ... handle GET request and simulate payload from get query params to ConvertPost function
 var ConvertGet = func(w http.ResponseWriter, r *http.Request) {
 
 	query := r.URL.Query()
@@ -70,6 +74,7 @@ var ConvertGet = func(w http.ResponseWriter, r *http.Request) {
 	ConvertPost(w, r)
 }
 
+// ConvertPost ... handle POST request, build Swap object, get and cache the currency exchange rate and amount
 var ConvertPost = func(w http.ResponseWriter, r *http.Request) {
 
 	convertReq := &convertReqObj{}

@@ -36,6 +36,7 @@ var (
 	staticPath        = defaultStaticPath
 )
 
+// init ... init function of the server
 func init() {
 	// Logging
 	backendStderr := logging.NewLogBackend(os.Stderr, "", 0)
@@ -69,6 +70,7 @@ func init() {
 
 }
 
+// main ... main function start the server
 func main() {
 
 	Logger.Infof("host %s", host)
@@ -86,6 +88,7 @@ func main() {
 	select {}
 }
 
+// serveHTTP ... initiate the HTTP Server
 func serveHTTP(host string, port int) {
 
 	mux := http.NewServeMux()
