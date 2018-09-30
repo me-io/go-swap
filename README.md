@@ -30,7 +30,6 @@ and optionally cache the results.
 - [GET /convert?from=EUR&to=GBP&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=themoneyconverter)
 
 #### /POST Examples for single or multi exchanger:
-- Check [SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
 - CURL examples:
     ```bash
     curl -X POST \
@@ -55,7 +54,21 @@ and optionally cache the results.
         }
       ]
     }'
+  
+     # Response example
+     # {
+     #    "to": "AED",
+     #    "from": "USD",
+     #    "exchangerName": "yahoo",
+     #    "exchangeValue": 3.6721,
+     #    "originalAmount": 2.5,
+     #    "convertedAmount": 9.1802,
+     #    "convertedText": "2.5 USD is worth 9.1802 AED",
+     #    "rateDateTime": "2018-09-30T07:45:45Z",
+     #    "rateFromCache": false
+     # }  
     ```
+- Check [SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
 - Postman Collection [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e721b5007e2df03f1cac)
 
 ## QuickStart 

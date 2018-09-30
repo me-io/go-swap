@@ -14,6 +14,11 @@ import (
 )
 
 func (c *convertReqObj) Validate() error {
+
+	if ex.CurrencyList[c.To] == "" || ex.CurrencyList[c.From] == "" {
+		return fmt.Errorf("currency %s or %s is not supoorted", c.From, c.To)
+	}
+
 	// todo implement
 	return nil
 }
