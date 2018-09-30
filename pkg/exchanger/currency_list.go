@@ -290,5 +290,5 @@ var CurrencyList = map[string]string{
 	"ZWL": "Zimbabwean Dollar (2009)",
 }
 
-// CurrencyListRev ... CurrencyList to array of int => interfaces to be used in validation
+// CurrencyListArr ... CurrencyList to array of int => interfaces to be used in validation
 var CurrencyListArr = MapKeyArrInterface(CurrencyList)
