@@ -26,8 +26,8 @@ and optionally cache the results.
 
 ##### /GET Examples:
 - [GET /convert?from=USD&to=AED&amount=2&exchanger=yahoo](https://go-swap-server.herokuapp.com/convert?from=USD&to=AED&amount=100&exchanger=yahoo) 
-- [GET /convert?from=EUR&to=GPB&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GPB&amount=100&exchanger=google)
-- [GET /convert?from=EUR&to=GPB&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GPB&amount=100&exchanger=themoneyconverter)
+- [GET /convert?from=EUR&to=GBP&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=google)
+- [GET /convert?from=EUR&to=GBP&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=themoneyconverter)
 
 ##### /POST Examples:
 ```bash
@@ -108,6 +108,7 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] examples
 - [x] code coverage
 - [x] get routes for single provider
+- [ ] validate currency from a list before request
 - [ ] increase tests
 - [ ] goreleaser
 - [ ] verbose logging

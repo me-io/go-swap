@@ -58,7 +58,6 @@ var ConvertGet = func(w http.ResponseWriter, r *http.Request) {
   "cacheTime":"%s"
 }`, amount, exchanger, apiKey, from, to, cacheTime)
 
-	fmt.Println(payload)
 	bytePayload := []byte(payload)
 	bytePayloadReader := bytes.NewReader(bytePayload)
 
