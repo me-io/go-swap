@@ -22,9 +22,9 @@ paths:
     post:
       tags:
       - "Currency"
-      summary: "Request Currency Conversion Rate & Value"
+      summary: "Request Currency Conversion Rate & Value Multiple Exchanger - POST"
       description: ""
-      operationId: "ConvertCurrency"
+      operationId: "ConvertCurrencyPost"
       consumes:
       - "application/json"
       produces:
@@ -35,7 +35,7 @@ paths:
         description: "Currency Conversion Request"
         required: true
         schema:
-          $ref: "#/definitions/ConvertRequest"
+          $ref: "#/definitions/ConvertPostRequest"
       responses:
         200:
           description: "successful operation"
@@ -47,8 +47,58 @@ paths:
           description: "Invalid input"
         404:
           description: "Invalid input"
+    get:
+      tags:
+      - "Currency"
+      summary: "Request Currency Conversion Rate & Value Single Exchanger - GET"
+      description: ""
+      operationId: "ConvertCurrencyGet"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "from"
+        type: "string"
+        required: true
+        default: "USD"
+      - in: "query"
+        name: "to"
+        type: "string"
+        required: true
+        default: "EGP"
+      - in: "query"
+        name: "amount"
+        type: "number"
+        required: true
+        default: "10.45"
+      - in: "query"
+        name: "exchanger"
+        type: "string"
+        required: true
+        default: "google"
+      - in: "query"
+        name: "apiKey"
+        type: "string"
+        required: false
+      - in: "query"
+        name: "cacheTime"
+        type: "string"
+        required: false
+        default: "120s"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ConvertResponse"
+        405:
+          description: "Invalid input"
+        400:
+          description: "Invalid input"
+        404:
+          description: "Invalid input"
+
 definitions:
-  ConvertRequest:
+  ConvertPostRequest:
     example:
       amount: 2.5
       from: "USD"
