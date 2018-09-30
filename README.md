@@ -68,8 +68,8 @@ and optionally cache the results.
      #    "rateFromCache": false
      # }  
     ```
-- Check [SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
-- Postman Collection [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e721b5007e2df03f1cac)
+- [Run in SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e721b5007e2df03f1cac)
 
 ## QuickStart 
 
@@ -113,6 +113,25 @@ func main() {
 
 ```
 
+## Features
+- Convert with Single exchange source `/GET` 
+- Convert with Multi exchange sources with fallback mechanism `/POST`
+    - Google
+    - Yahoo
+    - CurrencyLayer
+    - Fixer.io
+    - themoneyconverter.com
+    - openexchangerates.org
+    - 1forge.com
+- Rate Caching - `120s Default` 
+    - Memory - `Default`
+    - Redis
+- Rate decimal points rounding `4 Default`
+- Swagger UI
+- Clear API Request and Response
+- Docker image, Binary release and Heroku Demo
+- Clear documentation and 90%+ code coverage
+- Unit tested on live and mock data
 
 ## Documentation
 The documentation for the current branch can be found [here](#documentation).
@@ -138,14 +157,6 @@ The documentation for the current branch can be found [here](#documentation).
 [7]: //1forge.com
 
 ## TODO LIST
-- [x] Add Test Mocks
-- [x] cache integration
-- [x] herokuapp demo
-- [x] swagger ui
-- [x] examples
-- [x] code coverage
-- [x] get routes for single provider
-- [x] validate currency from a list before request
 - [ ] error structure incase of json return "" or regex not matched
 - [ ] convert panic to api json error
 - [ ] increase tests
@@ -154,6 +165,7 @@ The documentation for the current branch can be found [here](#documentation).
 - [ ] godoc 
 - [ ] static bundle public folder `./cmd/server/public`
 - [ ] v 1.0.0 release ( docker / binary github / homebrew mac )
+- [ ] support historical rates if possible
 - [ ] benchmark & performance optimization ` memory leak`
 - [ ] contributors list 
 
