@@ -1,5 +1,5 @@
 
-## Go Currency Exchange Library [WIP]
+## Currency Exchange Server - Golang 
 
 [![Build Status](https://travis-ci.org/me-io/go-swap.svg?branch=master)](https://travis-ci.org/me-io/go-swap)
 [![Go Report Card](https://goreportcard.com/badge/github.com/me-io/go-swap)](https://goreportcard.com/report/github.com/me-io/go-swap)
