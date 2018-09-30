@@ -146,6 +146,7 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] code coverage
 - [x] get routes for single provider
 - [x] validate currency from a list before request
+- [ ] error structure incase of json return "" or regex not matched
 - [ ] convert panic to api json error
 - [ ] increase tests
 - [ ] goreleaser
