@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	ex "github.com/me-io/go-swap/pkg/exchanger"
 	"github.com/me-io/go-swap/pkg/swap"
+	"io/ioutil"
 	"math"
 	"net/http"
 	"time"
@@ -25,6 +27,46 @@ func (c convertReqObj) Hash() string {
 }
 
 var Convert = func(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		ConvertPost(w, r)
+	}
+	if r.Method == "GET" {
+		ConvertGet(w, r)
+	}
+}
+
+var ConvertGet = func(w http.ResponseWriter, r *http.Request) {
+
+	query := r.URL.Query()
+	apiKey := query.Get("apiKey")
+	exchanger := query.Get("exchanger")
+	amount := query.Get("amount")
+	from := query.Get("from")
+	to := query.Get("to")
+	cacheTime := query.Get("cacheTime")
+
+	payload := fmt.Sprintf(`{
+  "amount": %s,
+  "exchanger": [
+    {
+      "name": "%s",
+      "apiKey": "%s"
+    }
+  ],
+  "from": "%s",
+  "to": "%s",
+  "cacheTime":"%s"
+}`, amount, exchanger, apiKey, from, to, cacheTime)
+
+	fmt.Println(payload)
+	bytePayload := []byte(payload)
+	bytePayloadReader := bytes.NewReader(bytePayload)
+
+	r.Body = ioutil.NopCloser(bytePayloadReader)
+	ConvertPost(w, r)
+}
+
+var ConvertPost = func(w http.ResponseWriter, r *http.Request) {
 
 	convertReq := &convertReqObj{}
 
@@ -92,7 +134,7 @@ var Convert = func(w http.ResponseWriter, r *http.Request) {
 		convertRes.From = convertReq.From
 		convertRes.To = convertReq.To
 		convertRes.ExchangeValue = rate.GetValue()
-		convertRes.DateTime = rate.GetDateTime()
+		convertRes.RateDateTime = rate.GetDateTime()
 		convertRes.ExchangerName = rate.GetExchangerName()
 		convertRes.RateFromCache = false
 

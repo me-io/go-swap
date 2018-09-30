@@ -125,15 +125,15 @@ definitions:
         type: "number"
         format: "float"
         example: 27.5814
-      ConvertedText:
+      convertedText:
         type: "string"
         example: "1 USD is worth 3.675 AED"
-      dateTime:
-        type: "string"
-        example: "2018-09-25T12:17:17Z"
       exchangerName:
         type: "string"
         example: "google"
+      rateDateTime:
+        type: "string"
+        example: "2018-09-25T12:17:17Z"
       rateFromCache:
         type: "boolean"
         example: false

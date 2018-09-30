@@ -24,6 +24,15 @@ and optionally cache the results.
     <img height="64" src="https://image.ibb.co/hvWT2U/go_swap_server_heroku.png" alt="heroku test instance @ https://go-swap-server.herokuapp.com">
 </a>
 
+##### /GET Examples:
+- [GET /convert?from=USD&to=AED&amount=2&exchanger=yahoo](https://go-swap-server.herokuapp.com/convert?from=USD&to=AED&amount=100&exchanger=yahoo) 
+- [GET /convert?from=EUR&to=GPB&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GPB&amount=100&exchanger=google)
+- [GET /convert?from=EUR&to=GPB&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GPB&amount=100&exchanger=themoneyconverter)
+
+##### /POST Examples:
+```bash
+
+```
 
 ## QuickStart 
 
@@ -97,13 +106,14 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] herokuapp demo
 - [x] swagger ui
 - [x] examples
+- [x] code coverage
+- [x] get routes for single provider
 - [ ] increase tests
 - [ ] goreleaser
 - [ ] verbose logging
 - [ ] cli convert google GET without payload to be used in binary image 
 - [ ] cli convert yahoo GET without payload 
 - [ ] godoc 
-- [ ] code coverage
 - [ ] static bundle public folder `./cmd/server/public`
 - [ ] v 1.0.0 release ( docker / binary github / homebrew mac )
 - [ ] Benchmark & Performance optimization ` memory leak`

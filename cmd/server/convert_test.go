@@ -109,7 +109,7 @@ func TestConvertObj_Convert(t *testing.T) {
 		r := &http.Request{}
 		r.Body = ioutil.NopCloser(bytePayloadReader)
 
-		Convert(w, r)
+		ConvertPost(w, r)
 		assert.Contains(t, testResponse, expectedName[k])
 		assert.Contains(t, testResponse, expectedRateCache[k])
 	}
