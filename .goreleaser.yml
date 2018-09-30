@@ -1,9 +1,13 @@
 project_name: go-swap-server
+before:
+  hooks:
+#  - make clean
+  - go generate ./...
 builds:
 - main: ./cmd/server/.
   binary: go-swap-server
   ldflags:
-  - -s -w -X main.build={{.Version}}
+  - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
   env:
   - CGO_ENABLED=0
 
@@ -18,3 +22,9 @@ archive:
   format_overrides:
   - goos: windows
     format: zip
+  files:
+  - LICENSE.md
+  - README.md
+
+sign:
+  artifacts: checksum
