@@ -3,7 +3,6 @@ info:
   description: "This is a sample server go-swap-server.  You can find out more about information at [https://github.com/me-io/go-swap](https://github.com/me-io/go-swap)"
   version: "1.0.0"
   title: "Go-Swap-Server"
-  termsOfService: "https://github.com/me-io/go-swap"
   contact:
     email: "meabed@me.io"
   license:
@@ -50,6 +49,17 @@ paths:
           description: "Invalid input"
 definitions:
   ConvertRequest:
+    example:
+      amount: 2.5
+      from: "USD"
+      to: "AED"
+      decimalPoints: 4
+      cacheTime: "120s"
+      exchanger:
+      - name: "yahoo"
+      - name: "google"
+      - name: "themoneyconverter"
+        userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"
     type: "object"
     required:
     - "amount"

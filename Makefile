@@ -182,7 +182,7 @@ build-dirs:
 clean: container-clean bin-clean
 
 container-clean:
-	rm -rf .container-* .dockerfile-* .push-*
+	rm -rf .container-* .dockerfile-* .push-* dist
 
 bin-clean:
 	rm -rf .go bin
