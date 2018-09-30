@@ -22,6 +22,7 @@ var (
 	redisUrl    string
 	// Storage ... Server Cache Storage
 	Storage     cache.Storage
+	// Logger ... Logger Driver
 	Logger      = logging.MustGetLogger("go-swap-server")
 
 	format = logging.MustStringFormatter(

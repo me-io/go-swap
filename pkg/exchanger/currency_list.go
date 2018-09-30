@@ -1,7 +1,7 @@
 package exchanger
 
+// CurrencyList ... list of currencies in ISO Format
 // source @ https://raw.githubusercontent.com/umpirsky/currency-list/master/data/en_US/currency.json
-// CurrencyList ... list of currencies in ISO Format source @ https://raw.githubusercontent.com/umpirsky/currency-list/master/data/en_US/currency.json
 var CurrencyList = map[string]string{
 	"AFN": "Afghan Afghani",
 	"AFA": "Afghan Afghani (1927–2002)",
