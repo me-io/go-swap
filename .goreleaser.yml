@@ -25,6 +25,3 @@ archive:
   files:
   - LICENSE.md
   - README.md
-
-sign:
-  artifacts: checksum
