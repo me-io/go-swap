@@ -145,12 +145,11 @@ The documentation for the current branch can be found [here](#documentation).
 - [x] examples
 - [x] code coverage
 - [x] get routes for single provider
-- [ ] validate currency from a list before request
+- [x] validate currency from a list before request
+- [ ] panic to json error
 - [ ] increase tests
 - [ ] goreleaser
 - [ ] verbose logging
-- [ ] cli convert google GET without payload to be used in binary image 
-- [ ] cli convert yahoo GET without payload 
 - [ ] godoc 
 - [ ] static bundle public folder `./cmd/server/public`
 - [ ] v 1.0.0 release ( docker / binary github / homebrew mac )
