@@ -5,17 +5,20 @@ import (
 	"time"
 )
 
+// Rate ... Rate interface
 type Rate interface {
 	GetRateValue() float64
 	GetRateDateTime() string
 	GetExchangerName() string
 }
 
+// Exchanger ... Exchanger interface
 type Exchanger interface {
 	Latest(string, string, ...interface{}) error
 	Rate
 }
 
+// attributes ... Exchanger attributes
 type attributes struct {
 	apiVersion   string
 	apiKey       string

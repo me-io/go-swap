@@ -35,9 +35,9 @@ type convertResObj struct {
 	RateFromCache   bool    `json:"rateFromCache"`
 }
 
+// Secret ... Secret Type for logging in the Logger
 // Password is just an example type implementing the Redactor interface. Any
 // time this is logged, the Redacted() function will be called.
-// Secret ... Secret Type for logging in the Logger
 type Secret string
 
 // Redacted ... Secret  Redacted function

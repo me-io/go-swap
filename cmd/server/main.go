@@ -20,6 +20,7 @@ var (
 	port        int
 	cacheDriver string
 	redisUrl    string
+	// Storage ... Server Cache Storage
 	Storage     cache.Storage
 	Logger      = logging.MustGetLogger("go-swap-server")
 
