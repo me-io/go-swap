@@ -11,15 +11,14 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"time"
 )
 
 var (
-	host        string
-	port        int
-	cacheDriver string
-	redisUrl    string
+	host        *string
+	port        *int
+	cacheDriver *string
+	redisUrl    *string
 	// Storage ... Server Cache Storage
 	Storage cache.Storage
 	// Logger ... Logger Driver
@@ -32,10 +31,9 @@ var (
 	routes = map[string]func(w http.ResponseWriter, r *http.Request){
 		`/convert`: Convert,
 	}
-
 	_, filename, _, _ = runtime.Caller(0)
 	defaultStaticPath = filepath.Dir(filename) + `/public`
-	staticPath        = defaultStaticPath
+	staticPath        = &defaultStaticPath
 )
 
 // init ... init function of the server
@@ -50,19 +48,19 @@ func init() {
 	logging.SetBackend(backendLevelFormatted)
 
 	// Caching
-	host = GetEnv(`H`, `0.0.0.0`)
-	port, _ = strconv.Atoi(GetEnv(`P`, `5000`))
-	cacheDriver = GetEnv(`CACHE`, `memory`)
-	redisUrl = GetEnv(`REDIS_URL`, ``)
-	staticPath = GetEnv(`STATIC_PATH`, defaultStaticPath)
+	host = flag.String(`H`, `0.0.0.0`, `Host binding address`)
+	port = flag.Int(`P`, 5000, `Host binding port`)
+	cacheDriver = flag.String(`CACHE`, `memory`, `Cache driver (default memory)`)
+	redisUrl = flag.String(`REDIS_URL`, ``, `Redis URI for redis cache driver`)
+	staticPath = flag.String(`STATIC_PATH`, defaultStaticPath, `Webserver static path`)
 
 	flag.Parse()
 
 	var err error
 
-	switch cacheDriver {
+	switch *cacheDriver {
 	case `redis`:
-		if Storage, err = redis.NewStorage(redisUrl); err != nil {
+		if Storage, err = redis.NewStorage(*redisUrl); err != nil {
 			Logger.Panic(err)
 		}
 		break
@@ -75,18 +73,18 @@ func init() {
 // main ... main function start the server
 func main() {
 
-	Logger.Infof("host %s", host)
-	Logger.Infof("port %d", port)
-	Logger.Infof("cacheDriver %s", cacheDriver)
-	Logger.Infof("REDIS_URL %s", redisUrl)
-	Logger.Infof("Static dir %s", staticPath)
+	Logger.Infof("host %s", *host)
+	Logger.Infof("port %d", *port)
+	Logger.Infof("cacheDriver %s", *cacheDriver)
+	Logger.Infof("REDIS_URL %s", *redisUrl)
+	Logger.Infof("Static dir %s", *staticPath)
 
 	// handle routers
 	for k, v := range routes {
 		http.HandleFunc(k, v)
 	}
 
-	go serveHTTP(host, port)
+	go serveHTTP(*host, *port)
 	select {}
 }
 
@@ -96,7 +94,7 @@ func serveHTTP(host string, port int) {
 	mux := http.NewServeMux()
 	for k, v := range routes {
 		mux.HandleFunc(k, v)
-		mux.Handle(`/`, http.FileServer(http.Dir(staticPath)))
+		mux.Handle(`/`, http.FileServer(http.Dir(*staticPath)))
 	}
 
 	addr := fmt.Sprintf("%v:%d", host, port)
