@@ -71,7 +71,6 @@ func (c *fixerApi) GetExchangerName() string {
 // Latest ... populate latest exchange rate
 func (c *fixerApi) Latest(from string, to string, opt ...interface{}) error {
 
-	// todo cache layer
 	_, err := c.requestRate(from, to, opt)
 	if err != nil {
 		log.Print(err)
@@ -95,7 +94,11 @@ func (c *fixerApi) Latest(from string, to string, opt ...interface{}) error {
 	value := json.GetPath(`result`).
 		MustFloat64()
 	// todo handle error
+	if value <= 0 {
+		return fmt.Errorf(`error in retrieving exhcange rate is 0`)
+	}
 	c.rateValue = value
+	c.rateDate = time.Now()
 	return nil
 }
 

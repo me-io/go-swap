@@ -94,6 +94,9 @@ func (c *openExchangeRatesApi) Latest(from string, to string, opt ...interface{}
 	value := json.GetPath(`response`).
 		MustFloat64()
 	// todo handle error
+	if value <= 0 {
+		return fmt.Errorf(`error in retrieving exhcange rate is 0`)
+	}
 	c.rateValue = value
 	c.rateDate = time.Now()
 	return nil

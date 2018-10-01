@@ -98,6 +98,9 @@ func (c *yahooApi) Latest(from string, to string, opt ...interface{}) error {
 		GetIndex(0).
 		MustFloat64()
 	// todo handle error
+	if value <= 0 {
+		return fmt.Errorf(`error in retrieving exhcange rate is 0`)
+	}
 	c.rateValue = math.Round(value*1000000) / 1000000
 	c.rateDate = time.Now()
 	return nil
