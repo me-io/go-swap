@@ -69,7 +69,7 @@ and optionally cache the results.
      # }  
     ```
 - [Run in SwaggerUI](https://go-swap-server.herokuapp.com/swagger)
-- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e721b5007e2df03f1cac)
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f8445ef9a390fd3faa1)
 
 ## QuickStart 
 
@@ -156,11 +156,15 @@ The documentation for the current branch can be found [here](#documentation).
 [6]: //openexchangerates.org
 [7]: //1forge.com
 
+### Uptime Monitor
+<a href="https://stats.uptimerobot.com/vo1g1ip5W" target="_blank">
+  <img src="https://uptimerobot.com/assets/img/logo_plain.png" alt="Deploy">
+</a>
+
 ## TODO LIST
-- [ ] error structure incase of json return "" or regex not matched
+- [ ] error structure for empty json or regex not matched
 - [ ] convert panic to api json error
 - [ ] increase tests
-- [ ] goreleaser
 - [ ] verbose logging
 - [ ] godoc 
 - [ ] static bundle public folder `./cmd/server/public`
