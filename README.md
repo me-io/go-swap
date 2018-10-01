@@ -26,7 +26,7 @@ and optionally cache the results.
 
 #### /GET Examples for single exchanger:
 - [GET /convert?from=USD&to=AED&amount=2&exchanger=yahoo](https://go-swap-server.herokuapp.com/convert?from=USD&to=AED&amount=100&exchanger=yahoo) 
-- [GET /convert?from=EUR&to=GBP&amount=1&exchanger=google](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=google)
+- [GET /convert?from=EUR&to=GBP&amount=1&exchanger=google&cacheTime=300s](https://go-swap-server.herokuapp.com/convert?from=EUR&to=GBP&amount=100&exchanger=google&cacheTime=300s)
 - [GET /convert?from=USD&to=SAR&amount=1&exchanger=themoneyconverter](https://go-swap-server.herokuapp.com/convert?from=USD&to=SAR&amount=100&exchanger=themoneyconverter)
 
 #### /POST Examples for single or multi exchanger:
