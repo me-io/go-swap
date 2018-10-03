@@ -133,6 +133,9 @@ func main() {
 - Clear documentation and 90%+ code coverage
 - Unit tested on live and mock data
 
+### Screens
+<img height="200" src="https://image.ibb.co/nEMd4K/Screen_Shot_2018_10_03_at_10_30_46_PM.png">
+
 ## Documentation
 The documentation for the current branch can be found [here](#documentation).
 
