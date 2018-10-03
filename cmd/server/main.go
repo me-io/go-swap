@@ -94,8 +94,9 @@ func serveHTTP(host string, port int) {
 	mux := http.NewServeMux()
 	for k, v := range routes {
 		mux.HandleFunc(k, v)
-		mux.Handle(`/`, http.FileServer(http.Dir(*staticPath)))
 	}
+
+	handleStatic(mux)
 
 	addr := fmt.Sprintf("%v:%d", host, port)
 	server := &http.Server{
@@ -110,4 +111,8 @@ func serveHTTP(host string, port int) {
 
 	err := server.ListenAndServe()
 	Logger.Error(err.Error())
+}
+
+func handleStatic(mux *http.ServeMux) {
+	mux.Handle(`/`, http.FileServer(http.Dir(*staticPath)))
 }
